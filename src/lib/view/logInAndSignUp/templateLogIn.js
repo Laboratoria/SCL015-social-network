@@ -1,6 +1,7 @@
-export const iniciarSesion = () => {
-  const mensajeIniciarSesion = `
-    <h2> Aqui estara el formulario de registro </h2>
+export const templateLogIn = () => {
+  const contenLogIn = `
+    <h2> Aqui estara el formulario para iniciar sesion
+    </h2>
     <ol>
         <li>
         <a href="#/">Home</a>
@@ -13,5 +14,5 @@ export const iniciarSesion = () => {
          </li>
   </ol> 
     `
-  return mensajeIniciarSesion;
+  return contenLogIn;
 }
