@@ -1,4 +1,4 @@
-import {loginGoogle} from '../../index.js';
+import { loginGoogle } from '../../index.js';
 
 export const templateSignUp = () => {
   const divSignUp = document.createElement('div');
@@ -31,19 +31,20 @@ export const templateSignUp = () => {
     console.log(password, email);
 
     // sigUpFirebase(email, password);
-   // Acceso de usuarios existentes
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((user) => {
+    // Acceso de usuarios existentes
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((user) => {
       // Signed in
-      signUpForm.reset(); // reset() restablece los valores de los elementos en un formulario
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode);
-      console.log(errorMessage);
+      // signUpForm.reset(); // reset() restablece los valores de los elementos en un formulario
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
       // ..
-    });
+      });
+
   });
   //  e.preventDefault();
 
