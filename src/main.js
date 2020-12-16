@@ -3,15 +3,14 @@ import { myFunction } from './lib/index.js';
 import { templateLogIn } from './lib/view/logInAndSignUp/templateLogIn.js';
 import { changeRoute } from './lib/router.js';
 import { firebaseConfig } from './firebaseConfig.js';
-// import { domSignUp } from './lib/view/logInAndSignUp/mainLogin.js';
 
 // document.getElementById('root').innerHTML = templateLogIn();
 
 const init = () => {
-  document.getElementById('root').innerHTML = templateLogIn();
+  document.getElementById('root').appendChild(templateLogIn());
+  //window.location.href=  "/#"
   window.addEventListener('hashchange', () => {
     myFunction();
-    // console.log(window.location.hash);
     changeRoute(window.location.hash);
   });
 };
