@@ -4,18 +4,16 @@ import { templateWall } from './view/wall/templateWall.js';
 
 const showTemplate = (hash) => {
   const containerRoot = document.getElementById('root');
-  containerRoot.innerHTML = templateLogIn();
+  containerRoot.innerHTML = '';
 
   switch (hash) {
     case '':
-      containerRoot.innerHTML = templateLogIn();
+      containerRoot.appendChild(templateLogIn());
       break;
     case '#/registro':
-      containerRoot.innerHTML = '';
       containerRoot.appendChild(templateSignUp());
       break;
     case '#/muro':
-      containerRoot.innerHTML = '';
       containerRoot.appendChild(templateWall());
       break;
     default:
@@ -23,13 +21,4 @@ const showTemplate = (hash) => {
   }
 };
 
-export const changeRoute = (hash) => {
-  if (hash === '#/') {
-    return showTemplate(hash);
-  } if (hash === '#/registro') {
-    return showTemplate(hash);
-  } if (hash === '#/muro') {
-    return showTemplate(hash);
-  }
-  return showTemplate(hash);
-};
+export const changeRoute = (hash) => showTemplate(hash); // captura cambio del rotulador
