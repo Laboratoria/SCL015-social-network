@@ -5,7 +5,7 @@ export const templateLogIn = () => {
   const divLogIn = document.createElement('div');
   const viewLogIn = `
       <img src="imagenes/logo.png" alt="logoVeg" id="logo">
-      <h2> La mejor red social para vegetarianos <h2>
+      <h2> La mejor red social para vegetarianosgit <h2>
       <div class="buttons" id="buttons">       
        <button id="loginGoogle2">Ingresar con Gmail</button>
        <a href="#/registro">

@@ -2,8 +2,16 @@ body{
     display: flex;
 }
 
+div{
+    display: flex;
+}
+
+/*section{
+    display: flex;
+}*/
+
 #logo{
-display: flex;
+/*display: flex;*/
 justify-content: center;
 width: 23vw;
 height: 50vh;
@@ -17,7 +25,7 @@ color: #3FBC1F;
 }
 
 #buttons{
-    display: flex;
+   
 
 }
 
