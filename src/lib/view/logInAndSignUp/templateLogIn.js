@@ -8,12 +8,12 @@ export const templateLogIn = () => {
       <button id="loginGoogle2">Login con google</button>
       <a href="#/registro">
          <button id="bntSignUp">Registrarse</button>
-        </a>
+      </a>
       <form id="loginForm">
         <input name="email" type="email" placeholder="Correo electronico" id="emailLogin">
         <input name="password" type="password" placeholder="Contraseña" id="passwordLogin" maxlength="6">
-        <button type="button" id="btnLogIn">INGRESAR</button>
         </form>
+        <button type="button" id="btnLogIn">INGRESAR</button>
       `;
   divLogIn.innerHTML = viewLogIn;
 
