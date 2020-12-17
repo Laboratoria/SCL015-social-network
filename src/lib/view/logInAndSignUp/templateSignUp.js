@@ -3,6 +3,7 @@ import { loginGoogle } from '../../index.js';
 export const templateSignUp = () => {
   const divSignUp = document.createElement('div');
   const viewSignUp = `
+  <img src="imagenes/logo.png" alt="logoVeg" id="logo">
   <h2> Aqui ira el formulario para el registro <h2>
   <form id=signUpForm>
     <button id="loginGoogle">Login con google</button>
@@ -14,6 +15,7 @@ export const templateSignUp = () => {
       <button type="submit" id="bntSignUp">Registrarme</button>
     </a>
   </form>
+  <img src="imagenes/fondo.png" alt="logoVeg" id="fondo">
   `;
   divSignUp.innerHTML = viewSignUp;
 

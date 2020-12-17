@@ -3,16 +3,20 @@
 export const templateLogIn = () => {
   const divLogIn = document.createElement('div');
   const viewLogIn = `
+      <img src="imagenes/logo.png" alt="logoVeg" id="logo">
       <h2> La mejor red social para vegetarianos <h2>
-      <button id="loginGoogle">Login con google</button>
-      <a href="#/registro">
-         <button id="bntSignUp">Registrarse</button>
-        </a>
-      <form id="loginForm">
-        <input name="email" type="email" placeholder="Correo electronico" id="emailLogin">
-        <input name="password" type="password" placeholder="Contraseña" id="passwordLogin" maxlength="6">
-        <button type="button" id="btnLogIn">INGRESAR</button>
-        </form>
+      <div class="buttons" id="buttons">       
+       <button id="loginGoogle">Ingresar con Gmail</button>
+       <a href="#/registro">
+          <button id="bntSignUp">Registrarse</button>
+         </a>
+       <form id="loginForm">
+         <input name="email" type="email" placeholder="Correo electronico" id="emailLogin">
+         <input name="password" type="password" placeholder="Contraseña" id="passwordLogin" maxlength="6">
+         <button type="button" id="btnLogIn">INGRESAR</button>
+       </form>
+      </div>
+      <img src="imagenes/fondo.png" alt="logoVeg" id="fondo">
       `;
   divLogIn.innerHTML = viewLogIn;
 

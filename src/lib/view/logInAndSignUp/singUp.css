@@ -1,0 +1,171 @@
+body{
+    display: flex;
+}
+
+#logo{
+display: flex;
+justify-content: center;
+width: 23vw;
+height: 50vh;
+}
+
+h2{
+font-family: 'Shrikhand', cursive;
+font-size: 45px;
+line-height: 20px;
+color: #3FBC1F;
+}
+
+#buttons{
+    display: flex;
+
+}
+
+#loginGoogle{
+width: 550px;
+height: 56px;
+left: 471px;
+top: 364px;
+background: #FFFFFF;
+border: 1px solid #000000;
+box-sizing: border-box;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 3px;
+font-family: 'Roboto', sans-serif;
+font-style: normal;
+font-weight: 200;
+font-size: 24px;
+line-height: 28px;
+color: #000000;
+}
+
+#bntSignUp{
+    width: 313px;
+    height: 35px;
+    left: 34px;
+    top: 323px;
+    background: rgba(63, 190, 32, 0.48);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+}
+
+#emailLogin{
+    width: 313px;
+    height: 35px;
+    left: 34px;
+    top: 323px;
+    background: rgba(63, 190, 32, 0.48);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+
+}
+
+#passwordLogin{
+    width: 313px;
+    height: 35px;
+    left: 34px;
+    top: 323px;
+    background: rgba(63, 190, 32, 0.48);
+    border-radius: 5px;    
+    font-style: normal;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000 ;
+    font-family: 'Roboto', sans-serif;
+}
+
+#btnLogIn{
+    width: 313px;
+    height: 35px;
+    left: 34px;
+    top: 323px;
+    background: #3FBE20;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+
+}
+
+#fullName{
+    width: 313px;
+    height: 35px;
+    left: 34px;
+    top: 323px;
+    background: rgba(63, 190, 32, 0.48);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+
+}
+
+#userNameSignUp{
+    width: 313px;
+    height: 35px;
+    left: 34px;
+    top: 323px;
+    background: rgba(63, 190, 32, 0.48);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+
+}
+
+#emailSignUp{
+    width: 313px;
+    height: 35px;
+    left: 34px;
+    top: 323px;
+    background: rgba(63, 190, 32, 0.48);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+
+}
+
+#passwordSignUp{
+    width: 313px;
+    height: 35px;
+    left: 34px;
+    top: 323px;
+    background: rgba(63, 190, 32, 0.48);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+
+}
+
+#fondo{
+width: 111vw;
+height: 103vh;
+}
