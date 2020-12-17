@@ -11,11 +11,8 @@ export const templateSignUp = () => {
     <input name="userName" type="text" placeholder="Nombre de Usuario" id="userNameSignUp">
     <input name="email" type="email" placeholder="Correo electronico" id="emailSignUp" required>
     <input name="password" type="password" placeholder="Contraseña" id="passwordSignUp" maxlength="6">
-    <a href="#/muro">
-      <button type="submit" id="bntSignUp">Registrarme</button>
-    </a>
   </form>
-  <img src="imagenes/fondo.png" alt="logoVeg" id="fondo">
+  <button id="btnSignUp">Registrarme</button>
   `;
   divSignUp.innerHTML = viewSignUp;
 
@@ -24,7 +21,7 @@ export const templateSignUp = () => {
     loginGoogle();
   });
 
-  const signUpForm = divSignUp.querySelector('#signUpForm');
+  const signUpForm = divSignUp.querySelector('#btnSignUp');
   signUpForm.addEventListener('click', () => {
     const fullName = document.querySelector('#fullName');
     const userName = document.querySelector('#userNameSignUp');
@@ -32,13 +29,20 @@ export const templateSignUp = () => {
     const password = document.querySelector('#passwordSignUp').value;
     console.log(password, email);
 
-    // sigUpFirebase(email, password);
+    // limpliar los input
+    const cleanForm = () => {
+      document.querySelector('#emailSignUp').value = '';
+      document.querySelector('#passwordSignUp').value = '';
+    };
+
     // Acceso de usuarios existentes
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        verificationEmail()
-
-      // Signed in
+        console.log('datos usuario', user);
+        user.user.sendEmailVerification();
+        alert('Te hemos enviado un correo para confirmar tu cuenta. *Recuerda revisar tu bandeja de spam o correos no deseado');
+        window.location.href = '';
+        // Signed in
       // signUpForm.reset(); // reset() restablece los valores de los elementos en un formulario
       })
       .catch((error) => {
@@ -46,23 +50,16 @@ export const templateSignUp = () => {
         const errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
-      // ..
+        if (errorCode === 'auth/email-already-in-use') {
+          alert('Este usuario ya existe');
+          cleanForm();
+        } else {
+          alert('Error');
+          cleanForm();
+        }
       });
   });
   //  e.preventDefault();
 
   return divSignUp;
-};
-
-const verificationEmail = (email, actionCodeSettings) => {
-  firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
-    .then(() => {
-    // The link was successfully sent. Inform the user.
-    // Save the email locally so you don't need to ask the user for it again
-    // if they open the link on the same device.
-      window.localStorage.setItem('emailForSignIn', email);
-    })
-    .catch((error) => {
-    // Some error occurred, you can inspect the code: error.code
-    });
 };

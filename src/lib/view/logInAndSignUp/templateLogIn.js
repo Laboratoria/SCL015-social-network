@@ -1,4 +1,5 @@
 // import { sigUpFirebase } from '../../index.js';
+import { loginGoogle } from '../../index.js';
 
 export const templateLogIn = () => {
   const divLogIn = document.createElement('div');
@@ -6,7 +7,7 @@ export const templateLogIn = () => {
       <img src="imagenes/logo.png" alt="logoVeg" id="logo">
       <h2> La mejor red social para vegetarianos <h2>
       <div class="buttons" id="buttons">       
-       <button id="loginGoogle">Ingresar con Gmail</button>
+       <button id="loginGoogle2">Ingresar con Gmail</button>
        <a href="#/registro">
           <button id="bntSignUp">Registrarse</button>
          </a>
@@ -20,6 +21,11 @@ export const templateLogIn = () => {
       `;
   divLogIn.innerHTML = viewLogIn;
 
+  const bntGoogle = divLogIn.querySelector('#loginGoogle2');
+  bntGoogle.addEventListener('click', () => {
+    loginGoogle();
+  });
+
   const loginForm = divLogIn.querySelector('#btnLogIn'); // selector del bpton INGRESAR
   loginForm.addEventListener('click', () => {
     // e.preventDefault();
@@ -28,18 +34,41 @@ export const templateLogIn = () => {
     const password = document.querySelector('#passwordLogin').value;
     console.log(password, email);
 
+    // limpliar los input
+    const cleanForm = () => {
+      document.querySelector('#emailLogin').value = '';
+      document.querySelector('#passwordLogin').value = '';
+    };
     // Acceso de usuarios existentes
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
-        console.log('se loguio');
-        // window.location.href=  "/#/muro"
         // Signed in
+        console.log('Usuario', user);
+        console.log('LISTO se loguio');
+        if (user.user.emailVerified === true) { // si hizo la vefiricacion del correo ingresa al muro
+          window.location.href = '/#/muro';
+        } else {
+          alert('Por favor confirma tu usuario en el link de verificacion enviado a tu correo');
+          cleanForm();
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
+        switch (errorCode) {
+          case 'auth/user-not-found':
+            alert('Aun no estas registrado');
+            cleanForm();
+            break;
+          case 'auth/wrong-password':
+            alert('Tu Contraseña es incorrecta');
+            cleanForm();
+            break;
+          default:
+            alert('Error');
+        }
       });
 
     // observador de estado de autenticación
@@ -59,4 +88,3 @@ export const templateLogIn = () => {
   });
   return divLogIn;
 };
-
