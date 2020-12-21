@@ -9,7 +9,7 @@ export const templateLogIn = () => {
       <div class="buttons" id="buttons">       
        <button id="loginGoogle2">Ingresar con Gmail</button>
        <a href="#/muro">
-          <button id="bntSignUp">muro</button>
+          <button id="bntSignUp">MURO</button>
          </a>
        <form id="loginForm">
          <input name="email" type="email" placeholder="Correo electronico" id="emailLogin" required>
