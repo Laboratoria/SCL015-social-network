@@ -1,5 +1,4 @@
 // Este es el punto de entrada de tu aplicacion
-import { myFunction } from './lib/index.js';
 import { templateLogIn } from './lib/view/logInAndSignUp/templateLogIn.js';
 import { changeRoute } from './lib/router.js';
 import { firebaseConfig } from './firebaseConfig.js';
