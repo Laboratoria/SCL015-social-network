@@ -2,9 +2,22 @@ body{
     display: flex;
 }
 
-div{
-    display: flex;
+#emailSignUp[type="email"]:focus:invalid {
+    -webkit-appearance: none;
+    background-color: rgba(63, 190, 32, 0.48);
+    border: 1px solid #e85c5c;
+    outline: none;
+    box-shadow: 0 0 4px red;
 }
+
+#errorPassword {
+    font-size: 12px;
+    display: none;
+}
+
+/* /* div{
+    display: flex;
+} */
 
 /*section{
     display: flex;
