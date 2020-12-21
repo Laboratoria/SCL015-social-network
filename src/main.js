@@ -7,12 +7,12 @@ import { firebaseConfig } from './firebaseConfig.js';
 // document.getElementById('root').innerHTML = templateLogIn();
 
 const init = () => {
-  document.getElementById('root').appendChild(templateLogIn());
+  document.getElementById('root').appendChild(templateLogIn());// en el html meteme el template login y 
   //window.location.href=  "/#"
-  window.addEventListener('hashchange', () => {
+  window.addEventListener('hashchange', () => {//que la ventana escuche los cambios de has y deacuerdo a eso buscame la funcion changerouter
     myFunction();
     changeRoute(window.location.hash);
   });
 };
 
-window.addEventListener('load', init); // cuando se cargue la pantalla llama a init
+window.addEventListener('load', init); // cuando se cargue la pantalla llama a init eso lo hace load
