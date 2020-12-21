@@ -5,6 +5,7 @@ export const templateWall = () => {
 
   const viewWall = ` <input type="text" name="post" id="post">
   <button id="btnPost">publicar</button>
+  <button id="btnPost">cancelar</button>
   `;
 
   divWall.innerHTML = viewWall;
