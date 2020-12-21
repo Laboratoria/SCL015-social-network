@@ -9,7 +9,6 @@ const init = () => {
   document.getElementById('root').appendChild(templateLogIn());// en el html meteme el template login y 
   //window.location.href=  "/#"
   window.addEventListener('hashchange', () => {//que la ventana escuche los cambios de has y deacuerdo a eso buscame la funcion changerouter
-    myFunction();
     changeRoute(window.location.hash);
   });
 };
