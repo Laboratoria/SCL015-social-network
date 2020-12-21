@@ -7,8 +7,8 @@ export const templateSignUp = () => {
   <h2> Aqui ira el formulario para el registro <h2>
   <button id="loginGoogle">Login con google</button>
   <form id="signUpForm" method="post">
-  <input name="fullName" type="text" placeholder="Nombre Completo" id="fullName" pattern="[a-z]{1, 20}" title="Solo se permiten letras" required>
-  <input name="userName" type="text" placeholder="Nombre de Usuario" id="userNameSignUp" required>
+  <input name="fullName" type="text" placeholder="Nombre Completo" id="fullName" pattern="[a-zA-Z ]{3,30}" title="Solo se permiten letras y un minimo de 3 caracteres" required>
+  <input name="userName" type="text" placeholder="Nombre de Usuario" id="userNameSignUp" minlength="2" maxlength="30" title="Minimo de 3 caracteres" required>
   <input name="email" type="email" placeholder="Correo electronico" id="emailSignUp" required>
   <input name="password" type="password" placeholder="Contraseña" id="passwordSignUp" minlength="6" maxlength="8" required>
   <p id="errorPassword">Tu contraseña debe contener minimo 6 caracteres. Al menos 1 caracter numerico y 1 caracter alfabetico.</p> 

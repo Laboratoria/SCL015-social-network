@@ -8,8 +8,8 @@ export const templateLogIn = () => {
       <h2> La mejor red social para vegetarianos<h2>
       <div class="buttons" id="buttons">       
        <button id="loginGoogle2">Ingresar con Gmail</button>
-       <a href="#/registro">
-          <button id="bntSignUp">Registrarse</button>
+       <a href="#/muro">
+          <button id="bntSignUp">muro</button>
          </a>
        <form id="loginForm">
          <input name="email" type="email" placeholder="Correo electronico" id="emailLogin" required>
@@ -48,7 +48,7 @@ export const templateLogIn = () => {
         // Signed in
         console.log('Usuario', user);
         console.log('LISTO se loguio');
-        if (user.user.emailVerified === true) { // si hizo la vefiricacion del correo ingresa al muro
+        if (user.user.emailVerified === true) { //si hizo la vefiricacion del correo ingresa al muro
           window.location.href = '/#/muro';
         } else {
           alert('Por favor confirma tu usuario en el link de verificacion enviado a tu correo');
@@ -69,10 +69,10 @@ export const templateLogIn = () => {
             alert('Tu Contraseña es incorrecta');
             cleanForm();
             break;
-            case 'auth/invalid-email':
-              alert('El correo ingresado no cummple con el formato del email');
-              cleanForm();
-              break;
+          case 'auth/invalid-email':
+            alert('El correo ingresado no cummple con el formato del email');
+            cleanForm();
+            break;
           default:
             alert('Error');
         }
