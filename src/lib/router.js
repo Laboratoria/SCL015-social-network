@@ -14,7 +14,7 @@ const showTemplate = (hash) => {
       containerRoot.appendChild(templateSignUp());
       break;
     case '#/muro':
-      containerRoot.appendChild(templateWall());
+      templateWall(containerRoot);
       break;
     default:
       containerRoot.innerHTML = '<h2>No existe</h2>';

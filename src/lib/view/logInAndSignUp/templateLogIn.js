@@ -42,13 +42,14 @@ export const templateLogIn = () => {
       document.querySelector('#emailLogin').value = '';
       document.querySelector('#passwordLogin').value = '';
     };
+
     // Acceso de usuarios existentes
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
         // Signed in
         console.log('Usuario', user);
         console.log('LISTO se loguio');
-        if (user.user.emailVerified === true) { //si hizo la vefiricacion del correo ingresa al muro
+        if (user.user.emailVerified === true) { // si hizo la vefiricacion del correo ingresa al muro
           window.location.href = '/#/muro';
         } else {
           alert('Por favor confirma tu usuario en el link de verificacion enviado a tu correo');
@@ -95,3 +96,7 @@ export const templateLogIn = () => {
   });
   return divLogIn;
 };
+
+// export const imailLogin = () => {
+//     document.querySelector('#emailLogin').value
+//   };

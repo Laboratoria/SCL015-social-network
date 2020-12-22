@@ -1,4 +1,20 @@
 import { loginGoogle, sigUpFirebase } from '../../index.js';
+import { db } from '../../../firebaseConfig.js';
+
+export const addCollection = (name, pseudonym, emailuser) => {
+  db.collection('profile').add({
+  // console.log("entro en las collection");
+    fullName: name,
+    userName: pseudonym,
+    email: emailuser,
+  })
+    .then((docRef) => {
+      console.log('Document written with ID: ', docRef.id);
+    })
+    .catch((error) => {
+      console.error('Error adding document: ', error);
+    });
+};
 
 export const templateSignUp = () => {
   const divSignUp = document.createElement('div');
@@ -31,43 +47,20 @@ export const templateSignUp = () => {
   const signUpForm = divSignUp.querySelector('#signUpForm');
   signUpForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const fullName = document.querySelector('#fullName');
-    const userName = document.querySelector('#userNameSignUp');
+    const fullName = document.querySelector('#fullName').value;
+    const userName = document.querySelector('#userNameSignUp').value;
     const email = document.querySelector('#emailSignUp').value;
     const password = document.querySelector('#passwordSignUp').value;
     console.log(password, email);
-    console.log("hellooooooooooo");
+    console.log('hellooooooooooo');
 
     if (password.match(/[a-z]/g) && password.match(/[0-9]/g) && password.length >= 6) { // match() se usa para obtener todas las ocurrencias de una expresión regular dentro de una cadena.
       sigUpFirebase(email, password);
+      addCollection(fullName, userName, email);
     } else {
       errorPasswords.style.display = 'block';
       document.querySelector('#passwordSignUp').value = '';
     }
-
-    // // Acceso de usuarios existentes
-    // firebase.auth().createUserWithEmailAndPassword(email, password)
-    //   .then((user) => {
-    //     console.log('datos usuario', user);
-    //     user.user.sendEmailVerification();
-    //     alert('Te hemos enviado un correo para confirmar tu cuenta. *Recuerda revisar tu bandeja de spam o correos no deseado');
-    //     window.location.href = '';
-    //     // Signed in
-    //   // signUpForm.reset(); // reset() restablece los valores de los elementos en un formulario
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     console.log(errorCode);
-    //     console.log(errorMessage);
-    //     if (errorCode === 'auth/email-already-in-use') {
-    //       alert('Este usuario ya existe');
-    //       cleanForm();
-    //     } else {
-    //       alert('Error');
-    //       cleanForm();
-    //     }
-    //   });
   });
   //  e.preventDefault();
 
