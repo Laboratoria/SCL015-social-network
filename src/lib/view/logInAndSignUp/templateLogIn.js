@@ -4,28 +4,26 @@ import { loginGoogle } from '../../index.js';
 export const templateLogIn = () => {
   const divLogIn = document.createElement('div');
   const viewLogIn = `
-  <div id="containerLogin">
-  <a href="#/muro"> 
-   <img src="imagenes/logoOK.png" alt="logoVeg" id="logo">    
-  </a>
-  <h2> La mejor red social para vegetarianos</h2>
-  <div class="buttons" id="buttons">       
-   <button id="loginGoogle2">Ingresar con Gmail</button>
-   <form id="loginForm">
-     <input name="email" type="email" placeholder="Correo electronico" id="emailLogin" required>
-     <input name="password" type="password" placeholder="Contraseña" id="passwordLogin" minlength="6" maxlength="8" required>
-     <button type="button" id="btnLogIn">INGRESAR</button>
-   </form>
-  </div>
-  <div id="foot"> 
-    <h3>¿No tienes cuenta?</h3> 
-    <a href="#/registro"><h3>Registrate aquí</h3></a>
-  </div>
-    <img src="imagenes/fondoo.png" alt="logoVeg" id="fondo">
-  </div>
-  
-  `;
-
+      <div class="container">
+      <a href="#/muro"> 
+       <img src="imagenes/logoOK.png" alt="logoVeg" id="logo">    
+      </a>
+      <h2> La mejor red social para vegetarianos</h2>
+      <div class="buttons" id="buttons">       
+       <button id="loginGoogle2">Ingresar con Gmail</button>
+       <form id="loginForm">
+         <input name="email" type="email" placeholder="Correo electronico" id="emailLogin" required>
+         <input name="password" type="password" placeholder="Contraseña" id="passwordLogin" minlength="6" maxlength="8" required>
+         <button type="button" id="btnLogIn">INGRESAR</button>
+       </form>
+      </div>
+      <div id="foot"> 
+        <h3>¿No tienes cuenta?</h3> 
+        <a href="#/registro"><h3>Registrate aquí</h3></a>
+      </div>
+      <img src="imagenes/fondoo.png" alt="logoVeg" id="fondo">
+      </div>
+      `;
   divLogIn.innerHTML = viewLogIn;
 
   const bntGoogle = divLogIn.querySelector('#loginGoogle2');
@@ -45,14 +43,13 @@ export const templateLogIn = () => {
       document.querySelector('#emailLogin').value = '';
       document.querySelector('#passwordLogin').value = '';
     };
-
     // Acceso de usuarios existentes
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
         // Signed in
         console.log('Usuario', user);
         console.log('LISTO se loguio');
-        if (user.user.emailVerified === true) { // si hizo la vefiricacion del correo ingresa al muro
+        if (user.user.emailVerified === true) { //si hizo la vefiricacion del correo ingresa al muro
           window.location.href = '/#/muro';
         } else {
           alert('Por favor confirma tu usuario en el link de verificacion enviado a tu correo');
