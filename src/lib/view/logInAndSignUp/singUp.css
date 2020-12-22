@@ -236,13 +236,13 @@ input{
 h3{
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
-    margin: 9px;
+    margin: 0;
 }
 
 #fondo{
     width: 100vw;
     height: 39vh;
-    position: relative;
+    position: fixed;
     top: -68px;
     left: -5px;
 }

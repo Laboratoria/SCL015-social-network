@@ -4,26 +4,28 @@ import { loginGoogle } from '../../index.js';
 export const templateLogIn = () => {
   const divLogIn = document.createElement('div');
   const viewLogIn = `
-      <div id="containerLogin">
-      <a href="#/muro"> 
-       <img src="imagenes/logoOK.png" alt="logoVeg" id="logo">    
-      </a>
-      <h2> La mejor red social para vegetarianos</h2>
-      <div class="buttons" id="buttons">       
-       <button id="loginGoogle2">Ingresar con Gmail</button>
-       <form id="loginForm">
-         <input name="email" type="email" placeholder="Correo electronico" id="emailLogin" required>
-         <input name="password" type="password" placeholder="Contraseña" id="passwordLogin" minlength="6" maxlength="8" required>
-         <button type="button" id="btnLogIn">INGRESAR</button>
-       </form>
-      </div>
-      <div id="foot"> 
-        <h3>¿No tienes cuenta?</h3> 
-        <a href="#/registro"><h3>Registrate aquí</h3></a>
-      </div>
-      <img src="imagenes/fondoo.png" alt="logoVeg" id="fondo">
-      </div>
-      `;
+  <div id="containerLogin">
+  <a href="#/muro"> 
+   <img src="imagenes/logoOK.png" alt="logoVeg" id="logo">    
+  </a>
+  <h2> La mejor red social para vegetarianos</h2>
+  <div class="buttons" id="buttons">       
+   <button id="loginGoogle2">Ingresar con Gmail</button>
+   <form id="loginForm">
+     <input name="email" type="email" placeholder="Correo electronico" id="emailLogin" required>
+     <input name="password" type="password" placeholder="Contraseña" id="passwordLogin" minlength="6" maxlength="8" required>
+     <button type="button" id="btnLogIn">INGRESAR</button>
+   </form>
+  </div>
+  <div id="foot"> 
+    <h3>¿No tienes cuenta?</h3> 
+    <a href="#/registro"><h3>Registrate aquí</h3></a>
+    <img src="imagenes/fondoo.png" alt="logoVeg" id="fondo">
+  </div>
+  </div>
+  
+  `;
+
   divLogIn.innerHTML = viewLogIn;
 
   const bntGoogle = divLogIn.querySelector('#loginGoogle2');
@@ -97,7 +99,3 @@ export const templateLogIn = () => {
   });
   return divLogIn;
 };
-
-// export const imailLogin = () => {
-//     document.querySelector('#emailLogin').value
-//   };
