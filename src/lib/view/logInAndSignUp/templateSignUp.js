@@ -19,7 +19,7 @@ export const addCollection = (name, pseudonym, emailuser) => {
 export const templateSignUp = () => {
   const divSignUp = document.createElement('div');
   const viewSignUp = `
-  <img src="imagenes/logo.png" alt="logoVeg" id="logo">
+  <img src="imagenes/logoOk.png" alt="logoVeg" id="logo">
   <h2> Aqui ira el formulario para el registro <h2>
   <button id="loginGoogle">Login con google</button>
   <form id="signUpForm" method="post">

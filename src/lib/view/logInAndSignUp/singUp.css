@@ -1,5 +1,13 @@
 body{
     display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#containerLogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #emailSignUp[type="email"]:focus:invalid {
@@ -11,13 +19,18 @@ body{
 }
 
 #errorPassword {
+
     font-size: 12px;
     display: none;
 }
 
-/* /* div{
-    display: flex;
-} */
+ div{
+    display: flex;   
+
+} 
+
+#root{
+}
 
 /*section{
     display: flex;
@@ -26,25 +39,42 @@ body{
 #logo{
 /*display: flex;*/
 justify-content: center;
-width: 23vw;
-height: 50vh;
+width: 14vw;
+height: 28vh;
+margin-top: 1vh;
 }
 
 h2{
 font-family: 'Shrikhand', cursive;
-font-size: 45px;
+font-size: 30px;
 line-height: 20px;
 color: #3FBC1F;
+margin: 3vh;
 }
 
 #buttons{
-   
+   align-items: center;
+   flex-direction: column;
 
 }
 
-#loginGoogle{
-width: 550px;
-height: 56px;
+form{
+    display: flex;
+}
+
+#loginForm{   
+   align-items: center;
+   flex-direction: column;
+}
+
+button{
+    display: flex;
+    margin: 15px;
+}
+
+#loginGoogle2{
+width: 321px;
+height: 39px;
 left: 471px;
 top: 364px;
 background: #FFFFFF;
@@ -58,6 +88,9 @@ font-weight: 200;
 font-size: 24px;
 line-height: 28px;
 color: #000000;
+margin-bottom: 3px;
+justify-content: center;
+align-items: center;
 }
 
 #bntSignUp{
@@ -88,6 +121,7 @@ color: #000000;
     font-size: 24px;
     line-height: 28px;
     color: #000000;
+    margin: 20px;
 
 }
 
@@ -107,7 +141,7 @@ color: #000000;
 }
 
 #btnLogIn{
-    width: 313px;
+    width: 321px;
     height: 35px;
     left: 34px;
     top: 323px;
@@ -119,7 +153,9 @@ color: #000000;
     font-size: 24px;
     line-height: 28px;
     color: #000000;
-
+    margin: 21px;
+    justify-content: center;
+    align-items: center;
 }
 
 #fullName{
@@ -185,8 +221,28 @@ color: #000000;
     color: #000000;
 
 }
+input{
+    display: flex;
+    
+}
+
+#foot{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+h3{
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    margin: 9px;
+}
 
 #fondo{
-width: 111vw;
-height: 103vh;
+    width: 100vw;
+    height: 39vh;
+    position: relative;
+    top: -68px;
+    left: -5px;
 }
