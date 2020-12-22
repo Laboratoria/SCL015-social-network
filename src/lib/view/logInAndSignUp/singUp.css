@@ -231,6 +231,9 @@ input{
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    position: absolute;
+    z-index: 1;
+    top: 499px;
 }
 
 h3{
@@ -242,7 +245,7 @@ h3{
 #fondo{
     width: 100vw;
     height: 39vh;
-    position: fixed;
-    top: -68px;
+    position: relative;
+    top: -18px;
     left: -5px;
 }

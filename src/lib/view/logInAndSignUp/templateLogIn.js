@@ -20,8 +20,8 @@ export const templateLogIn = () => {
   <div id="foot"> 
     <h3>¿No tienes cuenta?</h3> 
     <a href="#/registro"><h3>Registrate aquí</h3></a>
-    <img src="imagenes/fondoo.png" alt="logoVeg" id="fondo">
   </div>
+    <img src="imagenes/fondoo.png" alt="logoVeg" id="fondo">
   </div>
   
   `;
