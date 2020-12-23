@@ -249,3 +249,26 @@ h3{
     top: -18px;
     left: -5px;
 }
+
+/* MURO  */
+
+.wall {
+    display: flex;
+    flex-direction: column
+}
+#formPost {
+    flex-direction: column;
+}
+#btnPost {
+    display: flex;
+    margin: 5px;
+    width: 7vw;
+}
+
+#postList{
+    flex-direction: column;
+}
+
+.postDiv {
+    margin-top: 15px;
+}

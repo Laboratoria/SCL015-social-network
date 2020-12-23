@@ -28,14 +28,15 @@ export const templateLogIn = () => {
 
   divLogIn.innerHTML = viewLogIn;
 
+  // Log In con Google
   const bntGoogle = divLogIn.querySelector('#loginGoogle2');
   bntGoogle.addEventListener('click', () => {
+    // funcion que 
     loginGoogle();
   });
 
   const loginForm = divLogIn.querySelector('#btnLogIn'); // selector del boton INGRESAR
   loginForm.addEventListener('click', () => {
-    // e.preventDefault();
     const email = document.querySelector('#emailLogin').value;
     const password = document.querySelector('#passwordLogin').value;
     console.log(password, email);
@@ -50,8 +51,6 @@ export const templateLogIn = () => {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
         // Signed in
-        console.log('Usuario', user);
-        console.log('LISTO se loguio');
         if (user.user.emailVerified === true) { // si hizo la vefiricacion del correo ingresa al muro
           window.location.href = '/#/muro';
         } else {
