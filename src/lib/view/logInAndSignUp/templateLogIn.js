@@ -8,9 +8,12 @@ export const templateLogIn = () => {
       <a href="#/muro"> 
        <img src="imagenes/logoOK.png" alt="logoVeg" id="logo">    
       </a>
-      <h2> La mejor red social para vegetarianos</h2>
+      <h2> ¡La mejor red social para vegetarianos!</h2>
       <div class="buttons" id="buttons">       
        <button id="loginGoogle2">Ingresar con Gmail</button>
+       <fieldset class="separator">
+       <legend>o</legend>
+       </fieldset>
        <form id="loginForm">
          <input name="email" type="email" placeholder="Correo electronico" id="emailLogin" required>
          <input name="password" type="password" placeholder="Contraseña" id="passwordLogin" minlength="6" maxlength="8" required>
@@ -26,14 +29,15 @@ export const templateLogIn = () => {
       `;
   divLogIn.innerHTML = viewLogIn;
 
+  // Log In con Google
   const bntGoogle = divLogIn.querySelector('#loginGoogle2');
   bntGoogle.addEventListener('click', () => {
+    // funcion que 
     loginGoogle();
   });
 
   const loginForm = divLogIn.querySelector('#btnLogIn'); // selector del boton INGRESAR
   loginForm.addEventListener('click', () => {
-    // e.preventDefault();
     const email = document.querySelector('#emailLogin').value;
     const password = document.querySelector('#passwordLogin').value;
     console.log(password, email);
@@ -47,9 +51,7 @@ export const templateLogIn = () => {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
         // Signed in
-        console.log('Usuario', user);
-        console.log('LISTO se loguio');
-        if (user.user.emailVerified === true) { //si hizo la vefiricacion del correo ingresa al muro
+        if (user.user.emailVerified === true) { // si hizo la vefiricacion del correo ingresa al muro
           window.location.href = '/#/muro';
         } else {
           alert('Por favor confirma tu usuario en el link de verificacion enviado a tu correo');
@@ -71,7 +73,7 @@ export const templateLogIn = () => {
             cleanForm();
             break;
           case 'auth/invalid-email':
-            alert('El correo ingresado no cummple con el formato del email');
+            alert('El correo ingresado no cumple con el formato del email');
             cleanForm();
             break;
           default:

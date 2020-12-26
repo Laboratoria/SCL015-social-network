@@ -19,9 +19,14 @@ body{
 }
 
 #errorPassword {
-
     font-size: 12px;
     display: none;
+    width: 310px;
+    margin: 0;
+    color: gray;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
 }
 
  div{
@@ -38,18 +43,20 @@ body{
 
 #logo{
 /*display: flex;*/
-justify-content: center;
-width: 14vw;
-height: 28vh;
-margin-top: 1vh;
+    justify-content: center;
+    width: 13vw;
+    height: 26vh;
+    margin-bottom: 20px;
 }
 
 h2{
-font-family: 'Shrikhand', cursive;
-font-size: 30px;
-line-height: 20px;
-color: #3FBC1F;
-margin: 3vh;
+    font-family: 'Shrikhand', cursive;
+    font-size: 30px;
+    line-height: 20px;
+    color: #3FBC1F;
+    margin-top: 1vh;
+    margin-bottom: 0;
+    font-weight: normal
 }
 
 #buttons{
@@ -72,155 +79,66 @@ button{
     margin: 15px;
 }
 
+.inputSignUp {
+    margin: 5px;
+
+}
+
+input {
+    width: 313px;
+    height: 31px;
+    left: 34px;
+    top: 323px;
+    background: rgba(63, 190, 32, 0.48);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+    margin: 10px;
+    border-style: none;
+}
+
 #loginGoogle2{
-width: 321px;
-height: 39px;
-left: 471px;
-top: 364px;
-background: #FFFFFF;
-border: 1px solid #000000;
-box-sizing: border-box;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 3px;
-font-family: 'Roboto', sans-serif;
-font-style: normal;
-font-weight: 200;
-font-size: 24px;
-line-height: 28px;
-color: #000000;
-margin-bottom: 3px;
-justify-content: center;
-align-items: center;
-}
-
-#bntSignUp{
-    width: 313px;
-    height: 35px;
-    left: 34px;
-    top: 323px;
-    background: rgba(63, 190, 32, 0.48);
-    border-radius: 5px;
+    background: url("../../../imagenes/loGooglee.jpg");
+    background-repeat: no-repeat;
+    background-size: 37px;
+    width: 321px;
+    height: 39px;
+    /* background: #FFFFFF; */
+    border: 1px solid lightgray;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
     font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 200;
     font-size: 24px;
-    line-height: 28px;
-    color: #000000;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0px 7px;
 }
 
-#emailLogin{
-    width: 313px;
-    height: 35px;
-    left: 34px;
-    top: 323px;
-    background: rgba(63, 190, 32, 0.48);
-    border-radius: 5px;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 200;
-    font-size: 24px;
-    line-height: 28px;
-    color: #000000;
-    margin: 20px;
-
+.separator {
+    border: 0;
+    border-top: 1px solid;
+    padding: 0px 152px;
 }
 
-#passwordLogin{
-    width: 313px;
-    height: 35px;
-    left: 34px;
-    top: 323px;
-    background: rgba(63, 190, 32, 0.48);
-    border-radius: 5px;    
-    font-style: normal;
-    font-weight: 200;
-    font-size: 24px;
-    line-height: 28px;
-    color: #000000 ;
-    font-family: 'Roboto', sans-serif;
-}
-
-#btnLogIn{
+#btnLogIn, #btnSignUp{
     width: 321px;
     height: 35px;
-    left: 34px;
-    top: 323px;
     background: #3FBE20;
     border-radius: 5px;
     font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 200;
     font-size: 24px;
-    line-height: 28px;
-    color: #000000;
-    margin: 21px;
+    line-height: 33px;
     justify-content: center;
-    align-items: center;
+    display: flex;
+    margin: 8px;
+    border-style: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-#fullName{
-    width: 313px;
-    height: 35px;
-    left: 34px;
-    top: 323px;
-    background: rgba(63, 190, 32, 0.48);
-    border-radius: 5px;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 200;
-    font-size: 24px;
-    line-height: 28px;
-    color: #000000;
-
-}
-
-#userNameSignUp{
-    width: 313px;
-    height: 35px;
-    left: 34px;
-    top: 323px;
-    background: rgba(63, 190, 32, 0.48);
-    border-radius: 5px;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 200;
-    font-size: 24px;
-    line-height: 28px;
-    color: #000000;
-
-}
-
-#emailSignUp{
-    width: 313px;
-    height: 35px;
-    left: 34px;
-    top: 323px;
-    background: rgba(63, 190, 32, 0.48);
-    border-radius: 5px;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 200;
-    font-size: 24px;
-    line-height: 28px;
-    color: #000000;
-
-}
-
-#passwordSignUp{
-    width: 313px;
-    height: 35px;
-    left: 34px;
-    top: 323px;
-    background: rgba(63, 190, 32, 0.48);
-    border-radius: 5px;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 200;
-    font-size: 24px;
-    line-height: 28px;
-    color: #000000;
-
-}
 input{
     display: flex;
     
@@ -233,7 +151,17 @@ input{
     align-items: center;
     position: absolute;
     z-index: 1;
-    top: 558px;
+    top: 469px;
+}
+
+#foot2{
+   /* display: flex; */
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    top: 560px;
 }
 
 h3{
@@ -241,11 +169,62 @@ h3{
     font-family: 'Roboto', sans-serif;
     margin: 0;
 }
+a {
+    text-decoration: none;
+    color: #F57804;
+}
 
 #fondo{
     width: 100vw;
     height: 39vh;
     position: relative;
-    top: -18px;
+    top: -11px;
     left: -5px;
+    /* opacity: 0.8;  */
+}
+
+/* #verduras {
+    width: 400px;
+    height: 253px;
+} */
+
+#fondo2{
+    width: 100vw;
+    height: 56vh;
+    position: relative;
+    top: -448px;
+    left: 567px;
+    transform: rotate(-78deg);
+}
+
+#fondo3{
+    width: 100vw;
+    height: 63vh;;
+    position: relative;
+    top: -760.49px;
+    right: 606px;
+    transform:  rotate(112deg);;
+}
+
+/* MURO  */
+
+.wall {
+    display: flex;
+    flex-direction: column
+}
+#formPost {
+    flex-direction: column;
+}
+#btnPost {
+    display: flex;
+    margin: 5px;
+    width: 7vw;
+}
+
+#postList{
+    flex-direction: column;
+}
+
+.postDiv {
+    margin-top: 15px;
 }
