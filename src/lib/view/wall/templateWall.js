@@ -59,7 +59,6 @@ export const templateWall = (containerRoot) => {
           // vaciando div para que no se repitan los post
           divPost.innerHTML = '';
           querySnapshot.forEach((doc) => {
-            console.log(`${doc.id} => ${doc.data().postContent}`);
             divPost.innerHTML += `<div id = "postDiv" class="postDiv">
               <textarea class="postArea" readonly="readonly"> ${doc.data().postContent}</textarea>
               <button class="btnCommentary">Comentarios</button>
@@ -67,29 +66,29 @@ export const templateWall = (containerRoot) => {
               </div>
               <div class="commentDiv">
             </div>`;
-
-            // document.querySelectorAll('.postDiv button').forEach((element) => {
-            //   element.addEventListener('click', () => {
-            //     const postDiv = document.getElementById('postDiv');
-            //     const newComment = document.createElement('div');
-            //     newComment.setAttribute('class', 'newComment');
-            //     const textComment = document.createElement('textarea');
-            //     textComment.setAttribute('id', 'textComment');
-            //     const btnUpComment = document.createElement('button');
-            //     btnUpComment.setAttribute('id', 'btnUpComment');
-            //     btnUpComment.setAttribute('class', 'btn');
-            //     const btnCommentText = document.createTextNode('Comentar');
-            //     btnUpComment.appendChild(btnCommentText);
-            //     postDiv.appendChild(newComment);
-            //     newComment.appendChild(textComment);
-            //     newComment.appendChild(btnUpComment);
-
-            //     postDiv.appendChild(newComment);
-            //   });
-            // });
           });
         });
         containerRoot.appendChild(divWall);
       });
     });
 };
+
+// document.querySelectorAll('.postDiv button').forEach((element) => {
+//   element.addEventListener('click', () => {
+//     const postDiv = document.getElementById('postDiv');
+//     const newComment = document.createElement('div');
+//     newComment.setAttribute('class', 'newComment');
+//     const textComment = document.createElement('textarea');
+//     textComment.setAttribute('id', 'textComment');
+//     const btnUpComment = document.createElement('button');
+//     btnUpComment.setAttribute('id', 'btnUpComment');
+//     btnUpComment.setAttribute('class', 'btn');
+//     const btnCommentText = document.createTextNode('Comentar');
+//     btnUpComment.appendChild(btnCommentText);
+//     postDiv.appendChild(newComment);
+//     newComment.appendChild(textComment);
+//     newComment.appendChild(btnUpComment);
+
+//     postDiv.appendChild(newComment);
+//   });
+// });

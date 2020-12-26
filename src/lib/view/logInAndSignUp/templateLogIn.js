@@ -4,28 +4,29 @@ import { loginGoogle } from '../../index.js';
 export const templateLogIn = () => {
   const divLogIn = document.createElement('div');
   const viewLogIn = `
-  <div id="containerLogin">
-  <a href="#/muro"> 
-   <img src="imagenes/logoOK.png" alt="logoVeg" id="logo">    
-  </a>
-  <h2> La mejor red social para vegetarianos</h2>
-  <div class="buttons" id="buttons">       
-   <button id="loginGoogle2">Ingresar con Gmail</button>
-   <form id="loginForm">
-     <input name="email" type="email" placeholder="Correo electronico" id="emailLogin" required>
-     <input name="password" type="password" placeholder="Contraseña" id="passwordLogin" minlength="6" maxlength="8" required>
-     <button type="button" id="btnLogIn">INGRESAR</button>
-   </form>
-  </div>
-  <div id="foot"> 
-    <h3>¿No tienes cuenta?</h3> 
-    <a href="#/registro"><h3>Registrate aquí</h3></a>
-  </div>
-    <img src="imagenes/fondoo.png" alt="logoVeg" id="fondo">
-  </div>
-  
-  `;
-
+      <div class="container">
+      <a href="#/muro"> 
+       <img src="imagenes/logoOK.png" alt="logoVeg" id="logo">    
+      </a>
+      <h2> ¡La mejor red social para vegetarianos!</h2>
+      <div class="buttons" id="buttons">       
+       <button id="loginGoogle2">Ingresar con Gmail</button>
+       <fieldset class="separator">
+       <legend>o</legend>
+       </fieldset>
+       <form id="loginForm">
+         <input name="email" type="email" placeholder="Correo electronico" id="emailLogin" required>
+         <input name="password" type="password" placeholder="Contraseña" id="passwordLogin" minlength="6" maxlength="8" required>
+         <button type="button" id="btnLogIn">INGRESAR</button>
+       </form>
+      </div>
+      <div id="foot"> 
+        <h3>¿No tienes cuenta?</h3> 
+        <a href="#/registro"><h3>Registrate aquí</h3></a>
+      </div>
+      <img src="imagenes/fondoo.png" alt="logoVeg" id="fondo">
+      </div>
+      `;
   divLogIn.innerHTML = viewLogIn;
 
   // Log In con Google
@@ -46,7 +47,6 @@ export const templateLogIn = () => {
       document.querySelector('#emailLogin').value = '';
       document.querySelector('#passwordLogin').value = '';
     };
-
     // Acceso de usuarios existentes
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
@@ -73,7 +73,7 @@ export const templateLogIn = () => {
             cleanForm();
             break;
           case 'auth/invalid-email':
-            alert('El correo ingresado no cummple con el formato del email');
+            alert('El correo ingresado no cumple con el formato del email');
             cleanForm();
             break;
           default:

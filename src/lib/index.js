@@ -31,7 +31,7 @@ export const loginGoogle = () => {
 };
 
 // Acceso de usuarios existentes
-export const sigUpFirebase = (email, password) => {
+export const signUpFirebase = (email, password) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((user) => {
       console.log('datos usuario', user);
@@ -67,5 +67,25 @@ export const loginFirebase = (email, password) => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+    });
+};
+
+
+// Funcion que guarda el post en firebase
+export const addCollectionPost = (content, pseudonym, emailuser) => {
+  db.collection('post').add({
+    // agregando los Key que tendra la coleccion post
+    postContent: content,
+    userName: pseudonym,
+    email: emailuser,
+  })
+    .then((docRef) => {
+      console.log('Document written with ID: ', docRef.id);
+      alert('publicado');
+      window.location.href = '/#/muro';
+    })
+    .catch((error) => {
+      console.error('Error adding document: ', error);
+      alert(error);
     });
 };
