@@ -32,8 +32,7 @@ export const templateLogIn = () => {
   // Log In con Google
   const bntGoogle = divLogIn.querySelector('#loginGoogle2');
   bntGoogle.addEventListener('click', () => {
-    // funcion que 
-    loginGoogle();
+    loginGoogle(); // funcion para loguearse con google
   });
 
   const loginForm = divLogIn.querySelector('#btnLogIn'); // selector del boton INGRESAR
@@ -84,6 +83,7 @@ export const templateLogIn = () => {
     // observador de estado de autenticación
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        console.log("user", user);
         console.log('existe usuario activo');
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
