@@ -1,10 +1,6 @@
 // aqui exportaras las funciones que necesites
 import { cleanForm } from './view/logInAndSignUp/templateSignUp.js';
-
-export const myFunction = () => {
-  // aqui tu codigo
-  console.log('Hola mundo!');
-};
+import { db } from '../firebaseConfig.js';
 
 //login con google
 export const loginGoogle = () => {
@@ -30,7 +26,7 @@ export const loginGoogle = () => {
   });
 };
 
-// Acceso de usuarios existentes
+// Registro de usuarios
 export const signUpFirebase = (email, password) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((user) => {
@@ -70,7 +66,6 @@ export const loginFirebase = (email, password) => {
     });
 };
 
-
 // Funcion que guarda el post en firebase
 export const addCollectionPost = (content, pseudonym, emailuser) => {
   db.collection('post').add({
@@ -82,7 +77,6 @@ export const addCollectionPost = (content, pseudonym, emailuser) => {
     .then((docRef) => {
       console.log('Document written with ID: ', docRef.id);
       alert('publicado');
-      window.location.href = '/#/muro';
     })
     .catch((error) => {
       console.error('Error adding document: ', error);

@@ -1,9 +1,8 @@
 import { loginGoogle, signUpFirebase } from '../../index.js';
 import { db } from '../../../firebaseConfig.js';
 
-export const addCollection = (name, pseudonym, emailuser) => {
+export const addCollectionProfile = (name, pseudonym, emailuser) => {
   db.collection('profile').add({
-  // console.log("entro en las collection");
     fullName: name,
     userName: pseudonym,
     email: emailuser,
@@ -27,8 +26,8 @@ export const templateSignUp = () => {
    <legend>o</legend>
    </fieldset>
    <form id="loginForm" method="post">
-    <input name="fullName" type="text" class="inputSignUp" placeholder="Nombre Completo" id="fullName" pattern="[a-zA-Z ]{3,30}" title="Solo se permiten letras y un minimo de 3 caracteres" required>
-    <input name="userName" type="text" class="inputSignUp" placeholder="Nombre de Usuario" id="userNameSignUp" minlength="2" maxlength="30" title="Minimo de 3 caracteres" required>
+    <input name="fullName" type="text" class="inputSignUp" placeholder="Nombre Completo" id="fullName" pattern="[zA-a-Z ]{3,30}" title="Solo se permiten letras y un minimo de 3 caracteres" required>
+    <input name="userName" type="text" class="inputSignUp" placeholder="Nombre de Usuario" id="userNameSignUp" minlength="2" maxlength="30" title="Minimo de 2 caracteres" required>
     <input name="email" type="email" class="inputSignUp" placeholder="Correo electronico" id="emailSignUp" required>
     <input name="password" type="password" class="inputSignUp" placeholder="Contraseña" id="passwordSignUp" minlength="6" maxlength="8" required>
     <p id="errorPassword">Tu contraseña debe contener minimo 6 caracteres. Al menos 1 caracter numerico y 1 caracter alfabetico.</p> 
@@ -59,11 +58,10 @@ export const templateSignUp = () => {
     const email = document.querySelector('#emailSignUp').value;
     const password = document.querySelector('#passwordSignUp').value;
     console.log(password, email);
-    console.log('hellooooooooooo');
 
     if (password.match(/[a-z]/g) && password.match(/[0-9]/g) && password.length >= 6) { // match() se usa para obtener todas las ocurrencias de una expresión regular dentro de una cadena.
       signUpFirebase(email, password);
-      addCollection(fullName, userName, email);
+      addCollectionProfile(fullName, userName, email);
     } else {
       errorPasswords.style.display = 'block';
       document.querySelector('#passwordSignUp').value = '';
