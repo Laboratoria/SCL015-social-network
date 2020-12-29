@@ -8,20 +8,20 @@ export const templateLogIn = () => {
       <a href="#/muro"> 
        <img src="imagenes/logoOK.png" alt="logoVeg" id="logo">    
       </a>
-      <h2> ¡La mejor red social para vegetarianos!</h2>
+      <h2 class="welcome-veg"> ¡La mejor red social para vegetarianos!</h2>
       <div class="buttons" id="buttons">       
        <button id="loginGoogle2">Ingresar con Gmail</button>
        <fieldset class="separator">
        <legend>o</legend>
        </fieldset>
        <form id="loginForm">
-         <input name="email" type="email" placeholder="Correo electronico" id="emailLogin" required>
-         <input name="password" type="password" placeholder="Contraseña" id="passwordLogin" minlength="6" maxlength="8" required>
+         <input class="inputMain" name="email" type="email" placeholder="Correo electronico" id="emailLogin" required>
+         <input class="inputMain" name="password" type="password" placeholder="Contraseña" id="passwordLogin" minlength="6" maxlength="8" required>
          <button type="button" id="btnLogIn">INGRESAR</button>
        </form>
       </div>
       <div id="foot"> 
-        <h3>¿No tienes cuenta?</h3> 
+        <h3 class="opcion-main">¿No tienes cuenta?</h3> 
         <a href="#/registro"><h3>Registrate aquí</h3></a>
       </div>
       <img src="imagenes/fondoo.png" alt="logoVeg" id="fondo">

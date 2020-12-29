@@ -20,21 +20,21 @@ export const templateSignUp = () => {
   const viewSignUp = `
   <div class="container">
    <img src="imagenes/logoOk.png" alt="logoVeg" id="logo">
-   <h2> Crea tu cuenta y haz nuevos amigos veg... </h2>
+   <h2 class="welcome-veg"> Crea tu cuenta y haz nuevos amigos veg... </h2>
    <button id="loginGoogle2">  Registrate con google</button>
    <fieldset class="separator">
    <legend>o</legend>
    </fieldset>
    <form id="loginForm" method="post">
-    <input name="fullName" type="text" class="inputSignUp" placeholder="Nombre Completo" id="fullName" pattern="[zA-a-Z ]{3,30}" title="Solo se permiten letras y un minimo de 3 caracteres" required>
-    <input name="userName" type="text" class="inputSignUp" placeholder="Nombre de Usuario" id="userNameSignUp" minlength="2" maxlength="30" title="Minimo de 2 caracteres" required>
-    <input name="email" type="email" class="inputSignUp" placeholder="Correo electronico" id="emailSignUp" required>
-    <input name="password" type="password" class="inputSignUp" placeholder="Contraseña" id="passwordSignUp" minlength="6" maxlength="8" required>
+    <input class="inputMain" name="fullName" type="text" placeholder="Nombre Completo" id="fullName" pattern="[zA-a-Z ]{3,30}" title="Solo se permiten letras y un minimo de 3 caracteres" required>
+    <input class="inputMain" name="userName" type="text" placeholder="Nombre de Usuario" id="userNameSignUp" minlength="2" maxlength="30" title="Minimo de 2 caracteres" required>
+    <input class="inputMain" name="email" type="email" placeholder="Correo electronico" id="emailSignUp" required>
+    <input class="inputMain" name="password" type="password" placeholder="Contraseña" id="passwordSignUp" minlength="6" maxlength="8" required>
     <p id="errorPassword">Tu contraseña debe contener minimo 6 caracteres. Al menos 1 caracter numerico y 1 caracter alfabetico.</p> 
     <button type="submit" id="btnSignUp">Registrarme</button>
    </form>
    <div id="foot2"> 
-     <h3>¿Ya tienes cuenta?</h3>
+     <h3 class="opcion-main">¿Ya tienes cuenta?</h3>
      <a href=""><h3>Ingresa aquí</h3></a>
    </div>
    <img src="imagenes/fondoo.png" alt="logoVeg" id="fondo2">

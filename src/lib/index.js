@@ -2,12 +2,12 @@
 import { cleanForm } from './view/logInAndSignUp/templateSignUp.js';
 import { db } from '../firebaseConfig.js';
 
-//login con google
+// login con google
 export const loginGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider).then((result) => {
     // Esto le da un token de acceso de Google. Puede usarlo para acceder a la API de Google.
-    const token = result.credential.accessToken;
+    // const token = result.credential.accessToken;
     // La información del usuario que inició sesión.
     const user = result.user;
     console.log('user', user);
@@ -15,7 +15,7 @@ export const loginGoogle = () => {
     // ...
   }).catch((error) => {
     // Maneja los errores aquí.
-    const errorCode = error.code;
+    // const errorCode = error.code;
     const errorMessage = error.message;
     // Correo electrónico de la cuenta del usuario utilizada
     const email = error.email;
@@ -36,7 +36,7 @@ export const signUpFirebase = (email, password) => {
       window.location.href = '';
     // Signed in
       // signUpForm.reset();
-       // reset() restablece los valores de los elementos en un formulario
+      // reset() restablece los valores de los elementos en un formulario
     })
     .catch((error) => {
       const errorCode = error.code;
