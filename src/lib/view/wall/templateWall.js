@@ -1,8 +1,40 @@
 import { db } from '../../../firebaseConfig.js';
-import { addCollectionPost } from '../../index.js';
 // import {em} from '../logInAndSignUp/templateLogIn.js';
 
-// contenido del muro
+const containerModal = document.getElementById('modal'); // seccion HTML para el modal
+// Imprimir un elemento en HTML.
+const htmlToElements = (html) => {
+  const stencil = document.createElement('template');
+  stencil.innerHTML = html; // innerHTML devuelve la sintaxis con los descendientes del elemento.
+  return stencil.content.firstChild; // Nodo.firstChild = devuelve el primer hijo del nodo
+};
+// ----------- MODAL-------------
+export const printModal = (message) => {
+  containerModal.innerHTML = '';
+  const modal = htmlToElements(
+    `<div class ="modal-content">
+        <div class="modal-top">
+          <span class="close">&times;</span>
+        </div>
+          <div class="modal-body">
+          <p class= "modal-name"><strong>${message}</strong></p>
+        </div>
+        <div class="modal-button">
+          <button class="btn-post" id="btnPost">Aceptar</button>
+          <button class="btn-post" id="btnCancel">Cancelar</button>
+        </div>
+    </div>`,
+  );
+  containerModal.appendChild(modal);
+
+  // Cuando se haga click <span> (x), cierra el modal
+  const spanModalClose = document.getElementsByClassName('close')[0];
+  spanModalClose.onclick = () => {
+    containerModal.style.display = 'none';
+  };
+};
+
+// ----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
   const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
@@ -10,25 +42,17 @@ export const templateWall = (containerRoot) => {
 
   const divWall = document.createElement('div');
   const viewWall = `
-        <div class="wall">
-        <p>Hola ${displayNameData}</p>
-        <form id="formPost">
-        <textarea name="" id="postArea" placeholder="¿En que estas pensando?" cols="30" rows="10" required></textarea>
-        <input type="button" id="btnPost" value="Publicar">
-        </form>
-        <div id="postList"> 
-        </div>
-        </div>
-        `;
+    <div class="wall">
+    <p>Hola ${displayNameData}</p>
+    <a href='#/post'>
+        <input type="button" id="New" value="Nueva Publicación">
+    </a>
+    <div id="postList"> 
+    </div>
+    </div>
+    `;
 
   divWall.innerHTML = viewWall;
-
-  const buttonPost = divWall.querySelector('#btnPost'); // Llamando al boton publicar
-  buttonPost.addEventListener('click', () => {
-    const formPost = document.querySelector('#postArea').value; // Contenido del textarea
-    addCollectionPost(formPost, displayNameData, emailData); //  Agrega el post a firebase
-    document.querySelector('#postArea').value = '';
-  });
 
   const divPost = divWall.querySelector('#postList'); // Llamando al div donde se imprimirán los post
   db.collection('post').onSnapshot((querySnapshot) => { // Escuchando colección en firebase para ir imprimiendo los post
@@ -36,14 +60,27 @@ export const templateWall = (containerRoot) => {
     divPost.innerHTML = '';
     querySnapshot.forEach((doc) => {
       divPost.innerHTML += `<div id = "postDiv" class="postDiv">
-              <p>${doc.data().userName}</p>
-              <textarea class="postArea" readonly="readonly"> ${doc.data().postContent}</textarea>
-              <button class="btnCommentary">Comentarios</button>
-              <button class="delete">Borrar</button>
-              </div>
-              <div class="commentDiv">
-            </div>`;
+          <div class="post-identifier"
+            <p>${doc.data().userName}</p>
+          </div>
+          <p class="content-post"> <br> ${doc.data().postContent}</p>
+          <div class="deleteDiv">
+           <input type="button" class="delete" value="Borrar">
+          </div>
+          <button id="editPost">editar</button>
+          </div>
+          <div class="commentDiv">
+          </div>`;
     });
+
+    const btnDelete = document.querySelectorAll('.deleteDiv'); // llamando a todas las clases deleteDiv
+    for (let i = 0; i < btnDelete.length; i++) {
+      btnDelete[i].addEventListener('click', () => {
+        const messageDelete = '¿Estas seguro que deseas eliminar esta puplicación?';
+        printModal(messageDelete);
+        containerModal.style.display = 'block';
+      });
+    }
   });
   containerRoot.appendChild(divWall);
   // });
