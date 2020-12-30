@@ -2,7 +2,7 @@ import { db } from '../../../firebaseConfig.js';
 // import {em} from '../logInAndSignUp/templateLogIn.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
-// Imprimir un elemento en HTML.
+// -----Imprimir un elemento en HTML----
 const htmlToElements = (html) => {
   const stencil = document.createElement('template');
   stencil.innerHTML = html; // innerHTML devuelve la sintaxis con los descendientes del elemento.
@@ -34,7 +34,7 @@ export const printModal = (message) => {
   };
 };
 
-// ----------Contenido del Muro---------
+// <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
   const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
@@ -42,7 +42,7 @@ export const templateWall = (containerRoot) => {
 
   const divWall = document.createElement('div');
   const viewWall = `
-    <div class="wall">
+    <div class="wall-top">
     <p>Hola ${displayNameData}</p>
     <a href='#/post'>
         <input type="button" id="New" value="Nueva Publicación">
@@ -54,37 +54,88 @@ export const templateWall = (containerRoot) => {
 
   divWall.innerHTML = viewWall;
 
+  // ------Imprimir los cometarios-------
   const divPost = divWall.querySelector('#postList'); // Llamando al div donde se imprimirán los post
   db.collection('post').onSnapshot((querySnapshot) => { // Escuchando colección en firebase para ir imprimiendo los post
-    // Vaciando div para que no se repitan los post
-    divPost.innerHTML = '';
+    divPost.innerHTML = ''; // Vaciando div para que no se repitan los post
     querySnapshot.forEach((doc) => {
       divPost.innerHTML += `<div id = "postDiv" class="postDiv">
           <div class="post-identifier"
             <p>${doc.data().userName}</p>
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
-          <div class="deleteDiv">
-           <input type="button" class="delete" value="Borrar">
-          </div>
-          <button id="editPost">editar</button>
+          <input type="button" class="delete" value="Borrar">
+          <input type="button" id="btnEdit" class="editPost" value="Editar">
           </div>
           <div class="commentDiv">
           </div>`;
+
+      // -----Modal Editar------
+      const printModalEdit = () => {
+        containerModal.innerHTML = '';
+        const modal = htmlToElements(
+          `<div class ="modal-content-edit">
+                      <div class="modal-top">
+                        <span class="close">&times;</span>
+                      </div>
+                      <div class="modal-post">
+                      <textarea id="postArea" cols="30" rows="10">${doc.data().postContent}</textarea>
+                      <button class="btn-post-edit" onclick="editPostFirebase('${doc.id}','${doc.data().postContent}')" id="btnPostEdit">Publicar</button>
+                      <button class="btn-post-cancel" id="btnCancelEdit">Cancelar</button>
+                      </div>
+                  </div>`,
+        );
+        containerModal.appendChild(modal);
+
+        // Cuando se haga click <span> (x), cierra el modal
+        const spanModalClose = document.getElementsByClassName('close')[0];
+        spanModalClose.onclick = () => {
+          containerModal.style.display = 'none';
+        };
+      };
+
+      // -------Boton que abre el Modal Editar post---------
+      const btnEdit = document.querySelectorAll('.editPost'); // llamando a todas las clases deleteDiv
+      for (let i = 0; i < btnEdit.length; i++) {
+        btnEdit[i].addEventListener('click', () => {
+          printModalEdit();
+          containerModal.style.display = 'block';
+        });
+      }
+
+      const editPostFirebase = (id, content) => {
+        document.getElementById('postArea').value = content;
+        const AddEdit = document.getElementById('btnPostEdit');
+
+        AddEdit.onclick = () => {
+          const PostRef = db.collection('post').doc(id);
+          const content = document.getElementById('postArea').value;
+
+          return PostRef.update({
+            postContent: content,
+          })
+            .then(() => {
+              console.log('Document successfully updated!');
+            })
+            .catch((error) => {
+              // The document probably doesn't exist.
+              console.error('Error updating document: ', error);
+            });
+        };
+      };
     });
 
-    const btnDelete = document.querySelectorAll('.deleteDiv'); // llamando a todas las clases deleteDiv
-    for (let i = 0; i < btnDelete.length; i++) {
-      btnDelete[i].addEventListener('click', () => {
-        const messageDelete = '¿Estas seguro que deseas eliminar esta puplicación?';
-        printModal(messageDelete);
-        containerModal.style.display = 'block';
-      });
-    }
+    // const btnDelete = document.querySelectorAll('.delete'); // llamando a todas las clases deleteDiv
+    // for (let i = 0; i < btnDelete.length; i++) {
+    //   btnDelete[i].addEventListener('click', () => {
+    //     const messageDelete = '¿Estas seguro que deseas eliminar esta puplicación?';
+    //     printModal(messageDelete);
+    //     containerModal.style.display = 'block';
+    //   });
+    // }
   });
   containerRoot.appendChild(divWall);
-  // });
-};
+}; // final
 
 // db.collection('profile').where('email', '==', 'luzcielm@gmail.coml').get()
 // .then((querySnapshot) => {
