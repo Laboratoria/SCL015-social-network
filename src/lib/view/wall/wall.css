@@ -1,0 +1,89 @@
+section {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.header {
+    background-color: rgba(63, 190, 32, 0.48);F;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.header-menu {
+    margin-right: 30px;
+    display: flex;
+    width: 100vw;
+    justify-content: flex-end;
+  }
+
+  .addPost {
+    margin-right: 28%;
+  }
+  .header__img {
+    width: 200px;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .header-menu ul {
+    display: none;
+    list-style: none;
+    padding: 0px;
+    position: absolute;
+    width: 100px;
+    text-align: right;
+    margin: 0px 0px 0px -14px;
+  }
+  .header-menu:hover ul, ul:hover {
+    display: block;
+  }
+  .header-menu li {
+    margin: 10px 0px;
+  }
+  .header-menu li a {
+    color: white;
+    text-decoration: none;    
+  }
+  .header-menu li a:hover {
+    text-decoration: underline;        
+  }
+  .header-menu--profile {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .header-menu--profile img {
+    margin-right: 8px;
+    width: 40px;
+  }
+  .header-menu--profile p {
+    margin: 0px;
+    color: rgb(33 33 33 / 83%);
+  }
+
+#postList {
+    background: rgba(196, 196, 196, 0.18);
+    flex-direction: column;
+    align-items: center;
+}
+
+.postDiv{
+    display: flex;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.49);
+    box-sizing: border-box;
+    border-radius: 19px;
+    width: 50%;
+    flex-direction: column;
+}
+
+.user-Post {
+    width: 3%;
+}
+.user-Name {
+    display: flex;
+    margin: 0;
+    margin-top: 2%;
+}

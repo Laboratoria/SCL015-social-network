@@ -1,5 +1,5 @@
 import { db } from '../../../firebaseConfig.js';
-// import {em} from '../logInAndSignUp/templateLogIn.js';
+import { editPostFb } from '../../index.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
 // -----Imprimir un elemento en HTML----
@@ -27,43 +27,39 @@ export const printModal = (message) => {
   );
   containerModal.appendChild(modal);
 
-  // Cuando se haga click <span> (x), cierra el modal
-  const spanModalClose = document.getElementsByClassName('close')[0];
-  spanModalClose.onclick = () => {
-    containerModal.style.display = 'none';
-  };
-};
 
-export const editPostFb = (id, addEdit) => {
-  const PostRef = db.collection('post').doc(id);
-  return PostRef.update({
-    postContent: addEdit,
-  })
-    .then(() => {
-      console.log('Document successfully updated!');
-    })
-    .catch((error) => {
-      // The document probably doesn't exist.
-      console.error('Error updating document: ', error);
-    });
+// Cuando se haga click <span> (x), cierra el modal
+// const spanModalClose = document.getElementsByClassName('close')[0];
+// spanModalClose.onclick = () => {
+//   containerModal.style.display = 'none';
+// };
 };
-
 // <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
   const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
   const emailData = currentUserData.email; // Email del usuario que accedio
 
-  const divWall = document.createElement('div');
+  const divWall = document.createElement('section');
   const viewWall = `
-    <div class="wall-top">
-    <p>Hola ${displayNameData}</p>
-    <a href='#/post'>
-        <input type="button" id="New" value="Nueva Publicación">
-    </a>
-    <div id="postList"> 
+  <header class="header">
+    <div class="header-menu">
+      <a href='#/post' class="addPost">
+        <img src="imagenes/add.svg" alt="add_Post">
+      </a>
+      <div class="header-menu--profile">
+        <img src="imagenes/user.svg" alt="User">
+        <p>Hola ${displayNameData}</p>
+        <img src="imagenes/flecha abajo.svg" alt="flecha_Abajo">
+      </div>
+      <ul>
+        <li><a href="/">Perfil</a></li>
+        <li><a href="/">Cerrar Sesión</a></li>
+      </ul>
     </div>
-    </div>
+  </header>
+  <div id="postList"> 
+  </div>
     `;
 
   divWall.innerHTML = viewWall;
@@ -75,16 +71,17 @@ export const templateWall = (containerRoot) => {
     querySnapshot.forEach((doc) => {
       divPost.innerHTML += `<div id="postDiv-${doc.id}" class="postDiv">
           <div class="post-identifier">
-            <p>${doc.data().userName}</p>
+            <img src="imagenes/user.svg" alt="User" class="user-Post">
+            <p class="user-Name">${doc.data().userName}</p>
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
           <input type="button" class="delete" value="Borrar">
-          <input type="button" id="btnEdit" class="editPost" value="Editar">
+          <input type="button" id="openEdit-${doc.id}" class="editPost" value="Editar">
           </div>
           <div class="commentDiv">
           </div>
-          <section id="modalEdit-${doc.id}" class="modalRRRRR">
-            <div class ="modal-content">
+          <section id="modalEdit-${doc.id}" class="modal">
+          <div class ="modal-content">
               <div class="modal-top">
                 <span id="close-${doc.id}" class="close">&times;</span>
               </div>
@@ -99,38 +96,25 @@ export const templateWall = (containerRoot) => {
     });
 
     querySnapshot.forEach((doc) => {
+      const openEdit = document.getElementById(`openEdit-${doc.id}`);
       const editbutton = document.getElementById(`btnPostEdit-${doc.id}`);
-      // console.log(editbutton);
-      editbutton.addEventListener('click', () => {
-        console.log('entro');
+      const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion HTML para el modal
+      const spanModalClose = document.getElementById(`close-${doc.id}`);
+
+      openEdit.addEventListener('click', () => { // Abre el modal para editar
+        modalEdit.style.display = 'block';
+      });
+
+      editbutton.addEventListener('click', () => { // Edita el post en farebase
         editPostFb(doc.id, document.getElementById(`postArea-${doc.id}`).value);
       });
 
-      const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion HTML para el modal
-      // // Cuando se haga click <span> (x), cierra el modal
-      const spanModalClose = document.getElementById(`close-${doc.id}`);
-      spanModalClose.onclick = () => {
+      spanModalClose.onclick = () => { //  cierra el modal
         modalEdit.style.display = 'none';
-        console.log('cerrar modal');
       };
     });
 
-    // // -----Modal Editar------
-    // const printModalEdit = () => {
-    //   containerModal.innerHTML = '';
-    //   const modal = htmlToElements(
-    //     `<div class ="modal-content-edit">
-    //                 <div class="modal-top">
-    //                   <span class="close">&times;</span>
-    //                 </div>
-    //                 <div class="modal-post">
-    //                 <textarea id="postArea" class ="post-Area" cols="30" rows="10"></textarea>
-    //                 <button class="btn-post-edit" id="btnPostEdit">Publicar</button>
-    //                 <button class="btn-post-cancel" id="btnCancelEdit">Cancelar</button>
-    //                 </div>
-    //             </div>`,
-    //   );
-    //   containerModal.appendChild(modal);
+    // -----Modal Editar------
 
     // -------Boton que abre el Modal Editar post---------
     // const btnEdit = document.querySelectorAll('.editPost'); // llamando a todas las clases deleteDiv
@@ -173,17 +157,6 @@ export const templateWall = (containerRoot) => {
 //       });
 //   };
 // };
-
-// // -------Boton que abre el Modal Editar post---------
-// const btnEdit = document.querySelectorAll('.editPost'); // llamando a todas las clases deleteDiv
-// for (let i = 0; i < btnEdit.length; i++) {
-//   btnEdit[i].addEventListener('click', () => {
-//     printModalEdit(doc.data().postContent[i]);
-//     containerModal.style.display = 'block';
-//     // document.querySelectorAll('.post-Area').value =
-//     console.log(doc.data().postContent);
-//   });
-// }
 
 // const editButton = document.querySelectorAll('.delete');
 // editButton.addEventListener('click', () => {
