@@ -5,16 +5,33 @@ export const templatePost = (containerRoot) => {
   const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
   const emailData = currentUserData.email; // Email del usuario que accedio
 
-  const divNewPost = document.createElement('div');
+  const divNewPost = document.createElement('section');
   const viewPost = `
-        <p>Hola ${displayNameData}</p>
-        <div class="post">
-        <form id="formPost" method="post">
-        <textarea id="postArea" placeholder="¿En que estas pensando?" cols="30" rows="10" required></textarea>
-        <button class="btn-post" type="submit" id="btnPost">Publicar</button>
-        </form>
-        <button class="btn-post" id="btnCancel">Cancelar</button>
+    <header class="header">
+      <div class="header-menu">
+        <div class="header-menu--profile">
+          <img src="imagenes/user.svg" alt="User">
+          <p>Hola ${displayNameData}</p>
+          <img src="imagenes/flecha abajo.svg" alt="flecha_Abajo">
         </div>
+        <ul>
+          <li><a href="/">Perfil</a></li>
+          <li><a href="/">Cerrar Sesión</a></li>
+        </ul>
+      </div>
+    </header>
+    <section class="post">
+      <p class="new-post">Nueva Publicación</p>
+      <form id="formPost" method="post">
+        <textarea id="postArea" class="post-area" placeholder="¿En que estas pensando?" cols="30" rows="10" required></textarea>
+        <input type="file" id="myfile" name="myfile" accept="image/png, .jpeg, .jpg, image/gif" />
+        <div class="post-form-btn">
+          <button class="btn-post" type="submit" id="btnPost">Publicar</button>
+          <button class="btn-post" id="btnCancel">Cancelar</button>
+        </div>
+      </form>
+      
+    </section>
         `;
 
   divNewPost.innerHTML = viewPost;
@@ -23,6 +40,7 @@ export const templatePost = (containerRoot) => {
   buttonPost.addEventListener('submit', (e) => {
     e.preventDefault();
     const formPost = document.querySelector('#postArea').value; // Contenido del textarea
+    // const image = document.querySelector('#myfile').value;
     addCollectionPost(formPost, displayNameData, emailData); //  Agrega el post a firebase
     window.history.back();
   });

@@ -47,10 +47,10 @@ export const templateWall = (containerRoot) => {
       <a href='#/post' class="addPost">
         <img src="imagenes/add.svg" alt="add_Post">
       </a>
-      <div class="header-menu--profile">
-        <img src="imagenes/user.svg" alt="User">
+      <div class="header-menu-profile">
+        <img src="imagenes/user.svg" class="menu-user" alt="User">
         <p>Hola ${displayNameData}</p>
-        <img src="imagenes/flecha abajo.svg" alt="flecha_Abajo">
+        <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
       </div>
       <ul>
         <li><a href="/">Perfil</a></li>
@@ -71,8 +71,13 @@ export const templateWall = (containerRoot) => {
     querySnapshot.forEach((doc) => {
       divPost.innerHTML += `<div id="postDiv-${doc.id}" class="postDiv">
           <div class="post-identifier">
-            <img src="imagenes/user.svg" alt="User" class="user-Post">
-            <p class="user-Name">${doc.data().userName}</p>
+            <div class="post-name">
+              <img src="imagenes/user.svg" alt="User" class="user-Post">
+              <p class="user-Name">${doc.data().userName}</p>
+            </div>   
+            <div class="post-opcion">
+              <img src="imagenes/3puntos.svg" alt="opcion" class="opcion">
+            </div>       
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
           <input type="button" class="delete" value="Borrar">
@@ -86,7 +91,7 @@ export const templateWall = (containerRoot) => {
                 <span id="close-${doc.id}" class="close">&times;</span>
               </div>
               <div class="modal-post">
-              <textarea id="postArea-${doc.id}" class="post-Area" cols="30" rows="10">${doc.data().postContent}</textarea>
+              <textarea id="postArea-${doc.id}" class="post-area" cols="30" rows="10">${doc.data().postContent}</textarea>
               <button class="btn-post-edit" id="btnPostEdit-${doc.id}">Publicar</button>
               <button class="btn-post-cancel" id="btnCancelEdit">Cancelar</button>
               </div>

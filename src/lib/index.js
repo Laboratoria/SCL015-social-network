@@ -73,6 +73,7 @@ export const addCollectionPost = (content, pseudonym, emailuser) => {
     postContent: content,
     userName: pseudonym,
     email: emailuser,
+    // image: img,
   })
     .then((docRef) => {
       console.log('Document written with ID: ', docRef.id);
