@@ -144,7 +144,7 @@ button{
     align-items: center;
     position: absolute;
     z-index: 1;
-    top: 469px;
+    top: 524px;
 }
 
 #foot2{
@@ -152,7 +152,7 @@ button{
     align-items: center;
     position: absolute;
     z-index: 1;
-    top: 560px;
+    top: 631px;
 }
 
 .opcion-main {
@@ -227,4 +227,66 @@ a {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* formato responsive para celular S8 */
+@media screen and (device-width : 414px) and (device-height : 736px){
+    #logo {
+        justify-content: center;
+        width: 28vw;
+        height: 15vh;
+        margin-bottom: 20px;
+    }
+    
+    .welcome-veg {
+        font-family: 'Shrikhand', cursive;
+        font-size: 16px;
+        line-height: 20px;
+        color: #3FBC1F;
+        margin-top: 1vh;
+        margin-bottom: 0;
+        font-weight: normal;
+    }
+
+    #fondo {
+        width: 99vw;
+        height: 14vh;
+        position: relative;
+        top: 132px;
+    }
+
+    #foot {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        z-index: 1;
+        top: 506px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: visible;
+        margin-top: 44px;
+
+    }
+
+    #loginGoogle2{
+        background: url("../../../imagenes/loGooglee.jpg");
+        background-repeat: no-repeat;
+        background-size: 37px;
+        width: 321px;
+        height: 39px;
+        border: 1px solid lightgray;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 3px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 21px;
+        justify-content: center;
+        align-items: center;
+        margin: 25px 0px 7px;
+    }
 }
