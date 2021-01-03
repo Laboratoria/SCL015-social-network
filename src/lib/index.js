@@ -83,3 +83,19 @@ export const addCollectionPost = (content, pseudonym, emailuser) => {
       alert(error);
     });
 };
+
+// Funcion que edita el post en firebase
+export const editPostFb = (id, addEdit) => {
+  const PostRef = db.collection('post').doc(id);
+  return PostRef.update({
+    postContent: addEdit,
+  })
+    .then(() => {
+      console.log('Document successfully updated!');
+    })
+    .catch((error) => {
+      // The document probably doesn't exist.
+      console.error('Error updating document: ', error);
+    });
+};
+
