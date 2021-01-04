@@ -9,7 +9,7 @@ p {
   display: flex;
 }
 .header {
-  background-color: rgba(63, 190, 32, 0.48);
+  background-color: #B2EFA3;
   width: 100%;
   height: 80px;
   display: flex;
@@ -43,7 +43,7 @@ p {
     width: 193px;
     /* text-align: right; */
     margin: 0px -30px 0px -14px;
-    background: rgba(63, 190, 32, 0.48);
+    background:#B2EFA3;
 
   }
   .header-menu:hover ul, ul:hover {
@@ -63,7 +63,7 @@ p {
     margin-right: 8px;
     display: flex;
     align-items: center;
-    /* cursor: pointer; */
+    cursor: pointer;
   }
   .menu-user {
     margin-right: 8px;
@@ -125,7 +125,83 @@ p {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #B2EFA3;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 45%;
+  height: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  border-radius: 15px; 
+}
 
+/* Agregar Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+.close {
+  color: #161C58;
+  font-size: 33px;
+  padding: 0px 0px 2px 10px; */
+  margin-left: 20px;
+  margin-right: 5px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-post{
+  flex-direction: column;
+  margin: 0% 8%;
+}
+
+.modal-textarea{
+  height: 160px;
+  width: 385px;
+  box-sizing: border-box;
+  padding: 6px;
+}
+
+.modal-btn {
+  justify-content: flex-end;
+  margin-top: 3%;
+}
+
+.btn-post-edit, .btn-post-cancelar {
+  display: flex;
+  margin: 15px;
+  width: 126px;
+  height: 35px;
+  background: #59AE44;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 21px;
+  line-height: 33px;
+  justify-content: center;
+  display: flex;
+  margin: 8px;
+  border-style: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgb(0 0 0 / 0%);
+  color: white;
+}
 /* POST  */
 .content-post {
   display: flex;

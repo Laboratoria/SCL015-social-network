@@ -9,10 +9,10 @@ export const templatePost = (containerRoot) => {
   const viewPost = `
     <header class="header">
       <div class="header-menu">
-        <div class="header-menu--profile">
-          <img src="imagenes/user.svg" alt="User">
+      <div class="header-menu-profile">
+        <img src="imagenes/user.svg" class="menu-user" alt="User">
           <p>Hola ${displayNameData}</p>
-          <img src="imagenes/flecha abajo.svg" alt="flecha_Abajo">
+          <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
         </div>
         <ul>
           <li><a href="/">Perfil</a></li>

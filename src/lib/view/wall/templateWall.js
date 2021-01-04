@@ -91,9 +91,11 @@ export const templateWall = (containerRoot) => {
                 <span id="close-${doc.id}" class="close">&times;</span>
               </div>
               <div class="modal-post">
-              <textarea id="postArea-${doc.id}" class="post-area" cols="30" rows="10">${doc.data().postContent}</textarea>
-              <button class="btn-post-edit" id="btnPostEdit-${doc.id}">Publicar</button>
-              <button class="btn-post-cancel" id="btnCancelEdit">Cancelar</button>
+              <textarea id="postArea-${doc.id}" class="modal-textarea" cols="30" rows="10">${doc.data().postContent}</textarea>
+              <div class="modal-btn">
+                <button class="btn-post-cancelar" id="btnCancel${doc.id}">Cancelar</button>
+                <button class="btn-post-edit" id="btnPostEdit-${doc.id}">Publicar</button>
+              </div>
               </div>
             </div>
           </section>  
@@ -101,34 +103,28 @@ export const templateWall = (containerRoot) => {
     });
 
     querySnapshot.forEach((doc) => {
-      const openEdit = document.getElementById(`openEdit-${doc.id}`);
-      const editbutton = document.getElementById(`btnPostEdit-${doc.id}`);
-      const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion HTML para el modal
-      const spanModalClose = document.getElementById(`close-${doc.id}`);
+      const openEdit = document.getElementById(`openEdit-${doc.id}`); // // boton que abre el modal
+      const editbutton = document.getElementById(`btnPostEdit-${doc.id}`); // boton que publica la edicion
+      const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
+      const spanModalClose = document.getElementById(`close-${doc.id}`); // X que cierra el modal
+      const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
 
       openEdit.addEventListener('click', () => { // Abre el modal para editar
         modalEdit.style.display = 'block';
       });
 
-      editbutton.addEventListener('click', () => { // Edita el post en farebase
+      editbutton.addEventListener('click', () => { // Edita el post en firebase
         editPostFb(doc.id, document.getElementById(`postArea-${doc.id}`).value);
+      });
+
+      modalCancel.addEventListener('click', () => { //  cierra el modal
+        modalEdit.style.display = 'none';
       });
 
       spanModalClose.onclick = () => { //  cierra el modal
         modalEdit.style.display = 'none';
       };
     });
-
-    // -----Modal Editar------
-
-    // -------Boton que abre el Modal Editar post---------
-    // const btnEdit = document.querySelectorAll('.editPost'); // llamando a todas las clases deleteDiv
-    // for (let i = 0; i < btnEdit.length; i++) {
-    //   btnEdit[i].addEventListener('click', () => {
-    //     modalEdit.style.display = 'block';
-    //     console.log('entro al boton editar');
-    //   });
-    // }
   });
   containerRoot.appendChild(divWall);
 };// final
@@ -142,26 +138,6 @@ export const templateWall = (containerRoot) => {
 //   });
 // }
 
-// const editPostFirebase = (id, content) => {
-//   document.getElementById('postArea').value = content;
-//   const AddEdit = document.getElementById('btnPostEdit');
-
-//   AddEdit.onclick = () => {
-//     const PostRef = db.collection('post').doc(id);
-//     const content = document.getElementById('postArea').value;
-
-//     return PostRef.update({
-//       postContent: content,
-//     })
-//       .then(() => {
-//         console.log('Document successfully updated!');
-//       })
-//       .catch((error) => {
-//         // The document probably doesn't exist.
-//         console.error('Error updating document: ', error);
-//       });
-//   };
-// };
 
 // const editButton = document.querySelectorAll('.delete');
 // editButton.addEventListener('click', () => {
