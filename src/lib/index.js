@@ -73,6 +73,7 @@ export const addCollectionPost = (content, pseudonym, emailuser) => {
     postContent: content,
     userName: pseudonym,
     email: emailuser,
+    // image: img,
   })
     .then((docRef) => {
       console.log('Document written with ID: ', docRef.id);
@@ -98,4 +99,14 @@ export const editPostFb = (id, addEdit) => {
       console.error('Error updating document: ', error);
     });
 };
+
+//funcion eliminar post en firebase
+
+export const deletePostFb =(id) => {
+   db.collection('post').doc(id).delete().then(function() {
+  console.log("Document successfully deleted!");
+}).catch(function(error) {
+  console.error("Error removing document: ", error);
+});
+}
 
