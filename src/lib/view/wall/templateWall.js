@@ -82,7 +82,7 @@ export const templateWall = (containerRoot) => {
             </div>       
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
-          <input type="button" id="delete" class="delete" value="Borrar">
+          <input type="button" id="openDelete" class="delete" value="Borrar">
           <input type="button" id="openEdit-${doc.id}" class="editPost" value="Editar">
           </div>
           <div class="commentDiv">
@@ -145,8 +145,9 @@ export const templateWall = (containerRoot) => {
       const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
       const spanModalClose = document.getElementById(`close-${doc.id}`); // X que cierra el modal
       const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
-      const deleteP = document.getElementById('delete');
+      const openDelete = document.getElementById('openDelete');
       const btnAceptarDelete = document.getElementById(`btnAceptar-${doc.id}`)
+      console.log (`btnAceptar-${doc.id}`)
       console.log(btnAceptarDelete);
 
      
@@ -168,7 +169,7 @@ export const templateWall = (containerRoot) => {
         modalEdit.style.display = 'none';
       };
 
-      deleteP.addEventListener('click',(doc.id) => { 
+      openDelete.addEventListener('click',() => { 
         containerModal.style.display = 'block';
       });
       //const hola = () => {
