@@ -172,12 +172,6 @@ export const templateWall = (containerRoot) => {
       openDelete.addEventListener('click',() => { 
         containerModal.style.display = 'block';
       });
-      //const hola = () => {
-        //let borrar = `${doc.id}`
-        
-        //return borrar
-       //console.log('borro')
-      
 
      btnAceptarDelete.addEventListener('click',() => {       
       deletePostFb(`${doc.id}`);
