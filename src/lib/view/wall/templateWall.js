@@ -10,32 +10,32 @@ const htmlToElements = (html) => {
   stencil.innerHTML = html; // innerHTML devuelve la sintaxis con los descendientes del elemento.
   return stencil.content.firstChild; // Nodo.firstChild = devuelve el primer hijo del nodo
 };
-// ----------- MODAL-------------
-export const printModal = (message) => {
-  containerModal.innerHTML = '';
-  const modal = htmlToElements(
-    `<div class ="modal-content">
-        <div class="modal-top">
-          <span class="close">&times;</span>
-        </div>
-          <div class="modal-body">
-          <p class= "modal-name"><strong>${message}</strong></p>
-        </div>
-        <div class="modal-button">
-          <button class="btn-post" id="btnPost">Aceptar</button>
-          <button class="btn-post" id="btnCancel">Cancelar</button>
-        </div>
-    </div>`,
-  );
-  containerModal.appendChild(modal);
+// // ----------- MODAL-------------
+// export const printModal = (idFirebase) => {
+//   containerModal.innerHTML = '';
+//   const modal = htmlToElements(
+//     `<div class ="modal-content">
+//         <div class="modal-top">
+//           <span class="close">&times;</span>
+//         </div>
+//           <div class="modal-body">
+//           <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
+//         </div>
+//         <div class="modal-button">
+//           <button class="btn-post" id="btnAceptar-${idFirebase}">Aceptar</button>
+//           <button class="btn-post" id="btnCancel">Cancelar</button>
+//         </div>
+//     </div>`,
+//   );
+//   containerModal.appendChild(modal);
 
 
-// Cuando se haga click <span> (x), cierra el modal
-// const spanModalClose = document.getElementsByClassName('close')[0];
-// spanModalClose.onclick = () => {
-//   containerModal.style.display = 'none';
+// // Cuando se haga click <span> (x), cierra el modal
+// // const spanModalClose = document.getElementsByClassName('close')[0];
+// // spanModalClose.onclick = () => {
+// //   containerModal.style.display = 'none';
+// // };
 // };
-};
 // <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
@@ -82,7 +82,7 @@ export const templateWall = (containerRoot) => {
             </div>       
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
-          <input type="button" id="delete-${doc.id}" class="delete" value="Borrar">
+          <input type="button" id="delete" class="delete" value="Borrar">
           <input type="button" id="openEdit-${doc.id}" class="editPost" value="Editar">
           </div>
           <div class="commentDiv">
@@ -93,49 +93,97 @@ export const templateWall = (containerRoot) => {
                 <span id="close-${doc.id}" class="close">&times;</span>
               </div>
               <div class="modal-post">
-              <textarea id="postArea-${doc.id}" class="post-area" cols="30" rows="10">${doc.data().postContent}</textarea>
-              <button class="btn-post-edit" id="btnPostEdit-${doc.id}">Publicar</button>
-              <button class="btn-post-cancel" id="btnCancelEdit">Cancelar</button>
+              <textarea id="postArea-${doc.id}" class="modal-textarea" cols="30" rows="10">${doc.data().postContent}</textarea>
+              <div class="modal-btn">
+                <button class="btn-post-cancelar" id="btnCancel${doc.id}">Cancelar</button>
+                <button class="btn-post-edit" id="btnPostEdit-${doc.id}">Publicar</button>
+              </div>
               </div>
             </div>
           </section>  
           `;
+         
+         // ----------- MODAL-------------
+  
+     containerModal.innerHTML = '';
+     const modal = htmlToElements(
+      `<div class ="modal-content">
+          <div class="modal-top">
+            <span class="close">&times;</span>
+          </div>
+            <div class="modal-body">
+            <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
+          </div>
+          <div class="modal-button">
+            <button class="btn-post" id="btnAceptar-${doc.id}">Aceptar</button>
+
+            <button class="btn-post" id="btnCancel">Cancelar</button>
+  
+          </div>
+      </div>`,
+      
+    );
+  
+    containerModal.appendChild(modal);
+  
+  
+   // Cuando se haga click <span> (x), cierra el modal
+   // const spanModalClose = document.getElementsByClassName('close')[0];
+   // spanModalClose.onclick = () => {
+   //   containerModal.style.display = 'none';
+   // };
+   
+
     });
+    
+  
 
     querySnapshot.forEach((doc) => {
-      const openEdit = document.getElementById(`openEdit-${doc.id}`);
-      const editbutton = document.getElementById(`btnPostEdit-${doc.id}`);
-      const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion HTML para el modal
-      const spanModalClose = document.getElementById(`close-${doc.id}`);
-      const deleteP = document.getElementById(`delete-${doc.id}`);
+       
+      const openEdit = document.getElementById(`openEdit-${doc.id}`); // // boton que abre el modal
+      const editbutton = document.getElementById(`btnPostEdit-${doc.id}`); // boton que publica la edicion
+      const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
+      const spanModalClose = document.getElementById(`close-${doc.id}`); // X que cierra el modal
+      const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
+      const deleteP = document.getElementById('delete');
+      const btnAceptarDelete = document.getElementById(`btnAceptar-${doc.id}`)
+      console.log(btnAceptarDelete);
+
+     
+
 
       openEdit.addEventListener('click', () => { // Abre el modal para editar
         modalEdit.style.display = 'block';
       });
 
-      editbutton.addEventListener('click', () => { // Edita el post en farebase
+      editbutton.addEventListener('click', () => { // Edita el post en firebase
         editPostFb(doc.id, document.getElementById(`postArea-${doc.id}`).value);
+      });
+
+      modalCancel.addEventListener('click', () => { //  cierra el modal
+        modalEdit.style.display = 'none';
       });
 
       spanModalClose.onclick = () => { //  cierra el modal
         modalEdit.style.display = 'none';
       };
 
-      deleteP.addEventListener('click', () => { 
-        deletePostFb(doc.id);
+      deleteP.addEventListener('click',(doc.id) => { 
+        containerModal.style.display = 'block';
       });
+      //const hola = () => {
+        //let borrar = `${doc.id}`
+        
+        //return borrar
+       //console.log('borro')
+      
+
+     btnAceptarDelete.addEventListener('click',() => {       
+      deletePostFb(`${doc.id}`);
+      console.log('borro')
+     });
     });
-
-    // -----Modal Editar------
-
-    // -------Boton que abre el Modal Editar post---------
-    // const btnEdit = document.querySelectorAll('.editPost'); // llamando a todas las clases deleteDiv
-    // for (let i = 0; i < btnEdit.length; i++) {
-    //   btnEdit[i].addEventListener('click', () => {
-    //     modalEdit.style.display = 'block';
-    //     console.log('entro al boton editar');
-    //   });
-    // }
+  
   });
   containerRoot.appendChild(divWall);
 };// final
@@ -149,26 +197,6 @@ export const templateWall = (containerRoot) => {
 //   });
 // }
 
-// const editPostFirebase = (id, content) => {
-//   document.getElementById('postArea').value = content;
-//   const AddEdit = document.getElementById('btnPostEdit');
-
-//   AddEdit.onclick = () => {
-//     const PostRef = db.collection('post').doc(id);
-//     const content = document.getElementById('postArea').value;
-
-//     return PostRef.update({
-//       postContent: content,
-//     })
-//       .then(() => {
-//         console.log('Document successfully updated!');
-//       })
-//       .catch((error) => {
-//         // The document probably doesn't exist.
-//         console.error('Error updating document: ', error);
-//       });
-//   };
-// };
 
 // const editButton = document.querySelectorAll('.delete');
 // editButton.addEventListener('click', () => {

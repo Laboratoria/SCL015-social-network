@@ -21,7 +21,7 @@ export const loginGoogle = () => {
     const email = error.email;
     // El tipo firebase.auth.AuthCredential que se usó.
     const credential = error.credential;
-    console.log('error', errorMessage);
+    alert(errorMessage);
     // ...
   });
 };
