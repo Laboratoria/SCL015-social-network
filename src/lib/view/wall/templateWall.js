@@ -82,7 +82,7 @@ export const templateWall = (containerRoot) => {
             </div>       
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
-          <input type="button" id="openDelete" class="delete" value="Borrar">
+          <input type="button" id="delete" class="delete" value="Borrar">
           <input type="button" id="openEdit-${doc.id}" class="editPost" value="Editar">
           </div>
           <div class="commentDiv">
@@ -105,8 +105,8 @@ export const templateWall = (containerRoot) => {
          
          // ----------- MODAL-------------
   
-     containerModal.innerHTML = '';
-     const modal = htmlToElements(
+    containerModal.innerHTML = '';
+    const modal = htmlToElements(
       `<div class ="modal-content">
           <div class="modal-top">
             <span class="close">&times;</span>
@@ -145,9 +145,8 @@ export const templateWall = (containerRoot) => {
       const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
       const spanModalClose = document.getElementById(`close-${doc.id}`); // X que cierra el modal
       const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
-      const openDelete = document.getElementById('openDelete');
+      const deleteP = document.getElementById(`delete`);
       const btnAceptarDelete = document.getElementById(`btnAceptar-${doc.id}`)
-      console.log (`btnAceptar-${doc.id}`)
       console.log(btnAceptarDelete);
 
      
@@ -169,16 +168,18 @@ export const templateWall = (containerRoot) => {
         modalEdit.style.display = 'none';
       };
 
-      openDelete.addEventListener('click',() => { 
+      deleteP.addEventListener('click', () => { 
+        
+        
         containerModal.style.display = 'block';
       });
-
-     btnAceptarDelete.addEventListener('click',() => {       
-      deletePostFb(`${doc.id}`);
-      console.log('borro')
-     });
+      
+     btnAceptarDelete.addEventListener('click',()=>{
+        console.log('borro')
+        deletePostFb(doc.id);
+     })
     });
-  
+
   });
   containerRoot.appendChild(divWall);
 };// final
