@@ -1,5 +1,7 @@
 import { db } from '../../../firebaseConfig.js';
-import { editPostFb, deletePostFb } from '../../index.js';
+import { editPostFb} from '../../index.js';
+import { deletePostFb} from '../../index.js';
+
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
 // -----Imprimir un elemento en HTML----
@@ -9,7 +11,7 @@ const htmlToElements = (html) => {
   return stencil.content.firstChild; // Nodo.firstChild = devuelve el primer hijo del nodo
 };
 // ----------- MODAL-------------
-
+export const printModal = (message) => {
   containerModal.innerHTML = '';
   const modal = htmlToElements(
     `<div class ="modal-content">
@@ -27,16 +29,16 @@ const htmlToElements = (html) => {
   );
   containerModal.appendChild(modal);
 
+
 // Cuando se haga click <span> (x), cierra el modal
 // const spanModalClose = document.getElementsByClassName('close')[0];
 // spanModalClose.onclick = () => {
 //   containerModal.style.display = 'none';
 // };
-
+};
 // <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
-  console.log(currentUserData);
   const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
   const emailData = currentUserData.email; // Email del usuario que accedio
 
@@ -80,7 +82,7 @@ export const templateWall = (containerRoot) => {
             </div>       
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
-          <input type="button" id="openDelete" class="delete" value="Borrar">
+          <input type="button" id="delete-${doc.id}" class="delete" value="Borrar">
           <input type="button" id="openEdit-${doc.id}" class="editPost" value="Editar">
           </div>
           <div class="commentDiv">
@@ -108,10 +110,7 @@ export const templateWall = (containerRoot) => {
       const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
       const spanModalClose = document.getElementById(`close-${doc.id}`); // X que cierra el modal
       const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
-      const openDelete = document.getElementById('openDelete');
-      const btnAceptarDelete = document.getElementById(`btnAceptar-${doc.id}`);
-      console.log(`btnAceptar-${doc.id}`);
-      console.log(btnAceptarDelete);
+      const deleteP = document.getElementById(`delete-${doc.id}`);
 
       openEdit.addEventListener('click', () => { // Abre el modal para editar
         modalEdit.style.display = 'block';
@@ -129,8 +128,8 @@ export const templateWall = (containerRoot) => {
         modalEdit.style.display = 'none';
       };
 
-      openDelete.addEventListener('click', () => {
-        containerModal.style.display = 'block';
+      deleteP.addEventListener('click', () => {
+        deletePostFb(doc.id);
       });
     });
   });
@@ -145,6 +144,7 @@ export const templateWall = (containerRoot) => {
 //     containerModal.style.display = 'block';
 //   });
 // }
+
 
 // const editButton = document.querySelectorAll('.delete');
 // editButton.addEventListener('click', () => {
