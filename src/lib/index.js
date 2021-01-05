@@ -30,7 +30,6 @@ export const loginGoogle = () => {
 export const signUpFirebase = (email, password) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((user) => {
-      console.log('datos usuario', user);
       user.user.sendEmailVerification();
       alert('Te hemos enviado un correo para confirmar tu cuenta. *Recuerda revisar tu bandeja de spam o correos no deseado');
       window.location.href = '';
@@ -100,13 +99,12 @@ export const editPostFb = (id, addEdit) => {
     });
 };
 
-//funcion eliminar post en firebase
-
-export const deletePostFb =(id) => {
-   db.collection('post').doc(id).delete().then(function() {
-  console.log("Document successfully deleted!");
-}).catch(function(error) {
-  console.error("Error removing document: ", error);
-});
-}
-
+// funcion eliminar post en firebase
+export const deletePostFb = (id) => {
+  db.collection('post').doc(id).delete().then(() => {
+    console.log('Document successfully deleted!');
+  })
+    .catch((error) => {
+      console.error('Error removing document: ', error);
+    });
+};
