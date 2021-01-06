@@ -3,44 +3,45 @@ import { editPostFb, deletePostFb } from '../../index.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
 // -----Imprimir un elemento en HTML----
-// const htmlToElements = (html) => {
-//   const stencil = document.createElement('template');
-//   stencil.innerHTML = html; // innerHTML devuelve la sintaxis con los descendientes del elemento.
-//   return stencil.content.firstChild; // Nodo.firstChild = devuelve el primer hijo del nodo
-// };
-// const deleteFromFirebaseWithId = (documentId) => {
-//   console.log("El id del documento es:", documentId);
-// };
-
-// const modal = (buttonEvent) => {
-//   console.log(888, buttonEvent.target);
-//   deletePostFb(doc.id);
-// };
+const htmlToElements = (html) => {
+  const stencil = document.createElement('template');
+  stencil.innerHTML = html; // innerHTML devuelve la sintaxis con los descendientes del elemento.
+  return stencil.content.firstChild; // Nodo.firstChild = devuelve el primer hijo del nodo
+};
 
 // ----------- MODAL-------------
 // export const printModal = () => {
-//   containerModal.innerHTML = '';
-//   const modal = htmlToElements(
-//     `<div class ="modal-content">
-//         <div class="modal-top">
-//           <span class="close">&times;</span>
-//         </div>
-//           <div class="modal-body">
-//           <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
-//         </div>
-//         <div class="modal-button">
-//           <button class="btn-post" id="btnPost">Aceptar</button>
-//           <button class="btn-post" id="btnCancel">Cancelar</button>
-//         </div>
-//     </div>`,
-//   );
-//   containerModal.appendChild(modal);
+containerModal.innerHTML = '';
+const modal = htmlToElements(
+  `<div class ="modal-content">
+        <div class="modal-top">
+          <span class="close">&times;</span>
+        </div>
+          <div class="modal-body">
+          <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
+        </div>
+        <div class="modal-button">
+          <button class="btn-post" id="btnDeletePost">Aceptar</button>
+          <button class="btn-post" id="btnCancelPost">Cancelar</button>
+        </div>
+    </div>`,
+);
+containerModal.appendChild(modal);
+const btnDeletePost = document.getElementById('btnDeletePost');
+btnDeletePost.addEventListener('click', () => {
+  deletePostFb(containerModal.getAttribute('code'));// para que al eliminar el post sepa que id debe borrar
+});
 
-  // Cuando se haga click <span> (x), cierra el modal
-  // const spanModalClose = document.getElementsByClassName('close')[0];
-  // spanModalClose.onclick = () => {
-  //   containerModal.style.display = 'none';
-  // };
+const btnCancelPost = document.getElementById('btnCancelPost');
+btnCancelPost.addEventListener('click', () => {
+  containerModal.style.display = 'none';
+});
+
+// Cuando se haga click <span> (x), cierra el modal
+// const spanModalClose = document.getElementsByClassName('close')[0];
+// spanModalClose.onclick = () => {
+//   containerModal.style.display = 'none';
+// };
 // };
 // <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
@@ -84,12 +85,19 @@ export const templateWall = (containerRoot) => {
               <p class="user-Name">${doc.data().userName}</p>
             </div>   
             <div class="post-opcion">
+            <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#home">Editar</a>
+              <a href="#about">Borrar</a>
+            </div>
+          </div>
               <img src="imagenes/3puntos.svg" alt="opcion" class="opcion">
+              <input type="button" id="openDelete-${doc.id}" class="delete" value="Borrar">
+              <input type="button" id="openEdit-${doc.id}" class="editPost" value="Editar">
             </div>       
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
-          <input type="button" id="openDelete" class="delete" value="Borrar">
-          <input type="button" id="openEdit-${doc.id}" class="editPost" value="Editar">
           </div>
           <div class="commentDiv">
           </div>
@@ -106,53 +114,19 @@ export const templateWall = (containerRoot) => {
               </div>
               </div>
             </div>
-          </section> 
-          <section id="modalDelete-${doc.id}"<class="modal">
-          <div class ="modal-content" id="modalDeleteContent">
-                  <span class="closeDelete">&times;</span>
-                <div class="modal-body">
-                  <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
-                </div>
-                <div class="modal-button-delete">
-                  <button class="btn-post" id="btnAceptarDelete-${doc.id}">Aceptar</button>
-                  <button class="btn-post" id="btnCancel">Cancelar</button>
-                </div>
-            </div> 
+          </section>  
           `;
-
-      // containerModal.innerHTML = '';
-      // const modalDelete = htmlToElements(
-      //   `<div class ="modal-content" id="modalDeleteContent">
-      //           <div class="modal-top">
-      //             <span class="close">&times;</span>
-      //           </div>
-      //             <div class="modal-body">
-      //             <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
-      //           </div>
-      //           <div class="modal-button">
-      //             <button class="btn-post" id="btnAceptar-${doc.id}" class="btnAceptar">Aceptar</button>
-      //             <button class="btn-post" id="btnCancel">Cancelar</button>
-      //           </div>
-      //       </div>`,
-      // );
-      // console.log(document.getElementById('modalDeleteContent'));
-      // containerModal.appendChild(modalDelete);
-
-      // Cuando se haga click <span> (x), cierra el modal
-      // const spanModalClose = document.getElementsByClassName('close')[0];
-      // spanModalClose.onclick = () => {
-      //   containerModal.style.display = 'none';
-      // };
     });
 
     querySnapshot.forEach((doc) => {
+      const opcionPost = document.querySelector('.dropbtn');
       const openEdit = document.getElementById(`openEdit-${doc.id}`); // // boton que abre el modal
       const editbutton = document.getElementById(`btnPostEdit-${doc.id}`); // boton que publica la edicion
       const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
+
       const spanModalClose = document.getElementById(`close-${doc.id}`); // X que cierra el modal
       const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
-      const openDelete = document.getElementById('openDelete');
-      const btnAceptarDelete = document.getElementById(`btnAceptarDelete-${doc.id}`);
+      const openDelete = document.getElementById(`openDelete-${doc.id}`);// boton borrar
 
       openEdit.addEventListener('click', () => { // Abre el modal para editar
         modalEdit.style.display = 'block';
@@ -172,14 +146,33 @@ export const templateWall = (containerRoot) => {
 
       openDelete.addEventListener('click', () => {
         containerModal.style.display = 'block';
+        containerModal.setAttribute('code', doc.id);// asigno el valor id a code(es la variable con la que almaceno enel container)
       });
 
-      btnAceptarDelete.addEventListener('click', () => {
-        deletePostFb(doc.id);
+      /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+      opcionPost.addEventListener('click', () => {
+        const myDropdown = document.getElementById('myDropdown');
+        // myDropdown.setAttribute('code', doc.id);
+        // myDropdown.getAttribute('code')
+        document.getElementById('myDropdown').classList.toggle('show');
       });
 
-    });
-  });
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+          const dropdowns = document.getElementsByClassName('dropdown-content');
+          let i;
+          for (i = 0; i < dropdowns.length; i++) {
+            const openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+      };
+    }); // fin del for 2
+  }); // fin de la promesa doc
   containerRoot.appendChild(divWall);
 };// final
 
