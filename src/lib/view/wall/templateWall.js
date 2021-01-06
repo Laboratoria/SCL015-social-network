@@ -1,7 +1,5 @@
 import { db } from '../../../firebaseConfig.js';
-import { editPostFb} from '../../index.js';
-import { deletePostFb} from '../../index.js';
-
+import { editPostFb, deletePostFb } from '../../index.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
 // -----Imprimir un elemento en HTML----
@@ -11,7 +9,7 @@ const htmlToElements = (html) => {
   return stencil.content.firstChild; // Nodo.firstChild = devuelve el primer hijo del nodo
 };
 // ----------- MODAL-------------
-export const printModal = (message) => {
+//export const printModal = () => {
   containerModal.innerHTML = '';
   const modal = htmlToElements(
     `<div class ="modal-content">
@@ -19,23 +17,33 @@ export const printModal = (message) => {
           <span class="close">&times;</span>
         </div>
           <div class="modal-body">
-          <p class= "modal-name"><strong>${message}</strong></p>
+          <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
         </div>
         <div class="modal-button">
-          <button class="btn-post" id="btnPost">Aceptar</button>
-          <button class="btn-post" id="btnCancel">Cancelar</button>
+          <button class="btn-post" id="btnDeletePost">Aceptar</button>
+          <button class="btn-post" id="btnCancelPost">Cancelar</button>
         </div>
     </div>`,
   );
   containerModal.appendChild(modal);
+  const btnDeletePost = document.getElementById('btnDeletePost');
+  btnDeletePost.addEventListener('click', () => {
+  
+    deletePostFb(containerModal.getAttribute('code'));//para que al eliminar el post sepa que id debe borrar
+    });
 
+  const btnCancelPost = document.getElementById('btnCancelPost');
+  btnCancelPost.addEventListener('click',()=> {
 
-// Cuando se haga click <span> (x), cierra el modal
-// const spanModalClose = document.getElementsByClassName('close')[0];
-// spanModalClose.onclick = () => {
-//   containerModal.style.display = 'none';
-// };
-};
+    containerModal.style.display = 'none'
+  });
+    
+  // Cuando se haga click <span> (x), cierra el modal
+  // const spanModalClose = document.getElementsByClassName('close')[0];
+  // spanModalClose.onclick = () => {
+  //   containerModal.style.display = 'none';
+  // };
+//};
 // <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
@@ -82,7 +90,7 @@ export const templateWall = (containerRoot) => {
             </div>       
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
-          <input type="button" id="delete-${doc.id}" class="delete" value="Borrar">
+          <input type="button" id="openDelete-${doc.id}" class="delete" value="Borrar">
           <input type="button" id="openEdit-${doc.id}" class="editPost" value="Editar">
           </div>
           <div class="commentDiv">
@@ -102,53 +110,22 @@ export const templateWall = (containerRoot) => {
             </div>
           </section>  
           `;
-          
-          // ----------- MODAL-------------
-  
-     containerModal.innerHTML = '';
-     const modal = htmlToElements(
-       `<div class ="modal-content">
-           <div class="modal-top">
-             <span class="close">&times;</span>
-           </div>
-             <div class="modal-body">
-             <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
-           </div>
-           <div class="modal-button">
-             <button class="btn-post" id="btnAceptar-${doc.id}">Aceptar</button>
- 
-             <button class="btn-post" id="btnCancel">Cancelar</button>
-  
-           </div>
-       </div>`,
+
       
-      );
-  
-     containerModal.appendChild(modal);
-  
-  
-     // Cuando se haga click <span> (x), cierra el modal
-     // const spanModalClose = document.getElementsByClassName('close')[0];
-     // spanModalClose.onclick = () => {
-     //   containerModal.style.display = 'none';
-     // };
-   
-
-    }); //cierra for each
-
-
     });
 
     querySnapshot.forEach((doc) => {
       const openEdit = document.getElementById(`openEdit-${doc.id}`); // // boton que abre el modal
       const editbutton = document.getElementById(`btnPostEdit-${doc.id}`); // boton que publica la edicion
       const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
+
       const spanModalClose = document.getElementById(`close-${doc.id}`); // X que cierra el modal
       const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
-      const deleteP = document.getElementById(`delete-${doc.id}`);
+      const openDelete = document.getElementById(`openDelete-${doc.id}`);// boton borrar
 
       openEdit.addEventListener('click', () => { // Abre el modal para editar
         modalEdit.style.display = 'block';
+       
       });
 
       editbutton.addEventListener('click', () => { // Edita el post en firebase
@@ -161,16 +138,19 @@ export const templateWall = (containerRoot) => {
 
       spanModalClose.onclick = () => { //  cierra el modal
         modalEdit.style.display = 'none';
+
       };
 
-      deleteP.addEventListener('click', () => {
-        deletePostFb(doc.id);
+      openDelete.addEventListener('click', () => {
+        containerModal.style.display = 'block';
+        containerModal.setAttribute('code',doc.id)//asigno el valor id a code(es la variable con la que almaceno enel container)
       });
+
       
-    });//segundo for each
-  
+    });
+  });
   containerRoot.appendChild(divWall);
-};// final
+ };// final
 
 // const btnDelete = document.querySelectorAll('.delete'); // llamando a todas las clases deleteDiv
 // for (let i = 0; i < btnDelete.length; i++) {
@@ -180,7 +160,6 @@ export const templateWall = (containerRoot) => {
 //     containerModal.style.display = 'block';
 //   });
 // }
-
 
 // const editButton = document.querySelectorAll('.delete');
 // editButton.addEventListener('click', () => {
