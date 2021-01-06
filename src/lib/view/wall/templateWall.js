@@ -3,36 +3,45 @@ import { editPostFb, deletePostFb } from '../../index.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
 // -----Imprimir un elemento en HTML----
-const htmlToElements = (html) => {
-  const stencil = document.createElement('template');
-  stencil.innerHTML = html; // innerHTML devuelve la sintaxis con los descendientes del elemento.
-  return stencil.content.firstChild; // Nodo.firstChild = devuelve el primer hijo del nodo
-};
+// const htmlToElements = (html) => {
+//   const stencil = document.createElement('template');
+//   stencil.innerHTML = html; // innerHTML devuelve la sintaxis con los descendientes del elemento.
+//   return stencil.content.firstChild; // Nodo.firstChild = devuelve el primer hijo del nodo
+// };
+// const deleteFromFirebaseWithId = (documentId) => {
+//   console.log("El id del documento es:", documentId);
+// };
+
+// const modal = (buttonEvent) => {
+//   console.log(888, buttonEvent.target);
+//   deletePostFb(doc.id);
+// };
+
 // ----------- MODAL-------------
-export const printModal = () => {
-  containerModal.innerHTML = '';
-  const modal = htmlToElements(
-    `<div class ="modal-content">
-        <div class="modal-top">
-          <span class="close">&times;</span>
-        </div>
-          <div class="modal-body">
-          <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
-        </div>
-        <div class="modal-button">
-          <button class="btn-post" id="btnPost">Aceptar</button>
-          <button class="btn-post" id="btnCancel">Cancelar</button>
-        </div>
-    </div>`,
-  );
-  containerModal.appendChild(modal);
+// export const printModal = () => {
+//   containerModal.innerHTML = '';
+//   const modal = htmlToElements(
+//     `<div class ="modal-content">
+//         <div class="modal-top">
+//           <span class="close">&times;</span>
+//         </div>
+//           <div class="modal-body">
+//           <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
+//         </div>
+//         <div class="modal-button">
+//           <button class="btn-post" id="btnPost">Aceptar</button>
+//           <button class="btn-post" id="btnCancel">Cancelar</button>
+//         </div>
+//     </div>`,
+//   );
+//   containerModal.appendChild(modal);
 
   // Cuando se haga click <span> (x), cierra el modal
   // const spanModalClose = document.getElementsByClassName('close')[0];
   // spanModalClose.onclick = () => {
   //   containerModal.style.display = 'none';
   // };
-};
+// };
 // <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
@@ -97,25 +106,37 @@ export const templateWall = (containerRoot) => {
               </div>
               </div>
             </div>
-          </section>  
-          `;
-
-      containerModal.innerHTML = '';
-      const modal = htmlToElements(
-        `<div class ="modal-content">
-                <div class="modal-top">
-                  <span class="close">&times;</span>
-                </div>
-                  <div class="modal-body">
+          </section> 
+          <section id="modalDelete-${doc.id}"<class="modal">
+          <div class ="modal-content" id="modalDeleteContent">
+                  <span class="closeDelete">&times;</span>
+                <div class="modal-body">
                   <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
                 </div>
-                <div class="modal-button">
-                  <button class="btn-post" id="btnPost">Aceptar</button>
+                <div class="modal-button-delete">
+                  <button class="btn-post" id="btnAceptarDelete-${doc.id}">Aceptar</button>
                   <button class="btn-post" id="btnCancel">Cancelar</button>
                 </div>
-            </div>`,
-      );
-      containerModal.appendChild(modal);
+            </div> 
+          `;
+
+      // containerModal.innerHTML = '';
+      // const modalDelete = htmlToElements(
+      //   `<div class ="modal-content" id="modalDeleteContent">
+      //           <div class="modal-top">
+      //             <span class="close">&times;</span>
+      //           </div>
+      //             <div class="modal-body">
+      //             <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
+      //           </div>
+      //           <div class="modal-button">
+      //             <button class="btn-post" id="btnAceptar-${doc.id}" class="btnAceptar">Aceptar</button>
+      //             <button class="btn-post" id="btnCancel">Cancelar</button>
+      //           </div>
+      //       </div>`,
+      // );
+      // console.log(document.getElementById('modalDeleteContent'));
+      // containerModal.appendChild(modalDelete);
 
       // Cuando se haga click <span> (x), cierra el modal
       // const spanModalClose = document.getElementsByClassName('close')[0];
@@ -131,9 +152,7 @@ export const templateWall = (containerRoot) => {
       const spanModalClose = document.getElementById(`close-${doc.id}`); // X que cierra el modal
       const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
       const openDelete = document.getElementById('openDelete');
-      const btnAceptarDelete = document.getElementById(`btnAceptar-${doc.id}`);
-      console.log(`btnAceptar-${doc.id}`);
-      console.log(btnAceptarDelete);
+      const btnAceptarDelete = document.getElementById(`btnAceptarDelete-${doc.id}`);
 
       openEdit.addEventListener('click', () => { // Abre el modal para editar
         modalEdit.style.display = 'block';
@@ -155,9 +174,10 @@ export const templateWall = (containerRoot) => {
         containerModal.style.display = 'block';
       });
 
-      // deleteP.addEventListener('click', () => {
-      //   deletePostFb(doc.id);
-      // });
+      btnAceptarDelete.addEventListener('click', () => {
+        deletePostFb(doc.id);
+      });
+
     });
   });
   containerRoot.appendChild(divWall);
