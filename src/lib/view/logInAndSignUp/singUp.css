@@ -203,11 +203,6 @@ a {
     flex-direction: column;
 }
 
-
-#postList{
-    flex-direction: column;
-}
-
 .postDiv {
     margin-top: 15px;
 }

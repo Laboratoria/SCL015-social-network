@@ -9,6 +9,19 @@ const htmlToElements = (html) => {
   return stencil.content.firstChild; // Nodo.firstChild = devuelve el primer hijo del nodo
 };
 
+window.onclick = (event) => {
+  if (!event.target.matches('.dropbtn')) {
+    const dropdowns = document.getElementsByClassName('dropdown-content');
+    let i;
+    for (i = 0; i < dropdowns.length; i++) {
+      const openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+};
+
 // ----------- MODAL-------------
 // export const printModal = () => {
 containerModal.innerHTML = '';
@@ -37,12 +50,6 @@ btnCancelPost.addEventListener('click', () => {
   containerModal.style.display = 'none';
 });
 
-// Cuando se haga click <span> (x), cierra el modal
-// const spanModalClose = document.getElementsByClassName('close')[0];
-// spanModalClose.onclick = () => {
-//   containerModal.style.display = 'none';
-// };
-// };
 // <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
@@ -60,11 +67,11 @@ export const templateWall = (containerRoot) => {
         <img src="imagenes/user.svg" class="menu-user" alt="User">
         <p>Hola ${displayNameData}</p>
         <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
-      </div>
       <ul>
         <li><a href="/">Perfil</a></li>
         <li><a href="/">Cerrar Sesión</a></li>
       </ul>
+      </div>
     </div>
   </header>
   <div id="postList"> 
@@ -85,17 +92,14 @@ export const templateWall = (containerRoot) => {
               <p class="user-Name">${doc.data().userName}</p>
             </div>   
             <div class="post-opcion">
-            <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-            <div id="myDropdown" class="dropdown-content">
-              <a href="#home">Editar</a>
-              <a href="#about">Borrar</a>
+              <div class="dropdown">
+                <img src="imagenes/3puntos.svg" alt="opcion" class="dropbtn" id="dropbtn-${doc.id}">
+              <div id="myDropdown-${doc.id}" class="dropdown-content">
+                <p id="openEdit-${doc.id}" class="editPost">Editar</p>
+                <p id="openDelete-${doc.id}" class="delete">Borrar</p>
+              </div>
             </div>
-          </div>
-              <img src="imagenes/3puntos.svg" alt="opcion" class="opcion">
-              <input type="button" id="openDelete-${doc.id}" class="delete" value="Borrar">
-              <input type="button" id="openEdit-${doc.id}" class="editPost" value="Editar">
-            </div>       
+          </div>       
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
           </div>
@@ -119,7 +123,8 @@ export const templateWall = (containerRoot) => {
     });
 
     querySnapshot.forEach((doc) => {
-      const opcionPost = document.querySelector('.dropbtn');
+      const opcionPost = document.querySelector(`#dropbtn-${doc.id}`);
+
       const openEdit = document.getElementById(`openEdit-${doc.id}`); // // boton que abre el modal
       const editbutton = document.getElementById(`btnPostEdit-${doc.id}`); // boton que publica la edicion
       const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
@@ -150,27 +155,13 @@ export const templateWall = (containerRoot) => {
       });
 
       /* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
+      toggle between hiding and showing the dropdown content */
       opcionPost.addEventListener('click', () => {
-        const myDropdown = document.getElementById('myDropdown');
-        // myDropdown.setAttribute('code', doc.id);
-        // myDropdown.getAttribute('code')
-        document.getElementById('myDropdown').classList.toggle('show');
+        console.log("ENTRO")
+        document.getElementById(`myDropdown-${doc.id}`).classList.toggle('show');
       });
 
       // Close the dropdown if the user clicks outside of it
-      window.onclick = function (event) {
-        if (!event.target.matches('.dropbtn')) {
-          const dropdowns = document.getElementsByClassName('dropdown-content');
-          let i;
-          for (i = 0; i < dropdowns.length; i++) {
-            const openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-              openDropdown.classList.remove('show');
-            }
-          }
-        }
-      };
     }); // fin del for 2
   }); // fin de la promesa doc
   containerRoot.appendChild(divWall);
