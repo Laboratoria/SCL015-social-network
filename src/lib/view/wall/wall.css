@@ -36,14 +36,14 @@ p {
   .header-menu ul {
     display: none;
     list-style: none;
-    padding: 0px;
+    padding: 0px 15px;
     position: absolute;
     top: 80px;
-    /* left: 50px; */
-    width: 193px;
+    right: 30px;
+    width: 164px;
     /* text-align: right; */
     margin: 0px -30px 0px -14px;
-    background:#B2EFA3;
+    background: #B2EFA3;
 
   }
   .header-menu-profile:hover ul, ul:hover {
