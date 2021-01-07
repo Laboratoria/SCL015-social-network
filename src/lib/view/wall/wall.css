@@ -33,7 +33,7 @@ p {
     margin-top: 10px;
     margin-left: 10px;
   }
-  .header-menu ul {
+  .header-menu ul { 
     display: none;
     list-style: none;
     padding: 0px;
@@ -46,6 +46,7 @@ p {
     background:#B2EFA3;
 
   }
+  /*hover es para que se desplieguen las opciones cuando se posiciona sobre el menu*/
   .header-menu:hover ul, ul:hover {
     display: block;
   }
@@ -64,6 +65,7 @@ p {
     display: flex;
     align-items: center;
     cursor: pointer;
+    
   }
   .menu-user {
     margin-right: 8px;
@@ -76,6 +78,11 @@ p {
   .header-menu-profile p {
     margin: 0px;
     color: rgb(33 33 33 / 83%);
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 42px;
   }
 
 #postList {

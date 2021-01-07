@@ -14,17 +14,14 @@ export const templatePost = (containerRoot) => {
           <p>Hola ${displayNameData}</p>
           <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
         </div>
-        <ul>
-          <li><a href="/">Perfil</a></li>
-          <li><a href="/">Cerrar Sesión</a></li>
-        </ul>
+        
       </div>
     </header>
     <section class="post">
       <p class="new-post">Nueva Publicación</p>
       <form id="formPost" method="post">
         <textarea id="postArea" class="post-area" placeholder="¿En que estas pensando?" cols="30" rows="10" required></textarea>
-        <input type="file" id="myfile" name="myfile" accept="image/png, .jpeg, .jpg, image/gif" />
+        
         <div class="post-form-btn">
           <button class="btn-post" type="submit" id="btnPost">Publicar</button>
           <button class="btn-post" id="btnCancel">Cancelar</button>
@@ -33,6 +30,15 @@ export const templatePost = (containerRoot) => {
       
     </section>
         `;
+
+        //-----compartir imagenes----...
+//<input type="file" id="myfile" name="myfile" accept="image/png, .jpeg, .jpg, image/gif" />
+
+    //---------hover perfil------
+      //   <ul>
+      //   <li><a href="/">Perfil</a></li>
+      //   <li><a href="/">Cerrar Sesión</a></li>
+      // </ul>
 
   divNewPost.innerHTML = viewPost;
 

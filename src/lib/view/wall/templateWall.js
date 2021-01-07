@@ -25,11 +25,13 @@ const htmlToElements = (html) => {
         </div>
     </div>`,
   );
+  //eliminar post
   containerModal.appendChild(modal);
   const btnDeletePost = document.getElementById('btnDeletePost');
   btnDeletePost.addEventListener('click', () => {
   
     deletePostFb(containerModal.getAttribute('code'));//para que al eliminar el post sepa que id debe borrar
+    containerModal.style.display = 'none'
     });
 
   const btnCancelPost = document.getElementById('btnCancelPost');
@@ -39,11 +41,12 @@ const htmlToElements = (html) => {
   });
     
   // Cuando se haga click <span> (x), cierra el modal
-  // const spanModalClose = document.getElementsByClassName('close')[0];
-  // spanModalClose.onclick = () => {
-  //   containerModal.style.display = 'none';
-  // };
-//};
+  const spanModalClose = document.getElementsByClassName('close')[0];
+   spanModalClose.onclick = () => {
+   containerModal.style.display = 'none';
+   };
+  
+   
 // <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
@@ -62,15 +65,18 @@ export const templateWall = (containerRoot) => {
         <p>Hola ${displayNameData}</p>
         <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
       </div>
-      <ul>
-        <li><a href="/">Perfil</a></li>
-        <li><a href="/">Cerrar Sesión</a></li>
-      </ul>
+      
     </div>
   </header>
   <div id="postList"> 
   </div>
     `;
+    
+    //---------hover perfil------
+   // <ul>
+   //       <li><a href="/">Perfil</a></li>
+   //       <li><a href="/">Cerrar Sesión</a></li>
+  //     </ul>
 
   divWall.innerHTML = viewWall;
 
