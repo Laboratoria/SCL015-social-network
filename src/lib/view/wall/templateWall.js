@@ -2,6 +2,7 @@ import { db } from '../../../firebaseConfig.js';
 import { editPostFb, deletePostFb } from '../../index.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
+// let likeCounter = 0;
 // -----Imprimir un elemento en HTML----
 const htmlToElements = (html) => {
   const stencil = document.createElement('template');
@@ -9,6 +10,7 @@ const htmlToElements = (html) => {
   return stencil.content.firstChild; // Nodo.firstChild = devuelve el primer hijo del nodo
 };
 
+// desaparece la lista de la opcion editar y borrar al hacer click afuera
 window.onclick = (event) => {
   if (!event.target.matches('.dropbtn')) {
     const dropdowns = document.getElementsByClassName('dropdown-content');
@@ -22,35 +24,42 @@ window.onclick = (event) => {
   }
 };
 
-// ----------- MODAL-------------
-// export const printModal = () => {
+// ----------- MODAL borrar-------------
 containerModal.innerHTML = '';
 const modal = htmlToElements(
-  `<div class ="modal-content">
+  `<div class ="modal-content-delete">
         <div class="modal-top">
           <span class="close">&times;</span>
         </div>
-          <div class="modal-body">
-          <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta puplicación?</strong></p>
+          <div class="modal-body-delete">
+          <p class= "modal-name"><strong>¿Estas seguro que deseas eliminar esta publicación?</strong></p>
         </div>
         <div class="modal-button">
-          <button class="btn-post" id="btnDeletePost">Aceptar</button>
           <button class="btn-post" id="btnCancelPost">Cancelar</button>
+          <button class="btn-post" id="btnDeletePost">Aceptar</button>
         </div>
     </div>`,
 );
+  // eliminar post
 containerModal.appendChild(modal);
 const btnDeletePost = document.getElementById('btnDeletePost');
 btnDeletePost.addEventListener('click', () => {
   deletePostFb(containerModal.getAttribute('code'));// para que al eliminar el post sepa que id debe borrar
+  containerModal.style.display = 'none';
 });
-
+// boton de cancelar en eliminar post
 const btnCancelPost = document.getElementById('btnCancelPost');
 btnCancelPost.addEventListener('click', () => {
   containerModal.style.display = 'none';
 });
 
-// <----------Contenido del Muro---------
+// Cuando se haga click <span> (x), cierra el modal
+const spanModalCloseDelete = document.getElementsByClassName('close')[0];
+spanModalCloseDelete.onclick = () => {
+  containerModal.style.display = 'none';
+};
+
+// <----------Contenido del Muro--------->
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
   const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
@@ -80,7 +89,7 @@ export const templateWall = (containerRoot) => {
 
   divWall.innerHTML = viewWall;
 
-  // ------Imprimir los cometarios-------
+  // <------Imprimir los cometarios------->
   const divPost = divWall.querySelector('#postList'); // Llamando al div donde se imprimirán los post
   db.collection('post').onSnapshot((querySnapshot) => { // Escuchando colección en firebase para ir imprimiendo los post
     divPost.innerHTML = ''; // Vaciando div para que no se repitan los post
@@ -102,8 +111,11 @@ export const templateWall = (containerRoot) => {
           </div>       
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
-          </div>
-          <div class="commentDiv">
+          <div class="like">
+            <img src="imagenes/heart.svg" id="heart-${doc.id}" class="heart-icon" alt="">
+            <span class="iconify" data-inline="false" data-icon="line-md:heart-twotone" style="color: #60e440;"></span>
+            <p id="numberLike-${doc.id}">ooo</p>
+            </div>
           </div>
           <section id="modalEdit-${doc.id}" class="modal">
           <div class ="modal-content">
@@ -123,7 +135,7 @@ export const templateWall = (containerRoot) => {
     });
 
     querySnapshot.forEach((doc) => {
-      const opcionPost = document.querySelector(`#dropbtn-${doc.id}`);
+      const opcionPost = document.querySelector(`#dropbtn-${doc.id}`); // boton de las opciones
 
       const openEdit = document.getElementById(`openEdit-${doc.id}`); // // boton que abre el modal
       const editbutton = document.getElementById(`btnPostEdit-${doc.id}`); // boton que publica la edicion
@@ -132,6 +144,13 @@ export const templateWall = (containerRoot) => {
       const spanModalClose = document.getElementById(`close-${doc.id}`); // X que cierra el modal
       const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
       const openDelete = document.getElementById(`openDelete-${doc.id}`);// boton borrar
+
+      const likeImg = document.getElementById(`heart-${doc.id}`); // corazon para el like
+      let likeCounter = 0;
+
+      likeImg.addEventListener('click', () => {
+        document.getElementById(`numberLike-${doc.id}`).innerHTML = ++likeCounter;
+      });
 
       openEdit.addEventListener('click', () => { // Abre el modal para editar
         modalEdit.style.display = 'block';
@@ -157,11 +176,8 @@ export const templateWall = (containerRoot) => {
       /* When the user clicks on the button,
       toggle between hiding and showing the dropdown content */
       opcionPost.addEventListener('click', () => {
-        console.log("ENTRO")
         document.getElementById(`myDropdown-${doc.id}`).classList.toggle('show');
       });
-
-      // Close the dropdown if the user clicks outside of it
     }); // fin del for 2
   }); // fin de la promesa doc
   containerRoot.appendChild(divWall);

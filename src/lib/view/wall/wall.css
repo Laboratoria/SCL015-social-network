@@ -33,7 +33,7 @@ p {
     margin-top: 10px;
     margin-left: 10px;
   }
-  .header-menu ul {
+  .header-menu ul { 
     display: none;
     list-style: none;
     padding: 0px 15px;
@@ -46,6 +46,8 @@ p {
     background: #B2EFA3;
 
   }
+  
+  /*hover es para que se desplieguen las opciones cuando se posiciona sobre el menu*/
   .header-menu-profile:hover ul, ul:hover {
     display: block;
   }
@@ -64,6 +66,7 @@ p {
     display: flex;
     align-items: center;
     cursor: pointer;
+    
   }
   .menu-user {
     margin-right: 8px;
@@ -76,6 +79,11 @@ p {
   .header-menu-profile p {
     margin: 0px;
     color: rgb(33 33 33 / 83%);
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 42px;
   }
 
 #postList {
@@ -115,6 +123,7 @@ p {
   width: 57%;
 }
 
+
 /* .dropbtn {
   background-color: #3498DB;
   color: white;
@@ -147,8 +156,8 @@ p {
 .dropdown-content {
   display: none;
   position: absolute;
-  left: 25%;
-  top: 34%;
+  left: 30%;
+  top: 48%;
 
   /* display: flex; */
   background-image: url(../../../imagenes/nube\ a\ la\ derecha.png);
@@ -156,6 +165,7 @@ p {
   background-repeat: no-repeat;
   /* background-color: #f1f1f1; */
   min-width: 139px;
+  height: 74px;
   overflow: auto;
   /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
   z-index: 1;
@@ -168,11 +178,16 @@ p {
 } */
 
 .editPost {
-  margin-top: 9px;
+  padding: 17px 12px 9px;
+  cursor: pointer;
+}
+
+.delete{
+  padding-left: 12px;
+  cursor: pointer;
 }
 .dropdown-content p {
   color: black;
-  padding: 12px 10px 0px;
   margin: 0px 0px;
   /* text-decoration: none; */
   display: block;
@@ -180,6 +195,20 @@ p {
 /* .dropdown p:hover {background-color: #ddd;} */
 
 .show {display: block;}
+.xx {
+  fill:#3FBE20
+}
+.heart-icon{
+  Fill: red;
+  stroke: Solid #000000;
+  font-size: 50px;
+}
+
+.iconify{
+  Fill: Solid #60E440;
+  stroke: Solid #000000;
+  font-size: 50px;
+}
 
 /* MODAL */
 
@@ -187,7 +216,7 @@ p {
   display: none; 
   position: fixed; 
   z-index: 1; /* Sit on top */
-  padding-top: 77px; /* Location of the box */
+  padding-top: 143px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -196,6 +225,23 @@ p {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
+.modal-delete{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 211px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 108%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-top{
+  justify-content: flex-end;
+}
+
 .modal-content {
   display: flex;
   flex-direction: column;
@@ -204,7 +250,7 @@ p {
   padding: 0;
   border: 1px solid #888;
   width: 45%;
-  height: 50%;
+  height: 43%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
@@ -225,9 +271,9 @@ p {
 }
 
 .close {
-  color: #161C58;
+  color: #59AE44;
   font-size: 33px;
-  padding: 0px 0px 2px 10px; */
+  padding: 0px 7px 2px 10px;
   margin-left: 20px;
   margin-right: 5px;
 }
@@ -237,6 +283,10 @@ p {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+.modal-body-delete {
+  justify-content: center;
 }
 
 .modal-post{
@@ -256,10 +306,13 @@ p {
   margin-top: 3%;
 }
 
+.modal-button{
+  justify-content: center;
+}
 .btn-post-edit, .btn-post-cancelar {
   display: flex;
   margin: 15px;
-  width: 126px;
+  width: 93px;
   height: 35px;
   background: #59AE44;
   border-radius: 5px;
@@ -273,17 +326,35 @@ p {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgb(0 0 0 / 0%);
   color: white;
 }
+
+
+.modal-content-delete{
+    display: flex;
+    flex-direction: column;
+    background-color: #B2EFA3;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 45%;
+    height: 26%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    border-radius: 15px;
+}
 /* POST  */
 .content-post {
   display: flex;
-  margin: 0px 2px 5px 19px;
+  margin: -15px 2px 5px 19px;
 
 }
 .post{
   background: rgba(196, 196, 196, 0.18);
   flex-direction: column;
   align-items: center;
-  height: 84vh;;
+  height: 87vh;;
   width: 100vw;
 }
 
@@ -302,8 +373,9 @@ textarea {
 
 .post-area{
   margin: 0px;
-  height: 194px;
-  width: 455px;
+  height: 160px;
+  padding: 12px;
+  width: 439px;
 }
 
 #myfile{
