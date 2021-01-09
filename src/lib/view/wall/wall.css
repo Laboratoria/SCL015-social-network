@@ -195,19 +195,20 @@ p {
 /* .dropdown p:hover {background-color: #ddd;} */
 
 .show {display: block;}
-.xx {
-  fill:#3FBE20
-}
-.heart-icon{
-  Fill: red;
-  stroke: Solid #000000;
-  font-size: 50px;
-}
 
-.iconify{
-  Fill: Solid #60E440;
-  stroke: Solid #000000;
-  font-size: 50px;
+svg {
+  width: 31px;
+  margin-left: 13px;
+} 
+
+/* .heart-icon{
+  /* fill: #60E440 !important; 
+} */
+
+.number-like{
+  margin: 0px;
+  font-size: 124%;
+  align-items: center;
 }
 
 /* MODAL */

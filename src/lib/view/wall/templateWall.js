@@ -112,9 +112,13 @@ export const templateWall = (containerRoot) => {
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
           <div class="like">
-            <img src="imagenes/heart.svg" id="heart-${doc.id}" class="heart-icon" alt="">
-            <span class="iconify" data-inline="false" data-icon="line-md:heart-twotone" style="color: #60e440;"></span>
-            <p id="numberLike-${doc.id}">ooo</p>
+            <svg class="heart-icon" id="heart-${doc.id}" width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M29.5001 46.6666L50.3959 25.6666V16.3333L41.7917 12.8333L29.5001 16.3333L17.2084 12.8333L8.60425 16.3333V25.6666L29.5001 46.6666Z" fill="white"/>
+              <path d="M29.5 18.6667L31.3634 16.3333C33.5169 13.6337 36.7275 11.6667 40.5625 11.6667C42.5658 11.6665 44.5316 12.1827 46.25 13.1602C47.9684 14.1376 49.3749 15.5396 50.3194 17.2166C51.2638 18.8935 51.7108 20.7823 51.6125 22.6815C51.5143 24.5807 50.8746 26.4189 49.7616 28C47.7777 30.814 29.5 49 29.5 49" stroke="#60E440" stroke-width="2" stroke-linecap="round"/>
+              <path d="M29.5001 18.6667L27.6367 16.3333C25.4832 13.6337 22.2726 11.6667 18.4376 11.6667C16.4343 11.6665 14.4685 12.1827 12.7501 13.1602C11.0317 14.1376 9.62521 15.5396 8.68076 17.2166C7.73631 18.8935 7.28934 20.7823 7.38758 22.6815C7.48581 24.5807 8.12556 26.4189 9.23853 28C11.2224 30.814 29.5001 49 29.5001 49" stroke="#60E440" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <p id="numberLike-${doc.id}" class="number-like"></p>
+            
             </div>
           </div>
           <section id="modalEdit-${doc.id}" class="modal">
@@ -147,9 +151,23 @@ export const templateWall = (containerRoot) => {
 
       const likeImg = document.getElementById(`heart-${doc.id}`); // corazon para el like
       let likeCounter = 0;
+      let likeHeart = false;
+
+      // enciende o apaga el corazon de like
+      const toggleHeart = (valueHeart) => {
+        likeHeart = !valueHeart;
+      };
 
       likeImg.addEventListener('click', () => {
-        document.getElementById(`numberLike-${doc.id}`).innerHTML = ++likeCounter;
+        toggleHeart(likeHeart);
+        console.log(likeHeart);
+        if (likeHeart === true) {
+          likeImg.style.fill = '#60E440';
+          document.getElementById(`numberLike-${doc.id}`).innerHTML = ++likeCounter;
+        } else {
+          likeImg.style.fill = '#FFFFFF';
+          document.getElementById(`numberLike-${doc.id}`).innerHTML = --likeCounter;
+        }
       });
 
       openEdit.addEventListener('click', () => { // Abre el modal para editar
