@@ -8,11 +8,25 @@ const htmlToElements = (html) => {
   stencil.innerHTML = html; // innerHTML devuelve la sintaxis con los descendientes del elemento.
   return stencil.content.firstChild; // Nodo.firstChild = devuelve el primer hijo del nodo
 };
+
+window.onclick = (event) => {
+  if (!event.target.matches('.dropbtn')) {
+    const dropdowns = document.getElementsByClassName('dropdown-content');
+    let i;
+    for (i = 0; i < dropdowns.length; i++) {
+      const openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+};
+
 // ----------- MODAL-------------
-//export const printModal = () => {
-  containerModal.innerHTML = '';
-  const modal = htmlToElements(
-    `<div class ="modal-content">
+// export const printModal = () => {
+containerModal.innerHTML = '';
+const modal = htmlToElements(
+  `<div class ="modal-content">
         <div class="modal-top">
           <span class="close">&times;</span>
         </div>
@@ -64,8 +78,11 @@ export const templateWall = (containerRoot) => {
         <img src="imagenes/user.svg" class="menu-user" alt="User">
         <p>Hola ${displayNameData}</p>
         <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
+      <ul>
+        <li><a href="/">Perfil</a></li>
+        <li><a href="/">Cerrar Sesión</a></li>
+      </ul>
       </div>
-      
     </div>
   </header>
   <div id="postList"> 
@@ -92,12 +109,16 @@ export const templateWall = (containerRoot) => {
               <p class="user-Name">${doc.data().userName}</p>
             </div>   
             <div class="post-opcion">
-              <img src="imagenes/3puntos.svg" alt="opcion" class="opcion">
-            </div>       
+              <div class="dropdown">
+                <img src="imagenes/3puntos.svg" alt="opcion" class="dropbtn" id="dropbtn-${doc.id}">
+              <div id="myDropdown-${doc.id}" class="dropdown-content">
+                <p id="openEdit-${doc.id}" class="editPost">Editar</p>
+                <p id="openDelete-${doc.id}" class="delete">Borrar</p>
+              </div>
+            </div>
+          </div>       
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
-          <input type="button" id="openDelete-${doc.id}" class="delete" value="Borrar">
-          <input type="button" id="openEdit-${doc.id}" class="editPost" value="Editar">
           </div>
           <div class="commentDiv">
           </div>
@@ -116,11 +137,11 @@ export const templateWall = (containerRoot) => {
             </div>
           </section>  
           `;
-
-      
     });
 
     querySnapshot.forEach((doc) => {
+      const opcionPost = document.querySelector(`#dropbtn-${doc.id}`);
+
       const openEdit = document.getElementById(`openEdit-${doc.id}`); // // boton que abre el modal
       const editbutton = document.getElementById(`btnPostEdit-${doc.id}`); // boton que publica la edicion
       const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
@@ -131,7 +152,6 @@ export const templateWall = (containerRoot) => {
 
       openEdit.addEventListener('click', () => { // Abre el modal para editar
         modalEdit.style.display = 'block';
-       
       });
 
       editbutton.addEventListener('click', () => { // Edita el post en firebase
@@ -144,19 +164,25 @@ export const templateWall = (containerRoot) => {
 
       spanModalClose.onclick = () => { //  cierra el modal
         modalEdit.style.display = 'none';
-
       };
 
       openDelete.addEventListener('click', () => {
         containerModal.style.display = 'block';
-        containerModal.setAttribute('code',doc.id)//asigno el valor id a code(es la variable con la que almaceno enel container)
+        containerModal.setAttribute('code', doc.id);// asigno el valor id a code(es la variable con la que almaceno enel container)
       });
 
-      
-    });
-  });
+      /* When the user clicks on the button,
+      toggle between hiding and showing the dropdown content */
+      opcionPost.addEventListener('click', () => {
+        console.log("ENTRO")
+        document.getElementById(`myDropdown-${doc.id}`).classList.toggle('show');
+      });
+
+      // Close the dropdown if the user clicks outside of it
+    }); // fin del for 2
+  }); // fin de la promesa doc
   containerRoot.appendChild(divWall);
- };// final
+};// final
 
 // const btnDelete = document.querySelectorAll('.delete'); // llamando a todas las clases deleteDiv
 // for (let i = 0; i < btnDelete.length; i++) {

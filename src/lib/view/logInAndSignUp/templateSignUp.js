@@ -37,8 +37,7 @@ export const templateSignUp = () => {
      <h3 class="opcion-main">¿Ya tienes cuenta?</h3>
      <a href=""><h3>Ingresa aquí</h3></a>
    </div>
-   <img src="imagenes/fondoo.png" alt="logoVeg" id="fondo2">
-   <img src="imagenes/fondoo.png" alt="logoVeg" id="fondo3">
+   <img src="imagenes/canasta.png" alt="logoVeg" id="fondo2">
   </div>
   `;
   divSignUp.innerHTML = viewSignUp;
