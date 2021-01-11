@@ -13,8 +13,7 @@ export const templatePost = (containerRoot) => {
         <img src="imagenes/user.svg" class="menu-user" alt="User">
           <p>Hola ${displayNameData}</p>
           <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
-        </div>
-        
+        </div> 
       </div>
     </header>
     <section class="post">
@@ -23,14 +22,14 @@ export const templatePost = (containerRoot) => {
         <textarea id="postArea" class="post-area" placeholder="¿En que estas pensando?" cols="30" rows="10" required></textarea>
         
         <div class="post-form-btn">
-          <button class="btn-post" type="submit" id="btnPost">Publicar</button>
           <button class="btn-post" id="btnCancel">Cancelar</button>
+          <button class="btn-post" type="submit" id="btnPost">Publicar</button>
         </div>
       </form>
       
     </section>
         `;
-
+        
         //-----compartir imagenes----...
 //<input type="file" id="myfile" name="myfile" accept="image/png, .jpeg, .jpg, image/gif" />
 
