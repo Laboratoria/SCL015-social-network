@@ -39,32 +39,6 @@ const modal = htmlToElements(
           <button class="btn-post" id="btnDeletePost">Aceptar</button>
         </div>
     </div>`,
-<<<<<<< HEAD
-  );
-  //eliminar post
-  containerModal.appendChild(modal);
-  const btnDeletePost = document.getElementById('btnDeletePost');
-  btnDeletePost.addEventListener('click', () => {
-  
-    deletePostFb(containerModal.getAttribute('code'));//para que al eliminar el post sepa que id debe borrar
-    containerModal.style.display = 'none'
-    });
-
-  const btnCancelPost = document.getElementById('btnCancelPost');
-  btnCancelPost.addEventListener('click',()=> {
-
-    containerModal.style.display = 'none'
-  });
-    
-  // Cuando se haga click <span> (x), cierra el modal
-  const spanModalClose = document.getElementsByClassName('close')[0];
-   spanModalClose.onclick = () => {
-   containerModal.style.display = 'none';
-   };
-  
-   
-// <----------Contenido del Muro---------
-=======
 );
   // eliminar post
 containerModal.appendChild(modal);
@@ -73,6 +47,7 @@ btnDeletePost.addEventListener('click', () => {
   deletePostFb(containerModal.getAttribute('code'));// para que al eliminar el post sepa que id debe borrar
   containerModal.style.display = 'none';
 });
+
 // boton de cancelar en eliminar post
 const btnCancelPost = document.getElementById('btnCancelPost');
 btnCancelPost.addEventListener('click', () => {
@@ -80,15 +55,15 @@ btnCancelPost.addEventListener('click', () => {
 });
 
 // Cuando se haga click <span> (x), cierra el modal
-const spanModalCloseDelete = document.getElementsByClassName('close')[0];
-spanModalCloseDelete.onclick = () => {
+const spanModalClose = document.getElementsByClassName('close')[0];
+spanModalClose.onclick = () => {
   containerModal.style.display = 'none';
 };
 
-// <----------Contenido del Muro--------->
->>>>>>> 082097dc21b3d085a4a3ac7bf4057abf02c11725
+// <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
+  console.log(firebase.auth());
   const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
   const emailData = currentUserData.email; // Email del usuario que accedio
 
@@ -104,7 +79,6 @@ export const templateWall = (containerRoot) => {
         <p>Hola ${displayNameData}</p>
         <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
       <ul>
-        <li><a href="/">Perfil</a></li>
         <li><a href="/">Cerrar Sesión</a></li>
       </ul>
       </div>
@@ -179,14 +153,12 @@ export const templateWall = (containerRoot) => {
       let likeCounter = 0;
       let likeHeart = false;
 
-      // enciende o apaga el corazon de like
-      const toggleHeart = (valueHeart) => {
+      const toggleHeart = (valueHeart) => { // enciende o apaga el corazon de like
         likeHeart = !valueHeart;
       };
 
       likeImg.addEventListener('click', () => {
         toggleHeart(likeHeart);
-        console.log(likeHeart);
         if (likeHeart === true) {
           likeImg.style.fill = '#60E440'; // coloca el corazon en blanco
           document.getElementById(`numberLike-${doc.id}`).innerHTML = ++likeCounter;
@@ -218,18 +190,6 @@ export const templateWall = (containerRoot) => {
         containerModal.setAttribute('code', doc.id);// asigno el valor id a code(es la variable con la que almaceno enel container)
       });
 
-      // const verifyAuthor = () => {
-      //   if (doc.exists) {
-      //     console.log(1, doc.exists);
-      //     console.log('seeument data:', doc.data());
-      //     if (doc.data().email !== emailData) {
-      //       alert('Error: No eres el autor de esta post');
-      //     } else {
-      //       alert('comentario eliminado');
-      //     }
-      //   }
-      //   // });
-      // };
       /* Cuando el usuario hace clic en el botón,
        alternar entre ocultar y mostrar el contenido desplegable ... */
       if (doc.data().email === emailData) {

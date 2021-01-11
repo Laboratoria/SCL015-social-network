@@ -1,5 +1,5 @@
 // import { sigUpFirebase } from '../../index.js';
-import { loginGoogle } from '../../index.js';
+import { loginGoogle, observer } from '../../index.js';
 
 export const templateLogIn = () => {
   const divLogIn = document.createElement('div');
@@ -79,22 +79,7 @@ export const templateLogIn = () => {
             alert('Error');
         }
       });
-
-    // observador de estado de autenticación
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        console.log("user", user);
-        console.log('existe usuario activo');
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        // ...
-      } else {
-        console.log('no exite usuario activo');
-        // User is signed out
-        // ...
-      }
-    });
+    observer(); // funcion observador
   });
   return divLogIn;
 };
