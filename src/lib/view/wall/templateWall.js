@@ -1,5 +1,5 @@
 import { db } from '../../../firebaseConfig.js';
-import { editPostFb, deletePostFb } from '../../index.js';
+import { editPostFb, deletePostFb, likePostFb, likeCounter } from '../../index.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
 
@@ -44,7 +44,7 @@ const modal = htmlToElements(
 containerModal.appendChild(modal);
 const btnDeletePost = document.getElementById('btnDeletePost');
 btnDeletePost.addEventListener('click', () => {
-  deletePostFb(containerModal.getAttribute('code'));// para que al eliminar el post sepa que id debe borrar
+  deletePostFb(containerModal.getAttribute('code'));//  para que al eliminar el post sepa que id debe borrar
   containerModal.style.display = 'none';
 });
 
@@ -54,7 +54,7 @@ btnCancelPost.addEventListener('click', () => {
   containerModal.style.display = 'none';
 });
 
-// Cuando se haga click <span> (x), cierra el modal
+// Cuando se haga click (x), cierra el modal
 const spanModalClose = document.getElementsByClassName('close')[0];
 spanModalClose.onclick = () => {
   containerModal.style.display = 'none';
@@ -63,7 +63,7 @@ spanModalClose.onclick = () => {
 // <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
-  console.log(firebase.auth());
+  console.log(currentUserData.uid);
   const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
   const emailData = currentUserData.email; // Email del usuario que accedio
 
@@ -95,7 +95,17 @@ export const templateWall = (containerRoot) => {
   db.collection('post').onSnapshot((querySnapshot) => { // Escuchando colección en firebase para ir imprimiendo los post
     divPost.innerHTML = ''; // Vaciando div para que no se repitan los post
     querySnapshot.forEach((doc) => {
-      const puntitos = `<img src="imagenes/3puntos.svg" alt="opcion" class="dropbtn" id="dropbtn-${doc.id}"></img> `;
+      const optionsEllipsis = `<img src="imagenes/3puntos.svg" alt="opcion" class="dropbtn" id="dropbtn-${doc.id}"></img> `;
+      const heartWhite = `<svg class="heart-icon" id="heart-${doc.id}" width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M29.5001 46.6666L50.3959 25.6666V16.3333L41.7917 12.8333L29.5001 16.3333L17.2084 12.8333L8.60425 16.3333V25.6666L29.5001 46.6666Z" fill="white"/>
+      <path d="M29.5 18.6667L31.3634 16.3333C33.5169 13.6337 36.7275 11.6667 40.5625 11.6667C42.5658 11.6665 44.5316 12.1827 46.25 13.1602C47.9684 14.1376 49.3749 15.5396 50.3194 17.2166C51.2638 18.8935 51.7108 20.7823 51.6125 22.6815C51.5143 24.5807 50.8746 26.4189 49.7616 28C47.7777 30.814 29.5 49 29.5 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
+      <path d="M29.5001 18.6667L27.6367 16.3333C25.4832 13.6337 22.2726 11.6667 18.4376 11.6667C16.4343 11.6665 14.4685 12.1827 12.7501 13.1602C11.0317 14.1376 9.62521 15.5396 8.68076 17.2166C7.73631 18.8935 7.28934 20.7823 7.38758 22.6815C7.48581 24.5807 8.12556 26.4189 9.23853 28C11.2224 30.814 29.5001 49 29.5001 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
+    </svg> `;
+      const heartGreen = ` <svg class="heart-icon" id="heart-${doc.id}" width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M29.5001 46.6666L50.3959 25.6666V16.3333L41.7917 12.8333L29.5001 16.3333L17.2084 12.8333L8.60425 16.3333V25.6666L29.5001 46.6666Z" fill="#60E440"/>
+      <path d="M29.5 18.6667L31.3634 16.3333C33.5169 13.6337 36.7275 11.6667 40.5625 11.6667C42.5658 11.6665 44.5316 12.1827 46.25 13.1602C47.9684 14.1376 49.3749 15.5396 50.3194 17.2166C51.2638 18.8935 51.7108 20.7823 51.6125 22.6815C51.5143 24.5807 50.8746 26.4189 49.7616 28C47.7777 30.814 29.5 49 29.5 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
+      <path d="M29.5001 18.6667L27.6367 16.3333C25.4832 13.6337 22.2726 11.6667 18.4376 11.6667C16.4343 11.6665 14.4685 12.1827 12.7501 13.1602C11.0317 14.1376 9.62521 15.5396 8.68076 17.2166C7.73631 18.8935 7.28934 20.7823 7.38758 22.6815C7.48581 24.5807 8.12556 26.4189 9.23853 28C11.2224 30.814 29.5001 49 29.5001 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
+    </svg> `;
       divPost.innerHTML += `<div id="postDiv-${doc.id}" class="postDiv">
           <div class="post-identifier">
             <div class="post-name">
@@ -104,7 +114,7 @@ export const templateWall = (containerRoot) => {
             </div>   
             <div class="post-opcion" id="postOpcion">
               <div class="dropdown">
-              ${doc.data().email === emailData ? puntitos : ''}
+              ${doc.data().email === emailData ? optionsEllipsis : ''}
               <div id="myDropdown-${doc.id}" class="dropdown-content">
                 <p id="openEdit-${doc.id}" class="editPost">Editar</p>
                 <p id="openDelete-${doc.id}" class="delete">Borrar</p>
@@ -114,12 +124,8 @@ export const templateWall = (containerRoot) => {
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
           <div class="like">
-            <svg class="heart-icon" id="heart-${doc.id}" width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M29.5001 46.6666L50.3959 25.6666V16.3333L41.7917 12.8333L29.5001 16.3333L17.2084 12.8333L8.60425 16.3333V25.6666L29.5001 46.6666Z" fill="white"/>
-              <path d="M29.5 18.6667L31.3634 16.3333C33.5169 13.6337 36.7275 11.6667 40.5625 11.6667C42.5658 11.6665 44.5316 12.1827 46.25 13.1602C47.9684 14.1376 49.3749 15.5396 50.3194 17.2166C51.2638 18.8935 51.7108 20.7823 51.6125 22.6815C51.5143 24.5807 50.8746 26.4189 49.7616 28C47.7777 30.814 29.5 49 29.5 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
-              <path d="M29.5001 18.6667L27.6367 16.3333C25.4832 13.6337 22.2726 11.6667 18.4376 11.6667C16.4343 11.6665 14.4685 12.1827 12.7501 13.1602C11.0317 14.1376 9.62521 15.5396 8.68076 17.2166C7.73631 18.8935 7.28934 20.7823 7.38758 22.6815C7.48581 24.5807 8.12556 26.4189 9.23853 28C11.2224 30.814 29.5001 49 29.5001 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
-            </svg>
-            <p id="numberLike-${doc.id}" class="number-like"></p>
+            ${doc.data().like.includes(emailData) ? heartGreen : heartWhite}
+            <p class="number-like">${doc.data().like.length}</p>
             
             </div>
           </div>
@@ -145,12 +151,11 @@ export const templateWall = (containerRoot) => {
       const editbutton = document.getElementById(`btnPostEdit-${doc.id}`); // boton que publica la edicion
       const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
 
-      const spanModalClose = document.getElementById(`close-${doc.id}`); // X que cierra el modal
+      const spanModalCloseEdit = document.getElementById(`close-${doc.id}`); // X que cierra el modal
       const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
       const openDelete = document.getElementById(`openDelete-${doc.id}`);// boton borrar
 
       const likeImg = document.getElementById(`heart-${doc.id}`); // corazon para el like
-      let likeCounter = 0;
       let likeHeart = false;
 
       const toggleHeart = (valueHeart) => { // enciende o apaga el corazon de like
@@ -158,18 +163,19 @@ export const templateWall = (containerRoot) => {
       };
 
       likeImg.addEventListener('click', () => {
+        likePostFb(doc.id, emailData);
         toggleHeart(likeHeart);
-        if (likeHeart === true) {
-          likeImg.style.fill = '#60E440'; // coloca el corazon en blanco
-          document.getElementById(`numberLike-${doc.id}`).innerHTML = ++likeCounter;
+        if (doc.data().like.includes(emailData)) {
+          console.log(33333, doc.data().like.includes(emailData))
+          likeImg.style.fill = '#60E440'; // coloca el corazon en verde
         } else {
-          likeImg.style.fill = '#FFFFFF'; // coloca el corazon en verde
-          document.getElementById(`numberLike-${doc.id}`).innerHTML = --likeCounter;
+          likeImg.style.fill = '#FFFFFF'; // coloca el corazon en blanco
         }
+        // document.getElementById(`numberLike-${doc.id}`).innerHTML = doc.data().like.length;
+        // document.getElementById(`numberLike-${doc.id}`).innerHTML = likeCounter();
       });
 
-      openEdit.addEventListener('click', (e) => { // Abre el modal para editar
-        console.log(e.target.value);
+      openEdit.addEventListener('click', () => { // Abre el modal para editar
         modalEdit.style.display = 'block';
       });
 
@@ -181,7 +187,7 @@ export const templateWall = (containerRoot) => {
         modalEdit.style.display = 'none';
       });
 
-      spanModalClose.onclick = () => { //  cierra el modal editar en la "X"
+      spanModalCloseEdit.onclick = () => { //  cierra el modal editar en la "X"
         modalEdit.style.display = 'none';
       };
 
@@ -190,7 +196,7 @@ export const templateWall = (containerRoot) => {
         containerModal.setAttribute('code', doc.id);// asigno el valor id a code(es la variable con la que almaceno enel container)
       });
 
-      /* Cuando el usuario hace clic en el botón,
+      /* Cuando el usuario hace clic en el botón ...,
        alternar entre ocultar y mostrar el contenido desplegable ... */
       if (doc.data().email === emailData) {
         const opcionPost = document.querySelector(`#dropbtn-${doc.id}`); // boton de las opciones
@@ -212,13 +218,6 @@ export const templateWall = (containerRoot) => {
 //   });
 // }
 
-// const editButton = document.querySelectorAll('.delete');
-// editButton.addEventListener('click', () => {
-//   document.getElementById(`divPost-${doc.id}`).innerHTML = '<textarea id=\'editTextArea\'></textarea>';
-//   document.getElementById('editTextArea').value = doc.data().postContent;
-// });
-
-// };
 
 // db.collection('profile').where('email', '==', 'luzcielm@gmail.coml').get()
 // .then((querySnapshot) => {

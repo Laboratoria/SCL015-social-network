@@ -182,6 +182,7 @@ a {
 }
 
 #fondo2 {
+    display: none;
     width: 19vw;
     height: 15vh;
     top: 5px;
@@ -272,6 +273,7 @@ a {
     }
 
     #fondo2 {
+    display: none;
     margin-top: 50px;
     width: 52vw;
     height: 16vh;
