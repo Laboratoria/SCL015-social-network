@@ -157,7 +157,8 @@ button{
     align-items: center;
     position: absolute;
     z-index: 1;
-    top: 631px;
+    top: 569px;
+
 }
 
 .opcion-main {
@@ -196,7 +197,7 @@ a {
 }
 
 /* formato responsive para celular galaxy 8 plus */
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 767px) and (min-width: 320px) {
 
     .container {
         

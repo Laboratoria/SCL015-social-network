@@ -65,6 +65,24 @@ export const loginFirebase = (email, password) => {
     });
 };
 
+// observador de estado de autenticación
+export const observer = () => {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      console.log('user', user);
+      console.log('existe usuario activo');
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      // ...
+    } else {
+      console.log('no exite usuario activo');
+      // User is signed out
+      // ...
+    }
+  });
+};
+
 // Funcion que guarda el post en firebase
 export const addCollectionPost = (content, pseudonym, emailuser) => {
   db.collection('post').add({
@@ -72,10 +90,10 @@ export const addCollectionPost = (content, pseudonym, emailuser) => {
     postContent: content,
     userName: pseudonym,
     email: emailuser,
+    like: [],
     // image: img,
   })
     .then((docRef) => {
-      console.log('Document written with ID: ', docRef.id);
       alert('publicado');
     })
     .catch((error) => {
@@ -84,7 +102,7 @@ export const addCollectionPost = (content, pseudonym, emailuser) => {
     });
 };
 
-// Funcion que edita el post en firebase
+// Editar el post en firebase
 export const editPostFb = (id, addEdit) => {
   const PostRef = db.collection('post').doc(id);
   return PostRef.update({
@@ -99,7 +117,7 @@ export const editPostFb = (id, addEdit) => {
     });
 };
 
-// funcion eliminar post en firebase
+// Eliminar post en firebase
 export const deletePostFb = (id) => {
   db.collection('post').doc(id).delete().then(() => {
     console.log('Document successfully deleted!');
@@ -108,3 +126,25 @@ export const deletePostFb = (id) => {
       console.error('Error removing document: ', error);
     });
 };
+
+// Agregar el like al post
+// export const likePostFb = () => {
+//   db.collection('post').doc(id).delete().then((query) => {
+//     const post = query.data();
+//     if (post.like == null || post.like == '') {
+//       post.like = [];
+//       console.log('ento al like vacio');
+//       if (post.like.includes(user.uid)) {
+//         for (let i = 0; i < post.like.length; i++) {
+//           if (post.like[i] === user.uid) { // verifica si ya el usuario está en el array
+//             post.like.splice(i, 1); // sentencia para eliminar un elemento de un array
+
+//             database.collection('post').doc(id).update({ // para actualizar el array
+//               like: post.like,
+//             });
+//           }
+//         }
+//       }
+//     }
+//   });
+// };
