@@ -2,15 +2,15 @@ import { db } from '../../../firebaseConfig.js';
 import { editPostFb, deletePostFb } from '../../index.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
-// let likeCounter = 0;
-// -----Imprimir un elemento en HTML----
+
+// <-----Imprimir un elemento en HTML---->
 const htmlToElements = (html) => {
   const stencil = document.createElement('template');
   stencil.innerHTML = html; // innerHTML devuelve la sintaxis con los descendientes del elemento.
   return stencil.content.firstChild; // Nodo.firstChild = devuelve el primer hijo del nodo
 };
 
-// desaparece la lista de la opcion editar y borrar al hacer click afuera
+// desaparece la lista de la opcion... editar y borrar al hacer click afuera
 window.onclick = (event) => {
   if (!event.target.matches('.dropbtn')) {
     const dropdowns = document.getElementsByClassName('dropdown-content');
@@ -24,7 +24,7 @@ window.onclick = (event) => {
   }
 };
 
-// ----------- MODAL borrar-------------
+// <----------- MODAL borrar------------->
 containerModal.innerHTML = '';
 const modal = htmlToElements(
   `<div class ="modal-content-delete">
@@ -94,15 +94,16 @@ export const templateWall = (containerRoot) => {
   db.collection('post').onSnapshot((querySnapshot) => { // Escuchando colección en firebase para ir imprimiendo los post
     divPost.innerHTML = ''; // Vaciando div para que no se repitan los post
     querySnapshot.forEach((doc) => {
+      const puntitos = `<img src="imagenes/3puntos.svg" alt="opcion" class="dropbtn" id="dropbtn-${doc.id}"></img> `;
       divPost.innerHTML += `<div id="postDiv-${doc.id}" class="postDiv">
           <div class="post-identifier">
             <div class="post-name">
               <img src="imagenes/user.svg" alt="User" class="user-Post">
               <p class="user-Name">${doc.data().userName}</p>
             </div>   
-            <div class="post-opcion">
+            <div class="post-opcion" id="postOpcion">
               <div class="dropdown">
-                <img src="imagenes/3puntos.svg" alt="opcion" class="dropbtn" id="dropbtn-${doc.id}">
+              ${doc.data().email === emailData ? puntitos : ''}
               <div id="myDropdown-${doc.id}" class="dropdown-content">
                 <p id="openEdit-${doc.id}" class="editPost">Editar</p>
                 <p id="openDelete-${doc.id}" class="delete">Borrar</p>
@@ -114,8 +115,8 @@ export const templateWall = (containerRoot) => {
           <div class="like">
             <svg class="heart-icon" id="heart-${doc.id}" width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M29.5001 46.6666L50.3959 25.6666V16.3333L41.7917 12.8333L29.5001 16.3333L17.2084 12.8333L8.60425 16.3333V25.6666L29.5001 46.6666Z" fill="white"/>
-              <path d="M29.5 18.6667L31.3634 16.3333C33.5169 13.6337 36.7275 11.6667 40.5625 11.6667C42.5658 11.6665 44.5316 12.1827 46.25 13.1602C47.9684 14.1376 49.3749 15.5396 50.3194 17.2166C51.2638 18.8935 51.7108 20.7823 51.6125 22.6815C51.5143 24.5807 50.8746 26.4189 49.7616 28C47.7777 30.814 29.5 49 29.5 49" stroke="#60E440" stroke-width="2" stroke-linecap="round"/>
-              <path d="M29.5001 18.6667L27.6367 16.3333C25.4832 13.6337 22.2726 11.6667 18.4376 11.6667C16.4343 11.6665 14.4685 12.1827 12.7501 13.1602C11.0317 14.1376 9.62521 15.5396 8.68076 17.2166C7.73631 18.8935 7.28934 20.7823 7.38758 22.6815C7.48581 24.5807 8.12556 26.4189 9.23853 28C11.2224 30.814 29.5001 49 29.5001 49" stroke="#60E440" stroke-width="2" stroke-linecap="round"/>
+              <path d="M29.5 18.6667L31.3634 16.3333C33.5169 13.6337 36.7275 11.6667 40.5625 11.6667C42.5658 11.6665 44.5316 12.1827 46.25 13.1602C47.9684 14.1376 49.3749 15.5396 50.3194 17.2166C51.2638 18.8935 51.7108 20.7823 51.6125 22.6815C51.5143 24.5807 50.8746 26.4189 49.7616 28C47.7777 30.814 29.5 49 29.5 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
+              <path d="M29.5001 18.6667L27.6367 16.3333C25.4832 13.6337 22.2726 11.6667 18.4376 11.6667C16.4343 11.6665 14.4685 12.1827 12.7501 13.1602C11.0317 14.1376 9.62521 15.5396 8.68076 17.2166C7.73631 18.8935 7.28934 20.7823 7.38758 22.6815C7.48581 24.5807 8.12556 26.4189 9.23853 28C11.2224 30.814 29.5001 49 29.5001 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
             </svg>
             <p id="numberLike-${doc.id}" class="number-like"></p>
             
@@ -139,8 +140,6 @@ export const templateWall = (containerRoot) => {
     });
 
     querySnapshot.forEach((doc) => {
-      const opcionPost = document.querySelector(`#dropbtn-${doc.id}`); // boton de las opciones
-
       const openEdit = document.getElementById(`openEdit-${doc.id}`); // // boton que abre el modal
       const editbutton = document.getElementById(`btnPostEdit-${doc.id}`); // boton que publica la edicion
       const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
@@ -162,15 +161,16 @@ export const templateWall = (containerRoot) => {
         toggleHeart(likeHeart);
         console.log(likeHeart);
         if (likeHeart === true) {
-          likeImg.style.fill = '#60E440';
+          likeImg.style.fill = '#60E440'; // coloca el corazon en blanco
           document.getElementById(`numberLike-${doc.id}`).innerHTML = ++likeCounter;
         } else {
-          likeImg.style.fill = '#FFFFFF';
+          likeImg.style.fill = '#FFFFFF'; // coloca el corazon en verde
           document.getElementById(`numberLike-${doc.id}`).innerHTML = --likeCounter;
         }
       });
 
-      openEdit.addEventListener('click', () => { // Abre el modal para editar
+      openEdit.addEventListener('click', (e) => { // Abre el modal para editar
+        console.log(e.target.value);
         modalEdit.style.display = 'block';
       });
 
@@ -182,20 +182,35 @@ export const templateWall = (containerRoot) => {
         modalEdit.style.display = 'none';
       });
 
-      spanModalClose.onclick = () => { //  cierra el modal
+      spanModalClose.onclick = () => { //  cierra el modal editar en la "X"
         modalEdit.style.display = 'none';
       };
 
-      openDelete.addEventListener('click', () => {
+      openDelete.addEventListener('click', () => { // abre el modal de
         containerModal.style.display = 'block';
         containerModal.setAttribute('code', doc.id);// asigno el valor id a code(es la variable con la que almaceno enel container)
       });
 
-      /* When the user clicks on the button,
-      toggle between hiding and showing the dropdown content */
-      opcionPost.addEventListener('click', () => {
-        document.getElementById(`myDropdown-${doc.id}`).classList.toggle('show');
-      });
+      // const verifyAuthor = () => {
+      //   if (doc.exists) {
+      //     console.log(1, doc.exists);
+      //     console.log('seeument data:', doc.data());
+      //     if (doc.data().email !== emailData) {
+      //       alert('Error: No eres el autor de esta post');
+      //     } else {
+      //       alert('comentario eliminado');
+      //     }
+      //   }
+      //   // });
+      // };
+      /* Cuando el usuario hace clic en el botón,
+       alternar entre ocultar y mostrar el contenido desplegable ... */
+      if (doc.data().email === emailData) {
+        const opcionPost = document.querySelector(`#dropbtn-${doc.id}`); // boton de las opciones
+        opcionPost.addEventListener('click', () => {
+          document.getElementById(`myDropdown-${doc.id}`).classList.toggle('show');
+        });
+      }
     }); // fin del for 2
   }); // fin de la promesa doc
   containerRoot.appendChild(divWall);
