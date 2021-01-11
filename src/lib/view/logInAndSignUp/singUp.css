@@ -2,6 +2,7 @@ body{
     display: flex;
     flex-direction: column;
     margin: 0;
+    overflow-x: hidden;
 }
 
 
@@ -9,7 +10,9 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
     overflow: hidden;
+    width: 101vw;
 }
 
 #emailSignUp[type="email"]:focus:invalid {
@@ -145,7 +148,7 @@ button{
     align-items: center;
     position: absolute;
     z-index: 1;
-    top: 524px;
+    top: 480px;
 }
 
 #foot2{
@@ -171,7 +174,8 @@ a {
     width: 100vw;
     height: 39vh;
     position: relative;
-    top: -11px;
+    top: 22px;
+    overflow: hidden;
     left: -5px;
 }
 
@@ -200,11 +204,6 @@ a {
     flex-direction: column
 }
 #formPost {
-    flex-direction: column;
-}
-
-
-#postList{
     flex-direction: column;
 }
 
