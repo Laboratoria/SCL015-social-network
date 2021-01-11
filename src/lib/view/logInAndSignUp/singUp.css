@@ -1,3 +1,4 @@
+  
 body{
     display: flex;
     flex-direction: column;
@@ -106,7 +107,7 @@ button{
 #loginGoogle2{
     background: url("../../../imagenes/loGooglee.jpg");
     background-repeat: no-repeat;
-    background-size: 37px;
+    background-size: 30px;
     width: 321px;
     height: 39px;
     border: 1px solid lightgray;
@@ -180,13 +181,10 @@ a {
     left: -5px;
 }
 
-#fondo2{
-    width: 100vw;
-    height: 56vh;
-    position: relative;
-    top: -448px;
-    left: 567px;
-    transform: rotate(-78deg);
+#fondo2 {
+    width: 19vw;
+    height: 15vh;
+    top: 5px;
 }
 
 #fondo3{
@@ -197,6 +195,95 @@ a {
     right: 606px;
     transform:  rotate(112deg);;
 }
+
+/* formato responsive para celular galaxy 8 plus */
+@media screen and (max-width: 415px) {
+
+    .container {
+        
+        margin-top: 2vh;
+        
+    }
+
+    #logo {
+        justify-content: center;
+        width: 31vw;
+        height: 17vh;
+        margin-bottom: 20px;
+    }
+
+    .welcome-veg {
+       
+        font-size: 15px;
+        
+    }
+
+    #loginGoogle2 {
+        
+        background-size: 28px;
+        width: 265px;
+        height: 34px;
+       
+    }
+
+    .separator {
+       
+        padding: 1px 127px;
+    }
+    
+    .inputMain{
+    width: 266px;
+    height: 23px;
+    font-size: 17px;
+    }
+
+    #btnLogIn, #btnSignUp {
+    width: 264px;
+    height: 27px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    }
+
+    #fondo {
+        width: 100vw;
+        height: 17vh;
+        top: 118px;
+    }
+
+    #foot{
+    top: 436px;
+    }
+
+    .welcome-veg {
+     font-size: 13px;
+    }
+    
+    #loginGoogle2{
+    background-size: 24px;
+    margin: 8px 0px 7px;
+    font-size: 20px;}
+
+    #foot2 {
+        top: 465px;  
+    }
+
+    .opcion-main {
+        font-size: 15px;
+    }
+
+    #fondo2 {
+    margin-top: 50px;
+    width: 52vw;
+    height: 16vh;
+    top: 5px;
+    }
+}
+
+
+    
+
+
+
 
 /* MURO  */
 

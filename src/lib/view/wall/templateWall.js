@@ -39,6 +39,32 @@ const modal = htmlToElements(
           <button class="btn-post" id="btnDeletePost">Aceptar</button>
         </div>
     </div>`,
+<<<<<<< HEAD
+  );
+  //eliminar post
+  containerModal.appendChild(modal);
+  const btnDeletePost = document.getElementById('btnDeletePost');
+  btnDeletePost.addEventListener('click', () => {
+  
+    deletePostFb(containerModal.getAttribute('code'));//para que al eliminar el post sepa que id debe borrar
+    containerModal.style.display = 'none'
+    });
+
+  const btnCancelPost = document.getElementById('btnCancelPost');
+  btnCancelPost.addEventListener('click',()=> {
+
+    containerModal.style.display = 'none'
+  });
+    
+  // Cuando se haga click <span> (x), cierra el modal
+  const spanModalClose = document.getElementsByClassName('close')[0];
+   spanModalClose.onclick = () => {
+   containerModal.style.display = 'none';
+   };
+  
+   
+// <----------Contenido del Muro---------
+=======
 );
   // eliminar post
 containerModal.appendChild(modal);
@@ -60,6 +86,7 @@ spanModalCloseDelete.onclick = () => {
 };
 
 // <----------Contenido del Muro--------->
+>>>>>>> 082097dc21b3d085a4a3ac7bf4057abf02c11725
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
   const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
