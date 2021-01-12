@@ -1,5 +1,6 @@
 import { db } from '../../../firebaseConfig.js';
-import { editPostFb, deletePostFb, likePostFb, likeCounter } from '../../index.js';
+
+import { editPostFb, deletePostFb, singOff, likePostFb, likeCounter } from '../../index.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
 
@@ -60,10 +61,10 @@ spanModalClose.onclick = () => {
   containerModal.style.display = 'none';
 };
 
+
 // <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
-  console.log(currentUserData.uid);
   const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
   const emailData = currentUserData.email; // Email del usuario que accedio
 
@@ -78,17 +79,28 @@ export const templateWall = (containerRoot) => {
         <img src="imagenes/user.svg" class="menu-user" alt="User">
         <p>Hola ${displayNameData}</p>
         <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
-      <ul>
-        <li><a href="/">Cerrar Sesión</a></li>
-      </ul>
+      <div>
+       <ul>
+         <li id="logOut"><a href="/">Cerrar Sesión</a></li>
+       </ul>
+      </div>
       </div>
     </div>
   </header>
   <div id="postList"> 
   </div>
     `;
+  divWall.innerHTML = viewWall; //en la seccion que cree imprimeme el view wall
 
-  divWall.innerHTML = viewWall;
+  
+//cerrar sesion
+const logOut = divWall.querySelector('#logOut');// boton cerrar sesion  
+console.log(logOut)
+logOut.addEventListener('click', () => { 
+   alert('cerro')
+   singOff()
+
+});
 
   // <------Imprimir los cometarios------->
   const divPost = divWall.querySelector('#postList'); // Llamando al div donde se imprimirán los post

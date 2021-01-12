@@ -46,6 +46,7 @@ p {
     background: #B2EFA3;
 
   }
+
    /*hover es para que se desplieguen las opciones cuando se posiciona sobre el menu*/
   .header-menu-profile:hover ul, ul:hover {
     display: block;

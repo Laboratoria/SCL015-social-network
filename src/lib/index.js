@@ -127,9 +127,14 @@ export const deletePostFb = (id) => {
     });
 };
 
-export const likeCounter = (numberLike) => {
-  console.log('numero de likes', numberLike);
-};
+//cerrar sesion
+export const singOff =() =>{
+  firebase.auth().signOut().then(function() {
+    alert('salio')
+  }).catch(function(error) {
+    alert ('error')
+  });
+}
 
 // Agregar el like al post
 export const likePostFb = (id, email) => {
