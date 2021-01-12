@@ -137,23 +137,36 @@ export const singOff =() =>{
 }
 
 // Agregar el like al post
-// export const likePostFb = () => {
-//   db.collection('post').doc(id).delete().then((query) => {
-//     const post = query.data();
-//     if (post.like == null || post.like == '') {
-//       post.like = [];
-//       console.log('ento al like vacio');
-//       if (post.like.includes(user.uid)) {
-//         for (let i = 0; i < post.like.length; i++) {
-//           if (post.like[i] === user.uid) { // verifica si ya el usuario está en el array
-//             post.like.splice(i, 1); // sentencia para eliminar un elemento de un array
-
-//             database.collection('post').doc(id).update({ // para actualizar el array
-//               like: post.like,
-//             });
-//           }
-//         }
-//       }
-//     }
-//   });
-// };
+export const likePostFb = (id, email) => {
+  db.collection('post').doc(id).get()
+    .then((query) => {
+      const post = query.data();
+      if (post.like == null || post.like == '') {
+        post.like = [];
+        console.log('entro al like vacio');
+      }
+      if (post.like.includes(email)) {
+        for (let i = 0; i < post.like.length; i++) {
+          if (post.like[i] === email) { // verifica si ya el usuario está en el array
+            post.like.splice(i, 1); // sentencia para eliminar un elemento de un array
+            console.log(2, 'splice DISLIKE');
+            db.collection('post').doc(id).update({ // para actualizar el array
+              like: post.like,
+            });
+            console.log('luego del dislike', post.like);
+          }
+        }
+      } else {
+        post.like.push(email); // incluyeme este usuario en este array
+        console.log('push');
+        db.collection('post').doc(id).update({
+          like: post.like,
+        });
+        console.log('like push', post.like);
+      }
+      likeCounter(post.like.length);
+    })
+    .catch((error) => {
+      console.error('Error like: ', error);
+    });
+};

@@ -14,8 +14,7 @@ export const templatePost = (containerRoot) => {
           <p>Hola ${displayNameData}</p>
           <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
           <ul>
-           <li><a href="/">Perfil</a></li>
-           <li><a href="/">Cerrar Sesión</a></li>
+          <li><a href="/">Cerrar Sesión</a></li>
           </ul>
         </div> 
       </div>
