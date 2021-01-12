@@ -89,9 +89,7 @@ export const templateWall = (containerRoot) => {
   <div id="postList"> 
   </div>
     `;
-    
-    
-  divWall.innerHTML = viewWall;
+  divWall.innerHTML = viewWall; //en la seccion que cree imprimeme el view wall
 
   
 //cerrar sesion
@@ -102,7 +100,6 @@ logOut.addEventListener('click', () => {
    singOff()
 
 });
-
 
   // <------Imprimir los cometarios------->
   const divPost = divWall.querySelector('#postList'); // Llamando al div donde se imprimirán los post
