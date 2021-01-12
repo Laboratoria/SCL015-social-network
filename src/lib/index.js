@@ -127,6 +127,15 @@ export const deletePostFb = (id) => {
     });
 };
 
+//cerrar sesion
+export const singOff =() =>{
+  firebase.auth().signOut().then(function() {
+    alert('salio')
+  }).catch(function(error) {
+    alert ('error')
+  });
+}
+
 // Agregar el like al post
 // export const likePostFb = () => {
 //   db.collection('post').doc(id).delete().then((query) => {

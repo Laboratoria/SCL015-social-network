@@ -46,12 +46,8 @@ p {
     background: #B2EFA3;
 
   }
-<<<<<<< HEAD
-   /*hover es para que se desplieguen las opciones cuando se posiciona sobre el menu*/
-=======
   
   /*hover es para que se desplieguen las opciones cuando se posiciona sobre el menu*/
->>>>>>> 082097dc21b3d085a4a3ac7bf4057abf02c11725
   .header-menu-profile:hover ul, ul:hover {
     display: block;
   }
