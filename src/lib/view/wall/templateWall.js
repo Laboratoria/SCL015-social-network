@@ -1,6 +1,6 @@
 import { db } from '../../../firebaseConfig.js';
-
-import { editPostFb, deletePostFb, singOff, likePostFb, likeCounter } from '../../index.js';
+import { editPostFb, deletePostFb, singOff } from '../../index.js';
+import{ } from '../logInAndSignUp/templateLogIn.js'
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
 
@@ -61,6 +61,7 @@ spanModalClose.onclick = () => {
   containerModal.style.display = 'none';
 };
 
+ 
 
 // <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
@@ -77,7 +78,7 @@ export const templateWall = (containerRoot) => {
       </a>
       <div class="header-menu-profile">
         <img src="imagenes/user.svg" class="menu-user" alt="User">
-        <p>Hola ${displayNameData}</p>
+        <p id="nameLocal"></p>
         <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
       <div>
        <ul>
@@ -92,13 +93,25 @@ export const templateWall = (containerRoot) => {
     `;
   divWall.innerHTML = viewWall; //en la seccion que cree imprimeme el view wall
 
+  //local storage ingresar
+  if (typeof(Storage) !== "undefined") {
+    localStorage.setItem('fullNameStorage', displayNameData);
+    localStorage.setItem('emailStorage', emailData);
+    divWall.querySelector('#nameLocal').innerHTML = "Hola " + localStorage.getItem('fullNameStorage');
+     } else {
+      divWall.querySelector('#nameLocal').innerHTML = "Hola " + localStorage.getItem('fullNameStorage');
+     }
+
   
 //cerrar sesion
 const logOut = divWall.querySelector('#logOut');// boton cerrar sesion  
-console.log(logOut)
 logOut.addEventListener('click', () => { 
-   alert('cerro')
    singOff()
+
+//local storage cerrar sesion
+localStorage.removeItem("fullNameStorage");
+localStorage.removeItem("emailStorage");
+
 
 });
 

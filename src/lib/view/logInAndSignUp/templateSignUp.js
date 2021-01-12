@@ -15,6 +15,8 @@ export const addCollectionProfile = (name, pseudonym, emailuser) => {
     });
 };
 
+
+
 export const templateSignUp = () => {
   const divSignUp = document.createElement('div');
   const viewSignUp = `
@@ -76,3 +78,4 @@ export const cleanForm = () => {
   document.querySelector('#emailSignUp').value = '';
   document.querySelector('#passwordSignUp').value = '';
 };
+
