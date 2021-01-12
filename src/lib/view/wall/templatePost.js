@@ -11,7 +11,7 @@ export const templatePost = (containerRoot) => {
       <div class="header-menu">
       <div class="header-menu-profile">
         <img src="imagenes/user.svg" class="menu-user" alt="User">
-          <p>Hola ${displayNameData}</p>
+        <p id="nameLocal"></p>
           <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
           <ul>
           <li><a href="/">Cerrar Sesión</a></li>
@@ -38,6 +38,9 @@ export const templatePost = (containerRoot) => {
        
 
   divNewPost.innerHTML = viewPost;
+  
+ //local storage
+  divNewPost.querySelector('#nameLocal').innerHTML = "Hola " + localStorage.getItem('fullNameStorage');
 
   const buttonPost = divNewPost.querySelector('#formPost'); // Llamando al boton publicar
   buttonPost.addEventListener('submit', (e) => {

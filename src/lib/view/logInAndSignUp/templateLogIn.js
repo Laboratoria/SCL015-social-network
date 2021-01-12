@@ -80,6 +80,16 @@ export const templateLogIn = () => {
         }
       });
     observer(); // funcion observador
+
+    
+      
   });
+
+
   return divLogIn;
+
+
+  
 };
+
+
