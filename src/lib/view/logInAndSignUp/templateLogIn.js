@@ -39,7 +39,6 @@ export const templateLogIn = () => {
   loginForm.addEventListener('click', () => {
     const email = document.querySelector('#emailLogin').value;
     const password = document.querySelector('#passwordLogin').value;
-    console.log(password, email);
 
     // funcion para limpliar los input
     const cleanForm = () => {

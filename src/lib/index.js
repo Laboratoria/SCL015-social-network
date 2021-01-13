@@ -84,14 +84,14 @@ export const observer = () => {
 };
 
 // Funcion que guarda el post en firebase
-export const addCollectionPost = (content, pseudonym, emailuser) => {
+export const addCollectionPost = (content, pseudonym, emailuser, img) => {
   db.collection('post').add({
     // agregando los Key que tendra la coleccion post
     postContent: content,
     userName: pseudonym,
     email: emailuser,
     like: [],
-    // image: img,
+    image: img,
   })
     .then((docRef) => {
       alert('publicado');
@@ -127,10 +127,6 @@ export const deletePostFb = (id) => {
     });
 };
 
-export const likeCounter = (numberLike) => {
-  console.log('numero de likes', numberLike);
-};
-
 // Agregar el like al post
 export const likePostFb = (id, email) => {
   db.collection('post').doc(id).get()
@@ -138,28 +134,22 @@ export const likePostFb = (id, email) => {
       const post = query.data();
       if (post.like == null || post.like == '') {
         post.like = [];
-        console.log('entro al like vacio');
       }
       if (post.like.includes(email)) {
         for (let i = 0; i < post.like.length; i++) {
           if (post.like[i] === email) { // verifica si ya el usuario está en el array
             post.like.splice(i, 1); // sentencia para eliminar un elemento de un array
-            console.log(2, 'splice DISLIKE');
             db.collection('post').doc(id).update({ // para actualizar el array
               like: post.like,
             });
-            console.log('luego del dislike', post.like);
           }
         }
       } else {
         post.like.push(email); // incluyeme este usuario en este array
-        console.log('push');
         db.collection('post').doc(id).update({
           like: post.like,
         });
-        console.log('like push', post.like);
       }
-      likeCounter(post.like.length);
     })
     .catch((error) => {
       console.error('Error like: ', error);

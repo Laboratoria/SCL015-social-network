@@ -1,5 +1,5 @@
 import { db } from '../../../firebaseConfig.js';
-import { editPostFb, deletePostFb, likePostFb, likeCounter } from '../../index.js';
+import { editPostFb, deletePostFb, likePostFb } from '../../index.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
 
@@ -63,7 +63,6 @@ spanModalClose.onclick = () => {
 // <----------Contenido del Muro---------
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
-  console.log(currentUserData.uid);
   const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
   const emailData = currentUserData.email; // Email del usuario que accedio
 
@@ -156,23 +155,14 @@ export const templateWall = (containerRoot) => {
       const openDelete = document.getElementById(`openDelete-${doc.id}`);// boton borrar
 
       const likeImg = document.getElementById(`heart-${doc.id}`); // corazon para el like
-      let likeHeart = false;
+      // let likeHeart = false;
 
-      const toggleHeart = (valueHeart) => { // enciende o apaga el corazon de like
-        likeHeart = !valueHeart;
-      };
+      // const toggleHeart = (valueHeart) => { // enciende o apaga el corazon de like
+      //   likeHeart = !valueHeart;
+      // };
 
       likeImg.addEventListener('click', () => {
         likePostFb(doc.id, emailData);
-        toggleHeart(likeHeart);
-        if (doc.data().like.includes(emailData)) {
-          console.log(33333, doc.data().like.includes(emailData))
-          likeImg.style.fill = '#60E440'; // coloca el corazon en verde
-        } else {
-          likeImg.style.fill = '#FFFFFF'; // coloca el corazon en blanco
-        }
-        // document.getElementById(`numberLike-${doc.id}`).innerHTML = doc.data().like.length;
-        // document.getElementById(`numberLike-${doc.id}`).innerHTML = likeCounter();
       });
 
       openEdit.addEventListener('click', () => { // Abre el modal para editar
