@@ -123,16 +123,6 @@ p {
   width: 57%;
 }
 
-
-/* .dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-} */
-
 .dropbtn:hover, .dropbtn:focus {
   background-color: #C4CDC2;
 }
@@ -158,24 +148,14 @@ p {
   position: absolute;
   left: 30%;
   top: 48%;
-
-  /* display: flex; */
   background-image: url(../../../imagenes/nube\ a\ la\ derecha.png);
   background-size: 119px;;
   background-repeat: no-repeat;
-  /* background-color: #f1f1f1; */
   min-width: 139px;
   height: 74px;
   overflow: auto;
-  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
   z-index: 1;
 }
-/* .dropdown-content p {
-  color: black;
-  padding: 12px 16px;
-  margin: 2px 0px;
-  display: block;
-} */
 
 .editPost {
   padding: 17px 12px 9px;
@@ -195,6 +175,10 @@ p {
 /* .dropdown p:hover {background-color: #ddd;} */
 
 .show {display: block;}
+
+.img-post {
+  width: 100%;
+}
 
 svg {
   width: 31px;
@@ -348,7 +332,7 @@ svg {
 /* POST  */
 .content-post {
   display: flex;
-  margin: -15px 2px 5px 19px;
+  margin: -9px 2px 5px 19px;
 
 }
 .post{
