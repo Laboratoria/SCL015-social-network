@@ -15,6 +15,8 @@ export const addCollectionProfile = (name, pseudonym, emailuser) => {
     });
 };
 
+
+
 export const templateSignUp = () => {
   const divSignUp = document.createElement('div');
   const viewSignUp = `
@@ -26,7 +28,7 @@ export const templateSignUp = () => {
    <legend>o</legend>
    </fieldset>
    <form id="loginForm" method="post">
-    <input class="inputMain" name="fullName" type="text" placeholder="Nombre Completo" id="fullName" pattern="[zA-a-Z ]{3,30}" title="Solo se permiten letras y un minimo de 3 caracteres" required>
+    <input class="inputMain" name="fullName" type="text" placeholder="Nombre Completo" id="fullName" pattern="[AZ-za ]{3,30}" title="Solo se permiten letras y un minimo de 3 caracteres" required>
     <input class="inputMain" name="userName" type="text" placeholder="Nombre de Usuario" id="userNameSignUp" minlength="2" maxlength="30" title="Minimo de 2 caracteres" required>
     <input class="inputMain" name="email" type="email" placeholder="Correo electronico" id="emailSignUp" required>
     <input class="inputMain" name="password" type="password" placeholder="Contraseña" id="passwordSignUp" minlength="6" maxlength="8" required>
@@ -76,3 +78,4 @@ export const cleanForm = () => {
   document.querySelector('#emailSignUp').value = '';
   document.querySelector('#passwordSignUp').value = '';
 };
+

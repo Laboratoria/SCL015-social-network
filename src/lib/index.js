@@ -17,10 +17,6 @@ export const loginGoogle = () => {
     // Maneja los errores aquí.
     // const errorCode = error.code;
     const errorMessage = error.message;
-    // Correo electrónico de la cuenta del usuario utilizada
-    const email = error.email;
-    // El tipo firebase.auth.AuthCredential que se usó.
-    const credential = error.credential;
     alert(errorMessage);
     // ...
   });
@@ -52,24 +48,10 @@ export const signUpFirebase = (email, password) => {
     });
 };
 
-export const loginFirebase = (email, password) => {
-  console.log('entro');
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((user) => {
-      // Signed in
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
-};
-
 // observador de estado de autenticación
 export const observer = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      console.log('user', user);
       console.log('existe usuario activo');
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
@@ -125,6 +107,13 @@ export const deletePostFb = (id) => {
     .catch((error) => {
       console.error('Error removing document: ', error);
     });
+};
+
+// cerrar sesion
+export const singOff = () => {
+  firebase.auth().signOut().then(() => {
+  }).catch((error) => {
+  });
 };
 
 // Agregar el like al post

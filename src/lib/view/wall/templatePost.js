@@ -11,10 +11,10 @@ export const templatePost = (containerRoot) => {
       <div class="header-menu">
       <div class="header-menu-profile">
         <img src="imagenes/user.svg" class="menu-user" alt="User">
-          <p>Hola ${displayNameData}</p>
+        <p id="nameLocal"></p>
           <img src="imagenes/flecha abajo.svg" class="menu-arrow" alt="flecha_Abajo">
           <ul>
-            <li><a href="/">Cerrar Sesión</a></li>
+          <li><a href="/">Cerrar Sesión</a></li>
           </ul>
         </div> 
       </div>
@@ -36,39 +36,38 @@ export const templatePost = (containerRoot) => {
       </form>
     </section>
         `;
-
   divNewPost.innerHTML = viewPost;
+
+  // local storage
+  divNewPost.querySelector('#nameLocal').innerHTML = `Hola ${localStorage.getItem('fullNameStorage')}`;
 
   const buttonPost = divNewPost.querySelector('#formPost'); // Llamando al boton publicar
   const list = divNewPost.querySelector('#list');
   const image = divNewPost.querySelector('input[type=file]');
+  let imgb64;
+
+  image.onchange = () => {
+    const file = image.files[0];
+    const reader = new FileReader();
+    // Recibira el valor Base64 cada vez que un usuario seleccione un archivo de su dispositivo
+    reader.onloadend = () => { // El evento loadend es emitido cuando el progreso de la carga de un recurso se ha detenido
+      // Dado que contiene el URI de datos debemos eliminar el prefijo y mantener solo la cadena Base64
+      // b64 = reader.result.replace(/^data:.+;base64,/, '');
+      imgb64 = reader.result;
+      list.innerHTML += `<li>
+      <p>File name: ${file.name}</p>
+      <img src="${imgb64}" width="50px">
+      </li>`;
+    };
+    reader.readAsDataURL(file);
+  };
 
   buttonPost.addEventListener('submit', (e) => {
     e.preventDefault();
     const formPost = document.querySelector('#postArea').value; // Contenido del textarea
-    addCollectionPost(formPost, displayNameData, emailData); //  Agrega el post a firebase
+    addCollectionPost(formPost, displayNameData, emailData, imgb64); //  Agrega el post a firebase
     window.history.back();
   });
-
-  // image.addEventListener('change', () => {
-  image.onchange = () => {
-    const file = image.files[0];
-    const reader = new FileReader();
-    let b64;
-    // list.innerHTML = "";
-    // Recibira el valor Base64 cada vez que un usuario seleccione un archivo de su dispositivo
-    reader.onloadend = (event) => { // El evento loadend es emitido cuando el progreso de la carga de un recurso se ha detenido
-      // Dado que contiene el URI de datos debemos eliminar el prefijo y mantener solo la cadena Base64
-      b64 = reader.result.replace(/^data:.+;base64,/, '');
-      list.innerHTML += `<li>
-      <p>File name: ${file.name}</p>
-      <img src="${event.target.result}" width="50px">
-      </li>`;
-      console.log(b64);
-    };
-    // console.log(2, reader.readAsDataURL(file));
-    reader.readAsDataURL(file);
-  };
 
   const buttonCancel = divNewPost.querySelector('#btnCancel'); // Llamando al boton cancelar
   buttonCancel.addEventListener('click', () => {
