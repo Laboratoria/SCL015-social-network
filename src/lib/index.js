@@ -15,7 +15,6 @@ export const loginGoogle = () => {
     // ...
   }).catch((error) => {
     // Maneja los errores aquí.
-    // const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorMessage);
     // ...
@@ -53,14 +52,8 @@ export const observer = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       console.log('existe usuario activo');
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      // ...
     } else {
       console.log('no exite usuario activo');
-      // User is signed out
-      // ...
     }
   });
 };
@@ -91,10 +84,8 @@ export const editPostFb = (id, addEdit) => {
     postContent: addEdit,
   })
     .then(() => {
-      console.log('Document successfully updated!');
     })
     .catch((error) => {
-      // The document probably doesn't exist.
       console.error('Error updating document: ', error);
     });
 };
@@ -102,10 +93,8 @@ export const editPostFb = (id, addEdit) => {
 // Eliminar post en firebase
 export const deletePostFb = (id) => {
   db.collection('post').doc(id).delete().then(() => {
-    console.log('Document successfully deleted!');
   })
     .catch((error) => {
-      console.error('Error removing document: ', error);
     });
 };
 

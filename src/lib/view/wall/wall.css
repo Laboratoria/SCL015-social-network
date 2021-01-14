@@ -101,7 +101,7 @@ p {
   border: 1px solid rgba(0, 0, 0, 0.49);
   box-sizing: border-box;
   border-radius: 19px;
-  width: 50%;
+  width: 500px;
   flex-direction: column;
 }
 .post-identifier{
@@ -330,6 +330,10 @@ svg {
     border-radius: 15px;
 }
 /* POST  */
+.new-post{
+  display: flex;
+  margin: 2% 3% 2%;
+}
 .content-post {
   display: flex;
   margin: -9px 2px 5px 19px;
@@ -346,8 +350,8 @@ svg {
 #formPost {
   flex-direction: column;
   margin: 0px;
-  height: 324px;
-  width: 455px;
+  height: 72%;
+  width: 54%;
 }
 
 textarea {
@@ -362,13 +366,36 @@ textarea {
   padding: 12px;
   width: 439px;
 }
+.post-area-template {
+  padding: 1%;
+  margin-right: 19px;
+  margin-left: 203px;
+  width: 337px;
+}
 
 #myfile{
   margin-top: 2%;
+  margin-left: 31%;
+  color: green
+}
+
+.file-post{
+  justify-content: center;
+    width: 185px;
+    border-radius: 8px;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  border: 0.5px solid green;
+  background:#B2EFA3;
+  border-radius: 4px;
+  cursor: pointer;
+  filter: alpha(opacity=0);
+  /* opacity: 0; */
 }
 .post-form-btn{
   justify-content: center;
-  margin-top: 10%;
+  margin-top: 7%;
 }
 .btn-post{
   display: flex;
