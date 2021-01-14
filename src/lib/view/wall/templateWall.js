@@ -223,6 +223,7 @@ export const templateWall = (containerRoot) => {
   containerRoot.appendChild(divWall);
 };// final
 
+
 // document.querySelectorAll('.postDiv button').forEach((element) => {
 //   element.addEventListener('click', () => {
 //     const postDiv = document.getElementById('postDiv');

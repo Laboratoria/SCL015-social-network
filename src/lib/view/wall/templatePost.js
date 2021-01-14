@@ -22,13 +22,12 @@ export const templatePost = (containerRoot) => {
     <section class="post">
       <p class="new-post">Nueva Publicación</p>
       <form id="formPost" method="post">
-        <textarea id="postArea" class="post-area" placeholder="¿En que estas pensando?" cols="30" rows="10" required></textarea>
-        <input type="file" id="myfile" name="myfile" accept="image/png, .jpeg, .jpg, image/gif" />
-        <div class="preview">
-         <ol id="list">
-           <p>No has cargado imagenes.</p>
-          </ol>
+      <div id="post-content">
+      <textarea id="postArea" class="post-area-template" placeholder="¿En que estas pensando?" cols="30" rows="10" required></textarea>
+      <div id="list">
+      </div>
         </div>
+        <input type="file" id="myfile" name="myfile" accept="image/png, .jpeg, .jpg, image/gif" required />
         <div class="post-form-btn">
           <button class="btn-post" id="btnCancel">Cancelar</button>
           <button class="btn-post" type="submit" id="btnPost">Publicar</button>
@@ -49,15 +48,15 @@ export const templatePost = (containerRoot) => {
   image.onchange = () => {
     const file = image.files[0];
     const reader = new FileReader();
+    list.innerHTML = '';
     // Recibira el valor Base64 cada vez que un usuario seleccione un archivo de su dispositivo
     reader.onloadend = () => { // El evento loadend es emitido cuando el progreso de la carga de un recurso se ha detenido
       // Dado que contiene el URI de datos debemos eliminar el prefijo y mantener solo la cadena Base64
       // b64 = reader.result.replace(/^data:.+;base64,/, '');
       imgb64 = reader.result;
-      list.innerHTML += `<li>
-      <p>File name: ${file.name}</p>
-      <img src="${imgb64}" width="50px">
-      </li>`;
+      list.innerHTML += `
+      <img src="${imgb64}" class="file-post">
+      `;
     };
     reader.readAsDataURL(file);
   };
