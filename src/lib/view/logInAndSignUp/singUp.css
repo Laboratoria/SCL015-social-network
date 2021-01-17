@@ -25,7 +25,6 @@ body{
 }
 
 #errorPassword {
-    font-size: 12px;
     display: none;
     width: 310px;
     margin: 0;
@@ -49,7 +48,7 @@ body{
 
 h3 {
     margin: 0;
-    font-size: 30px;
+    font-size: 24px;
 }
 
 .welcome-veg {
@@ -158,12 +157,12 @@ button{
     align-items: center;
     position: absolute;
     z-index: 1;
-    top: 643px;
+    top: 609px;
 
 }
 
 .opcion-main {
-    font-size: 27px;
+    font-size: 24px;
     font-family: 'Roboto', sans-serif;
     margin: 0;
 }
@@ -186,8 +185,8 @@ a {
     width: 27vw;
     height: 31vh;
     top: 3px;
-    margin-inline-start: 905px;
-    margin-top: -90px;
+    margin-inline-start: 914px;
+    margin-top: -129px;
 }
 
 #fondo3 {
@@ -203,19 +202,17 @@ a {
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    overflow: hidden;
+    /* overflow: hidden; */
     width: 101vw;
     margin-top: -49vh;
 }
 
 
 /* formato responsive para celular  */
-@media screen and (max-width: 767px) and (min-width: 320px) {
+@media screen and (max-width: 415px) and (min-width: 320px) {
 
     .container {
-        
         margin-top: 2vh;
-        
     }
 
     #logo {
@@ -226,35 +223,30 @@ a {
     }
 
     .welcome-veg {
-       
         font-size: 15px;
-        
     }
 
     #loginGoogle2 {
-        
         background-size: 28px;
         width: 265px;
         height: 34px;
-       
     }
 
     .separator {
-       
         padding: 1px 127px;
     }
     
     .inputMain{
-    width: 266px;
-    height: 23px;
-    font-size: 17px;
+        width: 266px;
+        height: 23px;
+        font-size: 17px;
     }
 
     #btnLogIn, #btnSignUp {
-    width: 264px;
-    height: 33px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
+        width: 264px;
+        height: 33px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
     }
 
     #fondo {
@@ -264,20 +256,21 @@ a {
     }
 
     #foot{
-    top: 436px;
+        top: 436px;
     }
 
     .welcome-veg {
-     font-size: 13px;
+        font-size: 13px;
     }
     
     #loginGoogle2{
-    background-size: 24px;
-    margin: 8px 0px 7px;
-    font-size: 20px;}
+        background-size: 24px;
+        margin: 8px 0px 7px;
+        font-size: 20px;
+    }
 
     #foot2 {
-        top: 447px;
+        top: 479px;
         margin-top: 3vh;  
     }
 
@@ -286,11 +279,12 @@ a {
     }
 
     #fondo2 {
-    margin-top: 5px;
+    display: none;
+    /* margin-top: 5px;
     width: 38vw;
     height: 13vh;
     top: 5px;
-    margin: auto;
+    margin: auto; */
     }
     
     #fondo3 {
@@ -313,21 +307,53 @@ a {
 }
 
 
+@media screen and (min-width: 1150px) and (max-width: 1550px) {
+   
+    #foot {
+        top: 488px;;       
+    }
+}
+
     
+/* formato responsive para table hay que colocar max y min */  
+@media screen and (min-width: 415px)  and (max-width: 1024px){
+    #logo {
+        width: 28vw;
+        height: 21vh;
+        margin-bottom: 0;
+    }
+
+    .content {
+        margin-top: 0vh;
+    }
+
+    #foot {
+        top: 512px;   
+    }
+
+    #foot2 {
+        top: 659px;
+    }
+
+    #fondo {
+        width: 118vw;
+        height: 28vh;
+        top: 7px;
+        
+    }
+
+    #fondo3 {
+        display: none;
+    }
+
+}
 
 
 
 
 /* MURO  */
 
-.wall {
+/* .wall {
     display: flex;
     flex-direction: column
-}
-#formPost {
-    flex-direction: column;
-}
-
-.postDiv {
-    margin-top: 15px;
-}
+} */

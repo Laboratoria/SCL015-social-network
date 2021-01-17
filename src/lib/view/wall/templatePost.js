@@ -7,8 +7,8 @@ export const templatePost = (containerRoot) => {
 
   const divNewPost = document.createElement('section');
   const viewPost = `
-    <header class="header">
-      <div class="header-menu">
+    <header class="header-templatePost">
+      <div class="header-menu" id="headerMenuPost">
       <div class="header-menu-profile">
         <img src="imagenes/user.svg" class="menu-user" alt="User">
         <p id="nameLocal"></p>
@@ -51,8 +51,6 @@ export const templatePost = (containerRoot) => {
     list.innerHTML = '';
     // Recibira el valor Base64 cada vez que un usuario seleccione un archivo de su dispositivo
     reader.onloadend = () => { // El evento loadend es emitido cuando el progreso de la carga de un recurso se ha detenido
-      // Dado que contiene el URI de datos debemos eliminar el prefijo y mantener solo la cadena Base64
-      // b64 = reader.result.replace(/^data:.+;base64,/, '');
       imgb64 = reader.result;
       list.innerHTML += `
       <img src="${imgb64}" class="file-post">
@@ -62,10 +60,10 @@ export const templatePost = (containerRoot) => {
   };
 
   buttonPost.addEventListener('submit', (e) => {
-    e.preventDefault();
+    e.preventDefault(); // preventDefault () cancela el evento si es cancelable, significa que la acción predeterminada no ocurrirá.
     const formPost = document.querySelector('#postArea').value; // Contenido del textarea
     addCollectionPost(formPost, displayNameData, emailData, imgb64); //  Agrega el post a firebase
-    window.history.back();
+    window.history.back(); // se va una pagina atras (muro)
   });
 
   const buttonCancel = divNewPost.querySelector('#btnCancel'); // Llamando al boton cancelar

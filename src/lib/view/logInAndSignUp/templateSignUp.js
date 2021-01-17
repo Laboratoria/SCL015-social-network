@@ -1,4 +1,4 @@
-import { loginGoogle, signUpFirebase } from '../../index.js'; 
+import { loginGoogle, signUpFirebase } from '../../index.js';
 import { db } from '../../../firebaseConfig.js';
 
 export const addCollectionProfile = (name, pseudonym, emailuser) => {
