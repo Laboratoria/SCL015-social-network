@@ -1,19 +1,4 @@
-import { loginGoogle, signUpFirebase } from '../../index.js'; 
-import { db } from '../../../firebaseConfig.js';
-
-export const addCollectionProfile = (name, pseudonym, emailuser) => {
-  db.collection('profile').add({
-    fullName: name,
-    userName: pseudonym,
-    email: emailuser,
-  })
-    .then((docRef) => {
-      console.log('Document written with ID: ', docRef.id);
-    })
-    .catch((error) => {
-      console.error('Error adding document: ', error);
-    });
-};
+import { loginGoogle, signUpFirebase, addCollectionProfile } from '../../index.js';
 
 export const templateSignUp = () => {
   const divSignUp = document.createElement('div');
@@ -58,23 +43,14 @@ export const templateSignUp = () => {
     const userName = document.querySelector('#userNameSignUp').value;
     const email = document.querySelector('#emailSignUp').value;
     const password = document.querySelector('#passwordSignUp').value;
-    console.log(password, email);
 
     if (password.match(/[a-z]/g) && password.match(/[0-9]/g) && password.length >= 6) { // match() se usa para obtener todas las ocurrencias de una expresión regular dentro de una cadena.
-      signUpFirebase(email, password);
+      signUpFirebase(email, password, userName);
       addCollectionProfile(fullName, userName, email);
     } else {
       errorPasswords.style.display = 'block';
       document.querySelector('#passwordSignUp').value = '';
     }
   });
-
   return divSignUp;
 };
-
-// limpliar los input
-export const cleanForm = () => {
-  document.querySelector('#emailSignUp').value = '';
-  document.querySelector('#passwordSignUp').value = '';
-};
-
