@@ -20,7 +20,7 @@ window.onclick = (event) => {
   if (!event.target.matches('.dropbtn')) {
     const dropdowns = document.getElementsByClassName('dropdown-content');
     let i;
-    for (i = 0; i < dropdowns.length; i++) {
+    for (i = 0; i < dropdowns.length; i += 1) {
       const openDropdown = dropdowns[i];
       if (openDropdown.classList.contains('show')) {
         openDropdown.classList.remove('show');
@@ -53,13 +53,13 @@ btnDeletePost.addEventListener('click', () => {
   containerModal.style.display = 'none';
 });
 
-// boton de cancelar en eliminar post
+// boton de cancelar en Borrar post
 const btnCancelPost = document.getElementById('btnCancelPost');
 btnCancelPost.addEventListener('click', () => {
   containerModal.style.display = 'none';
 });
 
-// Cuando se haga click (x), cierra el modal
+// Click (x), cierra el modal borrar
 const spanModalClose = document.getElementsByClassName('close')[0];
 spanModalClose.onclick = () => {
   containerModal.style.display = 'none';
@@ -68,8 +68,8 @@ spanModalClose.onclick = () => {
 // <----------Contenido del Muro--------->
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
-  const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
   const emailData = currentUserData.email; // Email del usuario que accedio
+  const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
 
   const divWall = document.createElement('section');
   const viewWall = `
@@ -222,7 +222,6 @@ export const templateWall = (containerRoot) => {
   }); // fin de la promesa doc
   containerRoot.appendChild(divWall);
 };// final
-
 
 // document.querySelectorAll('.postDiv button').forEach((element) => {
 //   element.addEventListener('click', () => {

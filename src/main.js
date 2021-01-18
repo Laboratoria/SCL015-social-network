@@ -1,13 +1,13 @@
 // Este es el punto de entrada de tu aplicacion
 import { templateLogIn } from './lib/view/logInAndSignUp/templateLogIn.js';
 import { changeRoute } from './lib/router.js';
-import { firebaseConfig } from './firebaseConfig.js';
+// import { firebaseConfig } from './firebaseConfig.js';
 
 // document.getElementById('root').innerHTML = templateLogIn();
 
 const init = () => {
-  document.getElementById('root').appendChild(templateLogIn());// en el html meteme el template login y 
-  //window.location.href=  "/#"
+  document.getElementById('root').appendChild(templateLogIn());// en el html meteme el template login
+  // window.location.href=  "/#"
   window.addEventListener('hashchange', () => { // que la ventana escuche los cambios de has y de acuerdo a eso busca la funcion changerouter
     changeRoute(window.location.hash);
   });

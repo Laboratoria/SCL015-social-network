@@ -104,6 +104,11 @@ button{
     border-style: none;
 }
 
+/* #loginGoogle2{
+    background-size: 24px;
+    margin: 8px 0px 7px;
+    font-size: 20px;
+} */
 #loginGoogle2{
     background: url("../../../imagenes/loGooglee.jpg");
     background-repeat: no-repeat;
@@ -259,16 +264,11 @@ a {
         top: 436px;
     }
 
-    .welcome-veg {
+    /* .welcome-veg {
         font-size: 13px;
     }
-    
-    #loginGoogle2{
-        background-size: 24px;
-        margin: 8px 0px 7px;
-        font-size: 20px;
-    }
-
+     */
+     
     #foot2 {
         top: 479px;
         margin-top: 3vh;  
@@ -303,18 +303,15 @@ a {
         margin: 0;
         font-size: 15px;
     }
-
 }
-
 
 @media screen and (min-width: 1150px) and (max-width: 1550px) {
    
     #foot {
-        top: 488px;;       
+        top: 488px;      
     }
 }
 
-    
 /* formato responsive para table hay que colocar max y min */  
 @media screen and (min-width: 415px)  and (max-width: 1024px){
     #logo {

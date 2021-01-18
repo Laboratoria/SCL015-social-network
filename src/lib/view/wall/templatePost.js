@@ -50,7 +50,7 @@ export const templatePost = (containerRoot) => {
     const reader = new FileReader();
     list.innerHTML = '';
     // Recibira el valor Base64 cada vez que un usuario seleccione un archivo de su dispositivo
-    reader.onloadend = () => { // El evento loadend es emitido cuando el progreso de la carga de un recurso se ha detenido
+    reader.onloadend = () => { // El evento loadend es emitido cuando la carga se ha detenido
       imgb64 = reader.result;
       list.innerHTML += `
       <img src="${imgb64}" class="file-post">
@@ -60,7 +60,7 @@ export const templatePost = (containerRoot) => {
   };
 
   buttonPost.addEventListener('submit', (e) => {
-    e.preventDefault(); // preventDefault () cancela el evento si es cancelable, significa que la acción predeterminada no ocurrirá.
+    e.preventDefault(); // cancela el evento, significa que la acción predeterminada no ocurrirá.
     const formPost = document.querySelector('#postArea').value; // Contenido del textarea
     addCollectionPost(formPost, displayNameData, emailData, imgb64); //  Agrega el post a firebase
     window.history.back(); // se va una pagina atras (muro)
