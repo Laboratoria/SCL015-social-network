@@ -1,6 +1,10 @@
 import { db } from '../../../firebaseConfig.js';
-import { editPostFb, deletePostFb, singOff } from '../../index.js';
-import{ } from '../logInAndSignUp/templateLogIn.js'
+import {
+  editPostFb,
+  deletePostFb,
+  likePostFb,
+  singOff,
+} from '../../index.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
 
@@ -61,9 +65,7 @@ spanModalClose.onclick = () => {
   containerModal.style.display = 'none';
 };
 
- 
-
-// <----------Contenido del Muro---------
+// <----------Contenido del Muro--------->
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
   const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
@@ -91,35 +93,33 @@ export const templateWall = (containerRoot) => {
   <div id="postList"> 
   </div>
     `;
-  divWall.innerHTML = viewWall; //en la seccion que cree imprimeme el view wall
+  divWall.innerHTML = viewWall; // en la seccion que cree imprimeme el view wall
 
-  //local storage ingresar
-  if (typeof(Storage) !== "undefined") {
+  // local storage ingresar
+  if (typeof (Storage) !== 'undefined') {
     localStorage.setItem('fullNameStorage', displayNameData);
     localStorage.setItem('emailStorage', emailData);
-    divWall.querySelector('#nameLocal').innerHTML = "Hola " + localStorage.getItem('fullNameStorage');
-     } else {
-      divWall.querySelector('#nameLocal').innerHTML = "Hola " + localStorage.getItem('fullNameStorage');
-     }
+    divWall.querySelector('#nameLocal').innerHTML = `Hola ${localStorage.getItem('fullNameStorage')}`;
+  } else {
+    divWall.querySelector('#nameLocal').innerHTML = `Hola ${localStorage.getItem('fullNameStorage')}`;
+  }
 
-  
-//cerrar sesion
-const logOut = divWall.querySelector('#logOut');// boton cerrar sesion  
-logOut.addEventListener('click', () => { 
-   singOff()
+  // cerrar sesion
+  const logOut = divWall.querySelector('#logOut'); // boton cerrar sesion
+  logOut.addEventListener('click', () => {
+    singOff(); // funcion de firebase para cerrar sesion
 
-//local storage cerrar sesion
-localStorage.removeItem("fullNameStorage");
-localStorage.removeItem("emailStorage");
-
-
-});
+    // local storage cerrar sesion
+    localStorage.removeItem('fullNameStorage');
+    localStorage.removeItem('emailStorage');
+  });
 
   // <------Imprimir los cometarios------->
   const divPost = divWall.querySelector('#postList'); // Llamando al div donde se imprimirán los post
   db.collection('post').onSnapshot((querySnapshot) => { // Escuchando colección en firebase para ir imprimiendo los post
     divPost.innerHTML = ''; // Vaciando div para que no se repitan los post
     querySnapshot.forEach((doc) => {
+      const imgPost = `<img src="${doc.data().image}" class="img-post"></img>`;
       const optionsEllipsis = `<img src="imagenes/3puntos.svg" alt="opcion" class="dropbtn" id="dropbtn-${doc.id}"></img> `;
       const heartWhite = `<svg class="heart-icon" id="heart-${doc.id}" width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M29.5001 46.6666L50.3959 25.6666V16.3333L41.7917 12.8333L29.5001 16.3333L17.2084 12.8333L8.60425 16.3333V25.6666L29.5001 46.6666Z" fill="white"/>
@@ -146,6 +146,9 @@ localStorage.removeItem("emailStorage");
               </div>
             </div>
           </div>       
+          </div>
+          <div class="post-imagen">
+          ${doc.data().image === undefined ? '' : imgPost}
           </div>
           <p class="content-post"> <br> ${doc.data().postContent}</p>
           <div class="like">
@@ -181,23 +184,9 @@ localStorage.removeItem("emailStorage");
       const openDelete = document.getElementById(`openDelete-${doc.id}`);// boton borrar
 
       const likeImg = document.getElementById(`heart-${doc.id}`); // corazon para el like
-      let likeHeart = false;
 
-      const toggleHeart = (valueHeart) => { // enciende o apaga el corazon de like
-        likeHeart = !valueHeart;
-      };
-
-      likeImg.addEventListener('click', () => {
+      likeImg.addEventListener('click', () => { // llama a la funcion like
         likePostFb(doc.id, emailData);
-        toggleHeart(likeHeart);
-        if (doc.data().like.includes(emailData)) {
-          console.log(33333, doc.data().like.includes(emailData))
-          likeImg.style.fill = '#60E440'; // coloca el corazon en verde
-        } else {
-          likeImg.style.fill = '#FFFFFF'; // coloca el corazon en blanco
-        }
-        // document.getElementById(`numberLike-${doc.id}`).innerHTML = doc.data().like.length;
-        // document.getElementById(`numberLike-${doc.id}`).innerHTML = likeCounter();
       });
 
       openEdit.addEventListener('click', () => { // Abre el modal para editar
@@ -208,21 +197,21 @@ localStorage.removeItem("emailStorage");
         editPostFb(doc.id, document.getElementById(`postArea-${doc.id}`).value);
       });
 
-      modalCancel.addEventListener('click', () => { //  cierra el modal
+      modalCancel.addEventListener('click', () => { // cierra el modal
         modalEdit.style.display = 'none';
       });
 
-      spanModalCloseEdit.onclick = () => { //  cierra el modal editar en la "X"
+      spanModalCloseEdit.onclick = () => { // cierra el modal editar en la "X"
         modalEdit.style.display = 'none';
       };
 
-      openDelete.addEventListener('click', () => { // abre el modal de
+      openDelete.addEventListener('click', () => { // abre el modal delete
         containerModal.style.display = 'block';
-        containerModal.setAttribute('code', doc.id);// asigno el valor id a code(es la variable con la que almaceno enel container)
+        containerModal.setAttribute('code', doc.id); // asigno el valor id a code(es la variable con la que almaceno enel container)
       });
 
       /* Cuando el usuario hace clic en el botón ...,
-       alternar entre ocultar y mostrar el contenido desplegable ... */
+       alternar entre ocultar y mostrar el contenido desplegable */
       if (doc.data().email === emailData) {
         const opcionPost = document.querySelector(`#dropbtn-${doc.id}`); // boton de las opciones
         opcionPost.addEventListener('click', () => {
@@ -234,23 +223,6 @@ localStorage.removeItem("emailStorage");
   containerRoot.appendChild(divWall);
 };// final
 
-// const btnDelete = document.querySelectorAll('.delete'); // llamando a todas las clases deleteDiv
-// for (let i = 0; i < btnDelete.length; i++) {
-//   btnDelete[i].addEventListener('click', () => {
-//     const messageDelete = '¿Estas seguro que deseas eliminar esta puplicación?';
-//     printModal(messageDelete);
-//     containerModal.style.display = 'block';
-//   });
-// }
-
-
-// db.collection('profile').where('email', '==', 'luzcielm@gmail.coml').get()
-// .then((querySnapshot) => {
-//   querySnapshot.forEach((doc) => {
-//     // doc.data() is never undefined for query doc snapshots
-//     console.log(doc.id, ' => ', doc.data());
-//     // const userName = doc.data().userName; // userName del usuario luzcielm@gmail.com
-//     // const userEmail = doc.data().email;
 
 // document.querySelectorAll('.postDiv button').forEach((element) => {
 //   element.addEventListener('click', () => {

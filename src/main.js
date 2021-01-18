@@ -8,7 +8,7 @@ import { firebaseConfig } from './firebaseConfig.js';
 const init = () => {
   document.getElementById('root').appendChild(templateLogIn());// en el html meteme el template login y 
   //window.location.href=  "/#"
-  window.addEventListener('hashchange', () => {//que la ventana escuche los cambios de has y deacuerdo a eso buscame la funcion changerouter
+  window.addEventListener('hashchange', () => { // que la ventana escuche los cambios de has y de acuerdo a eso busca la funcion changerouter
     changeRoute(window.location.hash);
   });
 };

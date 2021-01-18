@@ -209,6 +209,14 @@ a {
 }
 
 
+/* formato responsive para laptop */
+@media screen and (max-width: 1024px) and (min-width: 667px) {
+    #foot {
+    top: 589px;
+    }
+}
+
+
 /* formato responsive para celular  */
 @media screen and (max-width: 767px) and (min-width: 320px) {
 
@@ -311,11 +319,6 @@ a {
     }
 
 }
-
-
-    
-
-
 
 
 /* MURO  */

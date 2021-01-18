@@ -15,12 +15,7 @@ export const loginGoogle = () => {
     // ...
   }).catch((error) => {
     // Maneja los errores aquí.
-    // const errorCode = error.code;
     const errorMessage = error.message;
-    // Correo electrónico de la cuenta del usuario utilizada
-    const email = error.email;
-    // El tipo firebase.auth.AuthCredential que se usó.
-    const credential = error.credential;
     alert(errorMessage);
     // ...
   });
@@ -52,46 +47,26 @@ export const signUpFirebase = (email, password) => {
     });
 };
 
-export const loginFirebase = (email, password) => {
-  console.log('entro');
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((user) => {
-      // Signed in
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
-};
-
 // observador de estado de autenticación
 export const observer = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      console.log('user', user);
       console.log('existe usuario activo');
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      // ...
     } else {
       console.log('no exite usuario activo');
-      // User is signed out
-      // ...
     }
   });
 };
 
 // Funcion que guarda el post en firebase
-export const addCollectionPost = (content, pseudonym, emailuser) => {
+export const addCollectionPost = (content, pseudonym, emailuser, img) => {
   db.collection('post').add({
     // agregando los Key que tendra la coleccion post
     postContent: content,
     userName: pseudonym,
     email: emailuser,
     like: [],
-    // image: img,
+    image: img,
   })
     .then((docRef) => {
       alert('publicado');
@@ -109,10 +84,8 @@ export const editPostFb = (id, addEdit) => {
     postContent: addEdit,
   })
     .then(() => {
-      console.log('Document successfully updated!');
     })
     .catch((error) => {
-      // The document probably doesn't exist.
       console.error('Error updating document: ', error);
     });
 };
@@ -120,19 +93,17 @@ export const editPostFb = (id, addEdit) => {
 // Eliminar post en firebase
 export const deletePostFb = (id) => {
   db.collection('post').doc(id).delete().then(() => {
-    console.log('Document successfully deleted!');
   })
     .catch((error) => {
-      console.error('Error removing document: ', error);
     });
 };
 
-//cerrar sesion
-export const singOff =() =>{
-  firebase.auth().signOut().then(function() {
-  }).catch(function(error) {
+// cerrar sesion
+export const singOff = () => {
+  firebase.auth().signOut().then(() => {
+  }).catch((error) => {
   });
-}
+};
 
 // Agregar el like al post
 export const likePostFb = (id, email) => {
@@ -141,28 +112,22 @@ export const likePostFb = (id, email) => {
       const post = query.data();
       if (post.like == null || post.like == '') {
         post.like = [];
-        console.log('entro al like vacio');
       }
       if (post.like.includes(email)) {
         for (let i = 0; i < post.like.length; i++) {
           if (post.like[i] === email) { // verifica si ya el usuario está en el array
             post.like.splice(i, 1); // sentencia para eliminar un elemento de un array
-            console.log(2, 'splice DISLIKE');
             db.collection('post').doc(id).update({ // para actualizar el array
               like: post.like,
             });
-            console.log('luego del dislike', post.like);
           }
         }
       } else {
         post.like.push(email); // incluyeme este usuario en este array
-        console.log('push');
         db.collection('post').doc(id).update({
           like: post.like,
         });
-        console.log('like push', post.like);
       }
-      likeCounter(post.like.length);
     })
     .catch((error) => {
       console.error('Error like: ', error);

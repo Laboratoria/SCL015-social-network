@@ -22,38 +22,55 @@ export const templatePost = (containerRoot) => {
     <section class="post">
       <p class="new-post">Nueva Publicación</p>
       <form id="formPost" method="post">
-        <textarea id="postArea" class="post-area" placeholder="¿En que estas pensando?" cols="30" rows="10" required></textarea>
+      <div id="post-content">
+      <textarea id="postArea" class="post-area-template" placeholder="¿En que estas pensando?" cols="30" rows="10" required></textarea>
+      <div id="list">
+      </div>
+        </div>
+        <input type="file" id="myfile" name="myfile" accept="image/png, .jpeg, .jpg, image/gif" required />
         <div class="post-form-btn">
           <button class="btn-post" id="btnCancel">Cancelar</button>
           <button class="btn-post" type="submit" id="btnPost">Publicar</button>
         </div>
       </form>
-      
     </section>
         `;
-        
-        //-----compartir imagenes----...
-//<input type="file" id="myfile" name="myfile" accept="image/png, .jpeg, .jpg, image/gif" />
-
-       
-
   divNewPost.innerHTML = viewPost;
-  
- //local storage
-  divNewPost.querySelector('#nameLocal').innerHTML = "Hola " + localStorage.getItem('fullNameStorage');
+
+  // local storage
+  divNewPost.querySelector('#nameLocal').innerHTML = `Hola ${localStorage.getItem('fullNameStorage')}`;
 
   const buttonPost = divNewPost.querySelector('#formPost'); // Llamando al boton publicar
+  const list = divNewPost.querySelector('#list');
+  const image = divNewPost.querySelector('input[type=file]');
+  let imgb64;
+
+  image.onchange = () => {
+    const file = image.files[0];
+    const reader = new FileReader();
+    list.innerHTML = '';
+    // Recibira el valor Base64 cada vez que un usuario seleccione un archivo de su dispositivo
+    reader.onloadend = () => { // El evento loadend es emitido cuando el progreso de la carga de un recurso se ha detenido
+      // Dado que contiene el URI de datos debemos eliminar el prefijo y mantener solo la cadena Base64
+      // b64 = reader.result.replace(/^data:.+;base64,/, '');
+      imgb64 = reader.result;
+      list.innerHTML += `
+      <img src="${imgb64}" class="file-post">
+      `;
+    };
+    reader.readAsDataURL(file);
+  };
+
   buttonPost.addEventListener('submit', (e) => {
     e.preventDefault();
     const formPost = document.querySelector('#postArea').value; // Contenido del textarea
-    // const image = document.querySelector('#myfile').value;
-    addCollectionPost(formPost, displayNameData, emailData); //  Agrega el post a firebase
+    addCollectionPost(formPost, displayNameData, emailData, imgb64); //  Agrega el post a firebase
     window.history.back();
   });
 
-  const buttonCancel = divNewPost.querySelector('#btnCancel'); // Llamando al boton publicar
+  const buttonCancel = divNewPost.querySelector('#btnCancel'); // Llamando al boton cancelar
   buttonCancel.addEventListener('click', () => {
-    window.history.back();
+    window.history.back(); // se va una pagina atras (muro)
   });
 
   containerRoot.appendChild(divNewPost);
