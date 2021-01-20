@@ -4,16 +4,19 @@
 ## Índice
 
 * [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#2-Definición-del-Proyecto)
-* [3. Objetivos de aprendizaje](#3-Historias-de-Usuarios)
-* [4. Consideraciones generales](#4-Prototipo-de-baja-fidelidad)
-* [5. Criterios de aceptación mínimos del proyecto](#5-Prototipo-de-alta-fidelidad.)
-* [6. Hacker edition](#6-Testeo-de-Usabilidad)
-* [7. Entrega](#7-Autores)
+* [2. Definición del Proyecto](#2-Definición-del-Proyecto)
+* [3. Historias de Usuarios](#3-Historias-de-Usuarios)
+* [4. Prototipo de baja fidelidad](#4-Prototipo-de-baja-fidelidad)
+* [5. Prototipo de alta fidelidad](#5-Prototipo-de-alta-fidelidad)
+* [6. Testeo de Usabilidad](#6-Testeo-de-Usabilidad)
+* [7. Autores](#7-Autores)
 
 ## 1. Preámbulo
 
 Social veg es una red social para vegetarianos en donde  podrás intercambiar y compartir  información, imágenes, recetas, recomendaciones de restaurantes y experiencias personales relacionadas al estilo de vida veg.
+
+![Pagina Inicial](src/data/image/web1.png)
+![Pagina Inicial](src/imagenes/web2.jpg)
 
 ## 2. Definición del Proyecto
 
@@ -122,8 +125,8 @@ CRITERIOS DE ACEPTACIÓN
 - Llevar un conteo de los likes.
 
 ## 4. Prototipo de baja fidelidad.
-![Prototipo papel](src/image/prototipo1.jpeg)
-![Prototipo papel](src/image/prototipo2.jpg)
+![Prototipo papel](src/imagenes/prototipo1.jpeg)
+![Prototipo papel](src/imagenes/prototipo2.jpg)
 
 ## 5. Prototipo de alta fidelidad.
 
@@ -147,6 +150,3 @@ CRITERIOS DE ACEPTACIÓN
 
 [link del proyecto Social Veg]()
 
-
-![Pagina Inicial](src/data/image/pantallainicial.png)
-![Pagina Inicial](src/data/image/pagina2.png)
