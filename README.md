@@ -15,8 +15,10 @@
 
 Social veg es una red social para vegetarianos en donde  podrás intercambiar y compartir  información, imágenes, recetas, recomendaciones de restaurantes y experiencias personales relacionadas al estilo de vida veg.
 
-![Pagina Inicial](src/data/image/web1.png)
-![Pagina Inicial](src/imagenes/web2.jpg)
+![](src/imagenes/web2.png)
+
+![](src/imagenes/web1.png)
+
 
 ## 2. Definición del Proyecto
 
@@ -126,7 +128,7 @@ CRITERIOS DE ACEPTACIÓN
 
 ## 4. Prototipo de baja fidelidad.
 ![Prototipo papel](src/imagenes/prototipo1.jpeg)
-![Prototipo papel](src/imagenes/prototipo2.jpg)
+![Prototipo papel](src/imagenes/prototipo2.jpeg)
 
 ## 5. Prototipo de alta fidelidad.
 
@@ -148,5 +150,5 @@ CRITERIOS DE ACEPTACIÓN
 * Luzciel Montesinos
 * Erika Arango 
 
-[link del proyecto Social Veg]()
+[link del proyecto Social Veg](https://social-veg.web.app/)
 
