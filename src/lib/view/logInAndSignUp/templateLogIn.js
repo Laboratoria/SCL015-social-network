@@ -6,7 +6,7 @@ export const templateLogIn = () => {
   const viewLogIn = `
       <div class="container">
       <a href="#/muro"> 
-       <img src="imagenes/logoOK.png" alt="logoVeg" id="logo">    
+       <img src="https://i.imgur.com/kYsQAKx.png" alt="logoVeg" id="logo">    
       </a>
       <h2 class="welcome-veg"> ¡La mejor red social para vegetarianos!</h2>
       <div class="buttons" id="buttons">       

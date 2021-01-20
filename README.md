@@ -126,7 +126,7 @@ CRITERIOS DE ACEPTACIÓN
 
 ## 4. Prototipo de baja fidelidad.
 ![Prototipo papel](src/imagenes/prototipo1.jpeg)
-![Prototipo papel](src/imagenes/prototipo2.jpg)
+![Prototipo papel](src/imagenes/prototipo2.jpeg)
 
 ## 5. Prototipo de alta fidelidad.
 
