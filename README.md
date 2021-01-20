@@ -4,13 +4,12 @@
 ## Índice
 
 * [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#-2Definición-del-Proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones generales](#4-consideraciones-generales)
-* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
-* [6. Hacker edition](#6-hacker-edition)
-* [7. Entrega](#7-entrega)
-* [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
+* [2. Resumen del proyecto](#2-Definición-del-Proyecto)
+* [3. Objetivos de aprendizaje](#3-Historias-de-Usuarios)
+* [4. Consideraciones generales](#4-Prototipo-de-baja-fidelidad)
+* [5. Criterios de aceptación mínimos del proyecto](#5-Prototipo-de-alta-fidelidad.)
+* [6. Hacker edition](#6-Testeo-de-Usabilidad)
+* [7. Entrega](#7-Autores)
 
 ## 1. Preámbulo
 
@@ -34,7 +33,7 @@ Esta plataforma pretende crear una comunidad de vegetarianos en donde los usuari
 Cabe destacar que este sitio web “Social Veg” fue implementado utilizando las tecnologías: HTML5, CSS3, JS ECMA6 y la plataforma Firebase de Google. Esta red social le permite a un usuario crear una cuenta de acceso y loguearse con ella, postear en el muro y si lo desea puede editar o borrar sus publicaciones.  Además puede dar “Like” y comentar las publicaciones de otros usuarios.
 
 
-## 3. HISTORIAS DE USUARIO
+## 3. Historias de Usuarios
 
 **PRIMERA HISTORIA:**
 
@@ -123,16 +122,16 @@ CRITERIOS DE ACEPTACIÓN
 
 - Llevar un conteo de los likes.
 
-## 4. PROTOTIPO DE BAJA FIDELIDAD
+## 4. Prototipo de baja fidelidad.
 ![Prototipo papel](src/data/image/prototipo1.jpeg)
 ![Prototipo papel](src/data/image/prototipo2.jpg)
 
-## 5. PROTOTIPO DE ALTA FIDELIDAD
+## 5. Prototipo de alta fidelidad.
 
 
 [link a figma](https://www.figma.com/file/xJuDtxQNQle9gdX8gSa2sU/Social-Veg-Colors?node-id=0%3A1)
 
-## TESTEO DE USABILIDAD
+## 6. Testeo de Usabilidad.
 
 [USUARIO 1](https://www.loom.com/share/f1d3b6ef531449ecb11128e5cf9eb857)
 
