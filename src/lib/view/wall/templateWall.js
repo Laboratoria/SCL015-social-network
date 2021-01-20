@@ -179,7 +179,7 @@ export const templateWall = (containerRoot) => {
       const editbutton = document.getElementById(`btnPostEdit-${doc.id}`); // boton que publica la edicion
       const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
 
-      const spanModalCloseEdit = document.getElementById(`close-${doc.id}`); // X que cierra el modal
+      const spanModalCloseEdit = document.getElementById(`close-${doc.id}`); // (x) que cierra el modal
       const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
       const openDelete = document.getElementById(`openDelete-${doc.id}`);// boton borrar
 

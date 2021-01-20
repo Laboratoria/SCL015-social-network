@@ -1,323 +1,154 @@
-# Creando una Red Social
+# Social Veg 
+
 
 ## Índice
 
 * [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones generales](#4-consideraciones-generales)
-* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
-* [6. Hacker edition](#6-hacker-edition)
-* [7. Entrega](#7-entrega)
-* [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
+* [2. Definición del Proyecto](#2-Definición-del-Proyecto)
+* [3. Historias de Usuarios](#3-Historias-de-Usuarios)
+* [4. Prototipo de baja fidelidad](#4-Prototipo-de-baja-fidelidad)
+* [5. Prototipo de alta fidelidad](#5-Prototipo-de-alta-fidelidad)
+* [6. Testeo de Usabilidad](#6-Testeo-de-Usabilidad)
+* [7. Autores](#7-Autores)
 
 ## 1. Preámbulo
 
-Instagram, Snapchat, Twitter, Facebook, Twitch, Linkedin, etc. Las redes
-sociales han invadido nuestras vidas. Las amamos u odiamos, y muchos no podemos
-vivir sin ellas.
+Social veg es una red social para vegetarianos en donde  podrás intercambiar y compartir  información, imágenes, recetas, recomendaciones de restaurantes y experiencias personales relacionadas al estilo de vida veg.
 
-Hay redes sociales de todo tipo y para todo tipo de intereses. Por ejemplo,
-en una ronda de financiamiento con inversionistas, se presentó una red social
-para químicos en la que los usuarios podían publicar artículos sobre sus
-investigaciones, comentar en los artículos de sus colegas, y filtrar artículos
-de acuerdo a determinadas etiquetas o su popularidad, lo más reciente, o lo
-más comentado.
+![](src/imagenes/web2.png)
 
-## 2. Resumen del proyecto
+![](src/imagenes/web1.png)
 
-En este proyecto construirás una Red Social sobre lo que decidan tú y tu equipo.
-Podría ser, por ejemplo, sobre alimentación saludable, feminismo, educación,
-salud, energías renovables, amantes de las [Empanadas](https://es.wikipedia.org/wiki/Empanada)
-o de los [Tacos de Canasta](https://es.wikipedia.org/wiki/Taco), de la
-[Feijoada](https://es.wikipedia.org/wiki/Feijoada), o de lo que sea.
 
-Tu Red Social tendrá que permitir a cualquier usuario crear una cuenta de
-acceso y loguearse con ella; crear, editar, borrar y _"likear"_ publicacciones.
+## 2. Definición del Proyecto
 
-## 3. Objetivos de aprendizaje
+### 2.1 Perfil de Usuario
 
-El objetivo principal de aprendizaje de este proyecto es construir una
-[Single-page Application (SPA)](https://es.wikipedia.org/wiki/Single-page_application)
-[_responsive_](https://github.com/Laboratoria/curricula-js/tree/master/topics/css/02-responsive)
- (con más de una vista / página) en la que podamos **leer y escribir datos.**
+Esta red social está enfocada en vegetarianos o personas que están iniciandose en este estilo de vida.
 
-### HTML y CSS
+### 2.2 Definición del problema
 
-* [ ] [Uso de HTML semántico.](https://developer.mozilla.org/en-US/docs/Glossary/Semantics#Semantics_in_HTML)
-* [ ] Uso de selectores de CSS.
-* [ ] Construir tu aplicación respetando el diseño realizado (maquetación).
-* [ ] [Uso de flexbox en CSS.](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+En el proceso investigativo previo a la creación de esta red social descubrimos que nuestros usuarios presentaban dificultades al relacionarse en un entorno No vegetariano tanto por el cuestionamiento que les hacían sus amigos y familiares por su forma de alimentarse, como por los desafíos que se les presentaban a nivel de salud, insumos y recetas.
 
-### DOM y Web APIs
+### 2.3 Solución del problema
 
-* [ ] Uso de selectores del DOM.
-* [ ] Manejo de eventos del DOM.
-* [ ] [Manipulación dinámica del DOM.](https://developer.mozilla.org/es/docs/Referencia_DOM_de_Gecko/Introducci%C3%B3n)
-(appendChild |createElement | createTextNode| innerHTML | textContent | etc.)
-* [ ] [History API.](https://developer.mozilla.org/es/docs/DOM/Manipulando_el_historial_del_navegador)
-* [ ] [localStorage.](https://developer.mozilla.org/es/docs/Web/API/Window/localStorage)
+Esta plataforma pretende crear una comunidad de vegetarianos en donde los usuarios puedan compartir noticias, tips, recetas, imágenes, recomendaciones de restaurantes y experiencias personales sobre el estilo de vida Veg.
 
-### JavaScript
+Cabe destacar que este sitio web “Social Veg” fue implementado utilizando las tecnologías: HTML5, CSS3, JS ECMA6 y la plataforma Firebase de Google. Esta red social le permite a un usuario crear una cuenta de acceso y loguearse con ella, postear en el muro y si lo desea puede editar o borrar sus publicaciones.  Además puede dar “Like” y comentar las publicaciones de otros usuarios.
 
-* [ ] Uso de condicionales (if-else | switch | operador ternario)
-* [ ] Uso de funciones (parámetros | argumentos | valor de retorno)
-* [ ] Manipular arrays (filter | map | sort | reduce)
-* [ ] Manipular objects (key | value)
-* [ ] Uso ES modules ([`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
-| [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export))
-* [ ] Diferenciar entre expression y statements.
-* [ ] Diferenciar entre tipos de datos atómicos y estructurados.
-* [ ] [Uso de callbacks.](https://developer.mozilla.org/es/docs/Glossary/Callback_function)
-* [ ] [Consumo de Promesas.](https://scotch.io/tutorials/javascript-promises-for-dummies#toc-consuming-promises)
 
-### Testing
+## 3. Historias de Usuarios
 
-* [ ] [Testeo unitario.](https://jestjs.io/docs/es-ES/getting-started)
-* [ ] [Testeo asíncrono.](https://jestjs.io/docs/es-ES/asynchronous)
-* [ ] [Uso de librerias de Mock.](https://jestjs.io/docs/es-ES/manual-mocks)
+**PRIMERA HISTORIA:**
 
-### Estructura del código y guía de estilo
+Yo como: Usuario.
 
-* [ ] Organizar y dividir el código en módulos (Modularización)
-* [ ] Uso de identificadores descriptivos (Nomenclatura | Semántica)
-* [ ] Uso de linter (ESLINT)
+Quiero: registrarme de manera facil y rapida.
 
-### Git y Github
+Para: formar parte de la red "Social Veg".
 
-* [ ] Uso de comandos de git (add | commit | pull | status | push)
-* [ ] Manejo de repositorios de GitHub (clone | fork | gh-pages)
-* [ ] Colaboración en Github (branches | pull requests | |tags)
-* [ ] Organización en Github (projects | issues | labels | milestones)
 
-### Firebase
+CRITERIOS DE ACEPTACIÓN
 
-* [ ] [Firestore.](https://firebase.google.com/docs/firestore)
-* [ ] [Firebase Auth.](https://firebase.google.com/docs/auth/web/start)
-* [ ] [Firebase security rules.](https://firebase.google.com/docs/rules)
-* [ ] Observadores. ([onAuthStateChanged](https://firebase.google.com/docs/auth/web/manage-users?hl=es#get_the_currently_signed-in_user)
- | [onSnapshot](https://firebase.google.com/docs/firestore/query-data/listen#listen_to_multiple_documents_in_a_collection))
-
-### UX
-
-* [ ] Diseñar la aplicación pensando y entendiendo al usuario.
-* [ ] Crear prototipos para obtener feedback e iterar.
-* [ ] Aplicar los principios de diseño visual (contraste, alineación, jerarquía)
-* [ ] Planear y ejecutar tests de usabilidad.
-
-## 4. Consideraciones generales
-
-* Este proyecto se debe resolver preferentemente en equipos de tres.
-
-* La lógica del proyecto debe estar implementada completamente en JavaScript
-  (ES6+), HTML y CSS :smiley:. Para este proyecto **no está permitido** utilizar
-  _frameworks_ o librerías de CSS y JS.
-
-* La división y organización del trabajo debe permitir, sin excepciones, que
-  **cada integrante** del equipo practique el aprendizaje de todo lo involucrado
-  en **cada historia**. _No se dividan el trabajo como en una fábrica._
-  - ¿Hasta acá has avanzado en tus proyectos con cierta fluidez y sin mayores
-    problemas? Sé generosa con tus compañeras, permíteles aprender y practicar
-    sin restricciones, aunque tome un poco más de tiempo. Aproveha de
-    _coachearlas_, de hacer _pair programming_, una de las mejores maneras de
-    aprender es explicando verbalmente.
-
-  - ¿Se te está haciendo difícil y te cuesta un poco más avanzar? No te quedes
-    con las partes "fáciles" del proyecto, conversa, negocia, exige tu oportunidad
-    para practicar y aprender lo que se te hace más difícil.
-
-* Solamente pueden trabajar en una única historia por vez, no pueden avanzar a
-  la siguiente sin haber completado la anterior. La historia se completa cuando
-  se cumplen **todos** sus Criterios de Aceptación + **toda** su Definición
-  de Terminado.
-
-Para comenzar tendrás que hacer un _fork_ y _clonar_ este repositorio.
-
-## 5. Criterios de aceptación mínimos del proyecto
-
-### 5.1 Boilerplate
-
-Este proyecto no incluye un _boilerplate_, así es que tendrás que definir la
-estructura de carpetas y escribir tus propias Pruebas Unitarias (_tests_). Para
-hacerlo, puedes guiarte de los proyectos anteriores.
-
-### 5.2 Definición del producto
-
-En el `README.md` cuéntanos brevemente cómo descubriste las necesidades de los
-usuarios y cómo llegaste a la definición final de tu producto. Es importante
-que detalles:
-
-* Quiénes son los principales usuarios de producto.
-* Qué problema resuelve el producto / para qué le servirá a estos usuarios.
-
-### 5.3 Historias de usuario
-
-Una vez que entiendas las necesidades de tus usuarixs, escribe las Historias de
-Usuario que representen todo lo que necesitan hacer/ver en la Red Social. Cada
-una de tus Historias de Usuario debe tener:
-
-* **Criterios de Aceptación:** todo lo que debe ocurrir para satisfacer las
-  necesidades del usuario.
-
-* **Definición de terminado:** todos los aspectos técnicos que deben cumplirse
-  para que, como equipo, sepan que esa historia está terminada y lista
-  para publicarse. **Todas** tus Historias de Usuario (salvo excepciones), deben
-  incluir estos aspectos en su Definición de Terminado (más todo lo que
-  necesiten agregar):
-
-  - Debe ser una SPA.
-  - Debe ser _responsive_.
-  - Deben haber recibido _code review_ de al menos una compañera de otro equipo.
-  - Hicieron los _test_ unitarios
-  - Testearon manualmente buscando errores e imperfecciones simples.
-  - Hicieron _pruebas_ de usabilidad e incorporaron el _feedback_ de los
-    usuarios como mejoras.
-  - Desplegaron su aplicación y etiquetaron la versión (git tag).
-
-### 5.4 Diseño de la Interfaz de Usuario (prototipo de baja fidelidad)
-
-Debes definir cuál será el flujo que seguirá el usuario dentro de tu aplicación
-y, con eso, diseña la Interfaz de Usuario (UI por sus siglas en inglés) que
-siga este flujo.
-
-### 5.5 Responsive
-
-Debe verse bien en dispositivos de pantallas grandes
-(computadoras/es, laptops, etc.) y pequeñas (_tablets_, celulares, etc.). Te
-sugerimos seguir la técnica de _`mobile first`_ (más detalles sobre esta técnica
-al final).
-
-### 5.6 Consideraciones del comportamiento de la interfaz de usuario (UI)
-
-Estas consideraciones te ayudarán a escribir las Definiciones de Terminado de
-tus H.U.:
-
-#### Creación de cuenta de usuario e inicio de sesión
-
-* _Login_ con Firebase:
-  - Para el _login_ y las publicaciones en el muro puedes utilizar [Firebase](https://firebase.google.com/products/database/)
-  - Creación de cuenta de acceso y autenticación con cuenta de correo y
-    contraseña, y también con una cuenta de Google.
-* Validaciones:
-  - Solamente se permite el acceso a usuarios con cuentas válidas.
+* El usuario puede visualizar el formulario de registro.
+* El usuario puede hacer click sobre el botón ingresar con google( de esta manera se registran sus datos automáticamente).
+* En caso de no ingresar con google:
+  - El usuario puede ingresar en un input su nombre completo.
+  - El input nombre completo no debe contener caracteres numéricos.
+  - El usuario puede ingresar en un input su username o nombre de usuario.
+  - El usuario puede ingresar en un input su correo electronico.
+  - El correo debe contener en sus caracteres “@” y  “.com”.
+  - El usuario puede ingresar su contraseña. Este input debe ser secreto.
+  - La contraseña debe ser de mínimo 6 caracteres. Y ser alfanumérico.
   - No pueden haber usuarios repetidos.
-  - La cuenta de usuario debe ser un correo electrónico válido.
-  - Lo que se escriba en el campo (_input_) de contraseña debe ser secreto.
-* Comportamiento:
-  - Al enviarse el formulario de registro o inicio de sesión, debe validarse.
-  - Si hay errores, se deben mostrar mensajes descriptivos para ayudar al
-  usuario a corregirlos.
+  - Todos los input son obligatorios y deben contener al menos 1 carácter.
+  - El usuario puede hacer click en el botón “registrarme”.Se debe validar que los input estén correctos.
+  - En caso que falte un input por llenar o no se cumpla alguno de los criterios anteriores saldrá un mensaje indicando cual es el error.( a) dejo vacío el nombre B) dejo vacio el user name C) menos de 6 caracteres en la contraseña D) no es alfanumérica la contraseña Del correo no cumple con el @ 
+  - Se le enviará un correo al usuario para que valide su cuenta.
+  - El correo debe decir: Bienvenido (a) a Social Veg.
+  - El usuario podrá visualizar la opción: “¿Ya tienes cuenta? Ingresa aquí” para redireccionarlo a la página de iniciar sesión 
 
-#### Muro/timeline
+**SEGUNDA HISTORIA:**
 
-* Validaciones:
-  - Al publicar, se debe validar que exista contenido en el _input_.
-* Comportamiento:
-  - Al recargar la aplicación, se debe verificar si el usuario está _logueado_
-    antes de mostrar contenido.
-  - Poder publicar un _post_.
-  - Poder dar y quitar _like_ a una publicación. Máximo uno por usuario.
-  - Llevar un conteo de los _likes_.
-  - Poder eliminar un post específico.
-  - Pedir confirmación antes de eliminar un _post_.
-  - Al dar _click_ para editar un _post_, debe cambiar el texto por un _input_
-    que permita editar el texto y luego guardar los cambios.
-  - Al guardar los cambios debe cambiar de vuelta a un texto normal pero con la
-    información editada.
-  - Al recargar la página debo de poder ver los textos editados.
+Yo como: Usuario vegetariano.
 
-### 5.7 Consideraciones técnicas Front-end
+Quiero: loguearme de manera facil y rapida.
 
-* Separar la manipulación del DOM de la lógica (Separación de responsabilidades).
-* Contar con múltiples vistas. Para esto, tu aplicación debe ser una
- [Single Page Application (SPA)](https://es.wikipedia.org/wiki/Single-page_application)
-* Alterar y persistir datos. Los datos que agregues o modifiques deberán
-  persistir a lo largo de la aplicación. Te recomendamos que uses
-  [Firebase](https://firebase.google.com/) para eso también.
+Para: ingresar a la página ( social Veg).
 
-#### Pruebas unitarias (unit tests)
+CRITERIOS DE ACEPTACIÓN
 
-* Recuerda que no hay un _setup_ de **tests** definido, dependerá de
-  la estructura de tu proyecto. Algo que no debes de olvidar es pensar en éstas
-  pruebas, te pueden ayudar a definir la estructura y nomenclatura de tu lógica.
+* El usuario podrá visualizar el formulario de iniciar sesión.
+* El usuario puede hacer click sobre el botón ingresar con google ingresando de manera automática al muro de social veg.
+* El usuario puede ingresar en un input el correo electrónico con el cual se registró.
+* El usuario puede ingresar su contraseña. Este input debe ser secreto.
+*  El usuario puede hacer click en el botón “ingresar”
+Se debe validar que los input estén correctos y si es así redireccionarlo al muro de la página
+* En caso que falte un input por llenar o no se cumpla alguno de los criterios anteriores saldrá un mensaje indicando “Tu Contraseña es incorrecta”, "Aun no estas registrado" o "El correo ingresado no cumple con el formato del email".
+* Si el usuario no ha verificado su usuario en el correo de verificacion se le informara por medio de un Alert "Por favor confirma tu usuario en el link de verificacion enviado a tu correo"
+* El usuario podrá visualizar la opción: “¿No tienes cuenta? Regístrate aquí” para redireccionarlo a la página de registro
 
-* Los tests unitarios deben cubrir un mínimo del 70% de _statements_, _functions_,
-  _lines_, y _branches_.
+**TERCERA HISTORIA:**
 
-### 5.8 Consideraciones técnicas UX
+Yo como: usuario vegetariano.
 
-* Hacer al menos 2 entrevistas con usuarios.
-* Hacer un  prototipo de baja fidelidad.
-* Asegurarte de que la implementación en código siga los lineamientos del
-  diseño.
-* Hacer sesiones de _testing de usabilidad_ con el producto en HTML.
+Quiero: Publicar y visualizar post. 
 
-## 6. Hacker edition
+Para: intercambiar y compartir información, datos, recomendaciones.
 
-Las secciones llamadas _Hacker Edition_ son **opcionales**. Si **terminaste**
-con todo lo anterior y te queda tiempo, intenta completarlas. Así podrás
-profundizar y/o ejercitar más sobre los objetivos de aprendizaje del proyecto.
+CRITERIOS DE ACEPTACIÓN
 
-* Permite crear posts con imágenes.
-* Permite buscar usuarios, agregar y eliminar "amigos".
-* Permite definir la privacidad de los _posts_ (público o solamente para amigos).
-* Permite ver su muro de cualquier usuario "no-amigo" (solamente los
-  posts _públicos_).
-* Permite comentar o responder una publicación.
-* Permite editar perfil.
+- Poder publicar un post.
+- Que salga el post publicado en el muro junto con el nombre del autor.
+- Que salgan todos los post publicados hasta el momento
+- Poder seleccionar un icono en donde se despliegue la opción de Borrar o editar un post. 
+- Al dar click en borrar debe aparecer un modal con la confirmación antes de borrar un post.
+- El modal debe decir  “¿Estás seguro que quieres eliminar este post?”. Tendrá 2 botones con las opciones “Aceptar” para eliminar el post y la opción “Cancelar” para volver al muro sin borrar el post. 
+- Al dar click en la opcion editar un post, debe cambiar el texto por un input que permite editar el texto y luego guardar los cambios.
+- Debe tener los botones “Publicar” para guardar y publicar el post editado y “Cancelar” para cerrar el modal sin guardar los cambios.
+- Al guardar los cambios debe cambiar de vuelta a un texto normal pero con la información editada.
+- Boton cerrar sesión
+- Se podrá cerrar la session y redirigir al usuario a la pagina del login.
 
-## 7. Entrega
+**CUARTA HISTORIA:**
 
-El proyecto será _entregado_ subiendo tu código a GitHub (`commit`/`push`) y la
-interfaz será desplegada usando GitHub pages u otro servicio de hosting que
-puedas haber encontrado en el camino.
+Yo como: usuario vegetariano.
 
-***
+Quiero:Dar like.
 
-## 8. Pistas, tips y Lecturas complementarias
+Para: Reaccionar a las publicaciones que me gustan.
 
-### Mobile first
+CRITERIOS DE ACEPTACIÓN
 
-El concepto de [_mobile first_](https://www.mediaclick.es/blog/diseno-web-responsive-design-y-la-importancia-del-mobile-first/)
-hace referencia a un proceso de diseño y desarrollo donde partimos de cómo se ve
-y cómo funciona la aplicación en un dispositivo móvil primero, y más adelante se
-ve como adaptar la aplicación a pantallas progresivamente grandes y
-características específicas del entorno desktop. Esto es en contraposición al
-modelo tradicional, donde primero se diseñaban los websites (o webapps) para
-desktop y después se trataba de _arrugar_ el diseño para que entre en pantallas
-más chicas. La clave acá es asegurarse de que desde el principio diseñan usando
-la vista _responsive_ de las herramientas de desarrollador (developer tools) del
-navegador. De esa forma, partimos de cómo se ve y comporta la aplicación en una
-pantalla y entorno móvil.
+- Hacer click sobre una imagen de un corazón para dar Like a una publicación.
 
-### Múltiples vistas
+- Poder dar y quitar like a una publicación. Máximo uno por usuario.
 
-En proyectos anteriores nuestras aplicaciones habían estado compuestas de una
-sola _vista_ principal (una sóla _página_). En este proyecto se introduce la
-necesidad de tener que dividir nuestra interfaz en varias _vistas_ o _páginas_
-y ofrecer una manera de navegar entre estas vistas. Este problema se puede
-afrontar de muchas maneras: con archivos HTML independientes (cada uno con su
-URL) y links tradicionales, manteniendo estado en memoria y rederizando
-condicionalmente (sin refrescar la página), [manipulando el historial del
-navegador](https://developer.mozilla.org/es/docs/DOM/Manipulando_el_historial_del_navegador)
-con [`window.history`](https://developer.mozilla.org/es/docs/Web/API/Window/history).
-En este proyecto te invitamos a explorar opciones y decidir una opción
-de implementación.
+- Llevar un conteo de los likes.
 
-### Escritura de datos
+## 4. Prototipo de baja fidelidad.
+![Prototipo papel](src/imagenes/prototipo1.jpeg)
+![Prototipo papel](src/imagenes/prototipo2.jpeg)
 
-En los proyectos anteriores hemos consumido (leído) datos, pero todavía no
-habíamos escrito datos (salvar cambios, crear datos, borrar, ...). En este
-proyecto tendrás que crear (salvar) nuevos datos, así como leer, actualizar y
-modificar datos existentes. Estos datos se podrán guardar de forma remota
-usando [Firebase](https://firebase.google.com/).
+## 5. Prototipo de alta fidelidad.
 
-Otras:
 
-* [Modulos: Export](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/export)
-* [Modulos: Import](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/import)
-* [Diseño web, responsive design y la importancia del mobile first - Media Click](https://www.mediaclick.es/blog/diseno-web-responsive-design-y-la-importancia-del-mobile-first/)
-* [Mobile First: el enfoque actual del diseño web móvil - 1and1](https://www.1and1.es/digitalguide/paginas-web/diseno-web/mobile-first-la-nueva-tendencia-del-diseno-web/)
-* [Mobile First - desarrolloweb.com](https://desarrolloweb.com/articulos/mobile-first-responsive.html)
-* [Mobile First - ZURB](https://zurb.com/word/mobile-first)
-* [Mobile First Is NOT Mobile Only - Nielsen Norman Group](https://www.nngroup.com/articles/mobile-first-not-mobile-only/)
+[link a figma](https://www.figma.com/file/xJuDtxQNQle9gdX8gSa2sU/Social-Veg-Colors?node-id=0%3A1)
+
+## 6. Testeo de Usabilidad.
+
+[USUARIO 1](https://www.loom.com/share/f1d3b6ef531449ecb11128e5cf9eb857)
+
+[USUARIO 2]()
+
+[USUARIO 3]()
+
+[USUARIO 4]()
+
+
+## 7. Autores
+* Luzciel Montesinos
+* Erika Arango 
+
+[link del proyecto Social Veg](https://social-veg.web.app/)
+

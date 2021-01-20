@@ -116,17 +116,6 @@ export const addCollectionPost = (content, pseudonym, emailuser, img) => {
     });
 };
 
-export const profileFb = (emailUser) => {
-  db.collection('profile').where('email', '==', emailUser).get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, ' => ', doc.data());
-        const userName = doc.data().userName;// userName del usuario luzcielm@gmail.com
-        console.log(userName);
-      });
-    });
-};
-
 // Editar el post en firebase
 export const editPostFb = (id, addEdit) => {
   const PostRef = db.collection('post').doc(id);
