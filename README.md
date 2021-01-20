@@ -4,7 +4,7 @@
 ## Índice
 
 * [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#2-resumen-del-proyecto)
+* [2. Resumen del proyecto](#-2Definición-del-Proyecto)
 * [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
 * [4. Consideraciones generales](#4-consideraciones-generales)
 * [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
@@ -66,6 +66,7 @@ CRITERIOS DE ACEPTACIÓN
   - El usuario podrá visualizar la opción: “¿Ya tienes cuenta? Ingresa aquí” para redireccionarlo a la página de iniciar sesión 
 
 **SEGUNDA HISTORIA:**
+
 Yo como: Usuario vegetariano.
 
 Quiero: loguearme de manera facil y rapida.
@@ -106,14 +107,30 @@ CRITERIOS DE ACEPTACIÓN
 - Boton cerrar sesión
 - Se podrá cerrar la session y redirigir al usuario a la pagina del login.
 
+**CUARTA HISTORIA:**
+
+Yo como: usuario vegetariano.
+
+Quiero:Dar like.
+
+Para: Reaccionar a las publicaciones que me gustan.
+
+CRITERIOS DE ACEPTACIÓN
+
+- Hacer click sobre una imagen de un corazón para dar Like a una publicación.
+
+- Poder dar y quitar like a una publicación. Máximo uno por usuario.
+
+- Llevar un conteo de los likes.
+
 ## 4. PROTOTIPO DE BAJA FIDELIDAD
-![Prototipo papel](src/data/image/)
-![Prototipo papel](src/data/image/.jpg)
+![Prototipo papel](src/data/image/prototipo1.jpeg)
+![Prototipo papel](src/data/image/prototipo2.jpg)
 
 ## 5. PROTOTIPO DE ALTA FIDELIDAD
 
 
-[link a figma](https://www.figma.com/file/zArEEulrZsJCpNGvHHilrT/PokeDatos?node-id=141%3A0)
+[link a figma](https://www.figma.com/file/xJuDtxQNQle9gdX8gSa2sU/Social-Veg-Colors?node-id=0%3A1)
 
 ## TESTEO DE USABILIDAD
 
