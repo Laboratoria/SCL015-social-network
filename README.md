@@ -25,7 +25,6 @@ Esta red social está enfocada en vegetarianos o personas que están iniciandose
 
 En el proceso investigativo previo a la creación de esta red social descubrimos que nuestros usuarios presentaban dificultades al relacionarse en un entorno No vegetariano tanto por el cuestionamiento que les hacían sus amigos y familiares por su forma de alimentarse, como por los desafíos que se les presentaban a nivel de salud, insumos y recetas.
 
-
 ### 2.3 Solución del problema
 
 Esta plataforma pretende crear una comunidad de vegetarianos en donde los usuarios puedan compartir noticias, tips, recetas, imágenes, recomendaciones de restaurantes y experiencias personales sobre el estilo de vida Veg.
@@ -123,8 +122,8 @@ CRITERIOS DE ACEPTACIÓN
 - Llevar un conteo de los likes.
 
 ## 4. Prototipo de baja fidelidad.
-![Prototipo papel](src/data/image/prototipo1.jpeg)
-![Prototipo papel](src/data/image/prototipo2.jpg)
+![Prototipo papel](src/image/prototipo1.jpeg)
+![Prototipo papel](src/image/prototipo2.jpg)
 
 ## 5. Prototipo de alta fidelidad.
 
@@ -142,9 +141,12 @@ CRITERIOS DE ACEPTACIÓN
 [USUARIO 4]()
 
 
-
 ## 7. Autores
 * Luzciel Montesinos
 * Erika Arango 
 
 [link del proyecto Social Veg]()
+
+
+![Pagina Inicial](src/data/image/pantallainicial.png)
+![Pagina Inicial](src/data/image/pagina2.png)
