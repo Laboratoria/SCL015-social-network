@@ -8,7 +8,7 @@ section {
 p {
   display: flex;
 }
-.header {
+.header, .header-templatePost {
   background-color: #B2EFA3;
   width: 100%;
   height: 80px;
@@ -48,7 +48,7 @@ p {
   }
 
    /*hover es para que se desplieguen las opciones cuando se posiciona sobre el menu*/
-  .header-menu-profile:hover ul, ul:hover {
+  .header-menu-profile:hover ul {
     display: block;
   }
   .header-menu li {
@@ -79,7 +79,7 @@ p {
   .header-menu-profile p {
     margin: 0px;
     color: rgb(33 33 33 / 83%);
-    font-family: Roboto;
+    /* font-family: Roboto; */
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
@@ -90,9 +90,6 @@ p {
   background: rgba(196, 196, 196, 0.18);
   flex-direction: column;
   align-items: center;
-  flex-direction: column;
-  /* height: 87vh; */
-  
 }
 
 .postDiv{
@@ -103,7 +100,9 @@ p {
   border-radius: 19px;
   width: 500px;
   flex-direction: column;
+  margin-top: 15px;
 }
+
 .post-identifier{
   margin: 5px 0px 5px 19px;
   display: flex;
@@ -149,7 +148,7 @@ p {
   left: 30%;
   top: 48%;
   background-image: url(../../../imagenes/nube\ a\ la\ derecha.png);
-  background-size: 119px;;
+  background-size: 119px;
   background-repeat: no-repeat;
   min-width: 139px;
   height: 74px;
@@ -296,7 +295,6 @@ svg {
 }
 .btn-post-edit, .btn-post-cancelar {
   display: flex;
-  margin: 15px;
   width: 93px;
   height: 35px;
   background: #59AE44;
@@ -305,7 +303,6 @@ svg {
   font-size: 21px;
   line-height: 33px;
   justify-content: center;
-  display: flex;
   margin: 8px;
   border-style: none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgb(0 0 0 / 0%);
@@ -343,7 +340,7 @@ svg {
   background: rgba(196, 196, 196, 0.18);
   flex-direction: column;
   align-items: center;
-  height: 87vh;;
+  height: 87vh;
   width: 100vw;
 }
 
@@ -399,7 +396,6 @@ input[type=file]::-webkit-file-upload-button {
 }
 .btn-post{
   display: flex;
-  margin: 15px;
   width: 126px;
   height: 35px;
   background: #59AE44;
@@ -408,7 +404,6 @@ input[type=file]::-webkit-file-upload-button {
   font-size: 21px;
   line-height: 33px;
   justify-content: center;
-  display: flex;
   margin: 8px;
   border-style: none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgb(0 0 0 / 0%);
@@ -416,4 +411,182 @@ input[type=file]::-webkit-file-upload-button {
 }
 
 
+.commet{
+  height: 44px;
+  width:  30px;
+  margin-left: 342px;
+}
+
+.modal-comments{
+  height: 44px;
+  width:  30px;
+}
+
+
+/* formato responsive para celular  */
+@media screen and (min-width: 320px) and  (max-width: 414){
+  .header-menu {
+    margin-right: 0;
+    justify-content: space-between
+  }
+  
+  .header-menu ul {
+    width: 89px;
+  }
+  .postDiv {
+    width: 314px;
+    margin-top: 15px;
+  }
+
+  .header-menu-profile p {
+    display: none;
+    line-height: 17px;
+  }
+
+  .addPost{
+    margin-right: 40%
+  }
+
+  .dropdown-content {
+    background-image: url(../../../imagenes/nubeIzquierda.svg);
+    left: -85px;
+    height: 86px;
+    background-size: 98px;
+  }
+
+  .modal-post {
+    align-items: center;
+  }
+  
+  .editPost {
+    padding: 15px 12px 8px;
+  }
+
+  /* templePost */
+
+  #headerMenuPost {
+    justify-content: flex-end;
+  }
+
+  
+  .post-area-template {
+    padding: 3%;
+    margin: 0;
+    width: 262px;
+    margin-bottom: 12px
+  }
+
+  #formPost {
+    height: auto;
+    width: auto;
+    align-items: center;
+  }
+  #post-content {
+    flex-direction: column;
+  }
+
+  .file-post {
+    width: 278px;
+  }
+
+  #myfile {
+    margin-left: 0;
+  }
+/* 
+  modal editar */
+  .modal-content {
+    width: 97%;
+    height: 286px;
+  }
+
+  .modal-textarea{
+    width: 262px;
+    padding: 10px;
+  }
+
+  .modal-btn {
+    justify-content: center;
+  }
+
+  /* modal borrar  */
+  .modal-delete {
+    padding-top: 168px;
+
+  }
+  .modal-content-delete {
+    margin: 5px;
+    width: 96%;
+    height: 179px;
+  }
+
+  .modal-name {
+    text-align: center;
+    font-size: 17px;
+  }
+
+  .btn-post {
+    width: 100px;
+  } 
+
+}
+
+/* formato responsive para table hay que colocar max y min */  
+@media screen and (min-width: 415px)  and (max-width: 1024px){
+
+  .header-menu {
+    margin-right: 0;
+  }
+  
+  .addPost {
+    margin-right: 125px
+  }
+
+  /* modal editar */
+  .modal-content {
+    width: 63%;
+    height: 26%;
+  }
+
+  .modal-post {
+    align-items: center;
+  }
+
+  /* modal borrar  */
+  .modal-content-delete {
+    width: 62%;
+    height: 16%;
+  }
+
+/* templePost */
+
+#headerMenuPost {
+  justify-content: flex-end;
+}
+
+
+.post-area-template {
+  padding: 3%;
+  margin: 0;
+  margin-bottom: 12px
+}
+
+#formPost {
+  height: auto;
+  width: auto;
+  align-items: center;
+}
+#post-content {
+  flex-direction: column;
+}
+
+.file-post {
+  width: 354px;
+  height: 235px;
+}
+
+#myfile {
+  margin-left: 0;
+}
+
+}
 

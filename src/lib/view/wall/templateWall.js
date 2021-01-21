@@ -4,6 +4,8 @@ import {
   deletePostFb,
   likePostFb,
   singOff,
+  postComment,
+  getComments,
 } from '../../index.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
@@ -20,7 +22,7 @@ window.onclick = (event) => {
   if (!event.target.matches('.dropbtn')) {
     const dropdowns = document.getElementsByClassName('dropdown-content');
     let i;
-    for (i = 0; i < dropdowns.length; i++) {
+    for (i = 0; i < dropdowns.length; i += 1) {
       const openDropdown = dropdowns[i];
       if (openDropdown.classList.contains('show')) {
         openDropdown.classList.remove('show');
@@ -53,13 +55,13 @@ btnDeletePost.addEventListener('click', () => {
   containerModal.style.display = 'none';
 });
 
-// boton de cancelar en eliminar post
+// boton de cancelar en Borrar post
 const btnCancelPost = document.getElementById('btnCancelPost');
 btnCancelPost.addEventListener('click', () => {
   containerModal.style.display = 'none';
 });
 
-// Cuando se haga click (x), cierra el modal
+// Click (x), cierra el modal borrar
 const spanModalClose = document.getElementsByClassName('close')[0];
 spanModalClose.onclick = () => {
   containerModal.style.display = 'none';
@@ -68,8 +70,8 @@ spanModalClose.onclick = () => {
 // <----------Contenido del Muro--------->
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
-  const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
   const emailData = currentUserData.email; // Email del usuario que accedio
+  const displayNameData = currentUserData.displayName; // Nombre del usuario que accedio
 
   const divWall = document.createElement('section');
   const viewWall = `
@@ -154,7 +156,12 @@ export const templateWall = (containerRoot) => {
           <div class="like">
             ${doc.data().like.includes(emailData) ? heartGreen : heartWhite}
             <p class="number-like">${doc.data().like.length}</p>
-            
+            <div class="commet">
+            <img src="imagenes/comentar.png" alt="comentar" id="imgComment-${doc.id}" class="comentar-Post">
+            </div>
+            </div>
+            <div class="sectionComments">
+            <ul id="sectionComments-${doc.id}"></ul>
             </div>
           </div>
           <section id="modalEdit-${doc.id}" class="modal">
@@ -167,6 +174,20 @@ export const templateWall = (containerRoot) => {
               <div class="modal-btn">
                 <button class="btn-post-cancelar" id="btnCancel${doc.id}">Cancelar</button>
                 <button class="btn-post-edit" id="btnPostEdit-${doc.id}">Publicar</button>
+              </div>
+              </div>
+            </div>
+          </section>  
+          <section id="modalComments-${doc.id}" class="modalC">
+          <div class ="modal-comments">
+              <div class="modal-comments">
+                <span id="closeComment-${doc.id}" class="close">&times;</span>
+              </div>
+              <div class="modal-discuss">
+              <p class= "modal-commentt"><strong>Escribe un comentario publico...</strong></p>
+              <textarea id="discussArea-${doc.id}" class="modal-textarea" cols="30" rows="10"></textarea>
+              <div class="modal-btn">
+                <button class="btn-post-edit" id="btncomment-${doc.id}">Publicar</button>
               </div>
               </div>
             </div>
@@ -184,13 +205,36 @@ export const templateWall = (containerRoot) => {
       const openDelete = document.getElementById(`openDelete-${doc.id}`);// boton borrar
 
       const likeImg = document.getElementById(`heart-${doc.id}`); // corazon para el like
+      const comments = document.getElementById(`imgComment-${doc.id}`)//icono comentar
+      const modalComments = document.getElementById(`modalComments-${doc.id}`)//modal comentar
+      const btncomment = document.getElementById(`btncomment-${doc.id}`);//boton publicar el comentario del post
+      const closeComment = document.getElementById(`closeComment-${doc.id}`); // X que cierra el modal comentar
+      const cajaComentarios = document.getElementById(`sectionComments-${doc.id}`);
+
+      obtenerComentarios(doc.id, cajaComentarios);
 
       likeImg.addEventListener('click', () => { // llama a la funcion like
         likePostFb(doc.id, emailData);
       });
+       
+      modalComments.style.display = 'none';
+      comments.addEventListener('click', () => { // Abre el modal para comentar
+        //console.log('comento');
+        modalComments.style.display = 'block';
+      });
+
+      btncomment.addEventListener('click', () => { 
+        const comentario = document.getElementById(`discussArea-${doc.id}`);
+        console.log(comentario,doc.id);
+        postComment(comentario.value, displayNameData, doc.id);//funcion comentar
+        obtenerComentarios(doc.id, cajaComentarios);
+        comentario.value = '';
+      });
 
       openEdit.addEventListener('click', () => { // Abre el modal para editar
+        console.log('hola comentar');
         modalEdit.style.display = 'block';
+        
       });
 
       editbutton.addEventListener('click', () => { // Edita el post en firebase
@@ -220,11 +264,21 @@ export const templateWall = (containerRoot) => {
       }
     }); // fin del for 2
   }); // fin de la promesa doc
+
+
   containerRoot.appendChild(divWall);
 };// final
+const obtenerComentarios = (idPost, cajaComentarios) => {
+  getComments(idPost).then((array) => {
+    cajaComentarios.innerHTML = '';
+    array.docs.forEach((doc) => {
+      cajaComentarios.innerHTML += `<li class="list-comments">${doc.data().comentario}</li>`
+        console.log(doc.data());
+    });
+  });
+}
 
-
-// document.querySelectorAll('.postDiv button').forEach((element) => {
+//document.querySelectorAll('.postDiv button').forEach((element) => {
 //   element.addEventListener('click', () => {
 //     const postDiv = document.getElementById('postDiv');
 //     const newComment = document.createElement('div');

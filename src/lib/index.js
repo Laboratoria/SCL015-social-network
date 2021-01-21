@@ -1,60 +1,100 @@
 // aqui exportaras las funciones que necesites
-import { cleanForm } from './view/logInAndSignUp/templateSignUp.js';
 import { db } from '../firebaseConfig.js';
+
+const cleanFormSignUp = () => {
+  document.querySelector('#emailSignUp').value = '';
+  document.querySelector('#passwordSignUp').value = '';
+};
+
+// funcion para limpliar los input LogIn
+const cleanFormLogin = () => {
+  document.querySelector('#emailLogin').value = '';
+  document.querySelector('#passwordLogin').value = '';
+};
 
 // login con google
 export const loginGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider).then((result) => {
+  firebase.auth().signInWithPopup(provider).then(() => {
     // Esto le da un token de acceso de Google. Puede usarlo para acceder a la API de Google.
-    // const token = result.credential.accessToken;
-    // La información del usuario que inició sesión.
-    const user = result.user;
-    console.log('user', user);
     window.location.href = '#/muro';
-    // ...
   }).catch((error) => {
-    // Maneja los errores aquí.
     const errorMessage = error.message;
     alert(errorMessage);
-    // ...
   });
 };
 
 // Registro de usuarios
-export const signUpFirebase = (email, password) => {
+export const signUpFirebase = (email, password, userName) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((user) => {
-      user.user.sendEmailVerification();
+    .then(() => {
+      const userSignUp = firebase.auth().currentUser;
+      userSignUp.updateProfile({ // actualiza el perfil del usuario en Firebase
+        displayName: userName,
+      });
+      userSignUp.sendEmailVerification();
       alert('Te hemos enviado un correo para confirmar tu cuenta. *Recuerda revisar tu bandeja de spam o correos no deseado');
       window.location.href = '';
-    // Signed in
-      // signUpForm.reset();
-      // reset() restablece los valores de los elementos en un formulario
     })
     .catch((error) => {
       const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode);
-      console.log(errorMessage);
       if (errorCode === 'auth/email-already-in-use') {
         alert('Este usuario ya existe');
-        cleanForm();
+        cleanFormSignUp();
       } else {
         alert('Error');
-        cleanForm();
+        cleanFormSignUp();
+      }
+    });
+};
+
+// Funcion que guarda el perfil del usuario que se registro en firebase
+export const addCollectionProfile = (name, pseudonym, emailuser) => {
+  db.collection('profile').add({
+    fullName: name,
+    userName: pseudonym,
+    email: emailuser,
+  }).then(() => {
+  }).catch(() => {
+  });
+};
+
+// logIn de usuarios existentes
+export const loginFb = (email, password) => {
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then((user) => {
+      // Signed in
+      if (user.user.emailVerified === true) { // si hizo la vefiricacion del correo
+        window.location.href = '/#/muro';
+      } else {
+        alert('Por favor confirma tu usuario en el link de verificacion enviado a tu correo');
+        cleanFormLogin();
+      }
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      switch (errorCode) {
+        case 'auth/user-not-found':
+          alert('Aun no estas registrado');
+          cleanFormLogin();
+          break;
+        case 'auth/wrong-password':
+          alert('Tu Contraseña es incorrecta');
+          cleanFormLogin();
+          break;
+        case 'auth/invalid-email':
+          alert('El correo ingresado no cumple con el formato del email');
+          cleanFormLogin();
+          break;
+        default:
+          alert('Error');
       }
     });
 };
 
 // observador de estado de autenticación
 export const observer = () => {
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      console.log('existe usuario activo');
-    } else {
-      console.log('no exite usuario activo');
-    }
+  firebase.auth().onAuthStateChanged(() => {
   });
 };
 
@@ -68,14 +108,24 @@ export const addCollectionPost = (content, pseudonym, emailuser, img) => {
     like: [],
     image: img,
   })
-    .then((docRef) => {
+    .then(() => {
       alert('publicado');
     })
     .catch((error) => {
-      console.error('Error adding document: ', error);
       alert(error);
     });
 };
+
+// export const profileFb = (emailUser) => {
+//   db.collection('profile').where('email', '==', emailUser).get()
+//     .then((querySnapshot) => {
+//       querySnapshot.forEach((doc) => {
+//         console.log(doc.id, ' => ', doc.data());
+//         const userName = doc.data().userName;// userName del usuario luzcielm@gmail.com
+//         console.log(userName);
+//       });
+//     });
+// };
 
 // Editar el post en firebase
 export const editPostFb = (id, addEdit) => {
@@ -85,23 +135,43 @@ export const editPostFb = (id, addEdit) => {
   })
     .then(() => {
     })
-    .catch((error) => {
-      console.error('Error updating document: ', error);
+    .catch(() => {
     });
 };
+
+
 
 // Eliminar post en firebase
 export const deletePostFb = (id) => {
   db.collection('post').doc(id).delete().then(() => {
   })
-    .catch((error) => {
+    .catch(() => {
     });
+};
+
+//comentar post
+export const postComment = (comentario,userId,idPost) =>{
+    const commentRef = db.collection('post').doc(idPost).collection('comentarios');
+    return commentRef.add({
+      comentario: comentario,
+      usuario: userId,
+    })
+      .then(() => {
+      })
+      .catch(() => {
+      });
+  };
+
+export const getComments = (idPost) =>{
+  
+  return db.collection(`post/${idPost}/comentarios`).get()
+
 };
 
 // cerrar sesion
 export const singOff = () => {
   firebase.auth().signOut().then(() => {
-  }).catch((error) => {
+  }).catch(() => {
   });
 };
 
@@ -110,11 +180,11 @@ export const likePostFb = (id, email) => {
   db.collection('post').doc(id).get()
     .then((query) => {
       const post = query.data();
-      if (post.like == null || post.like == '') {
+      if (post.like === null || post.like === '') {
         post.like = [];
       }
       if (post.like.includes(email)) {
-        for (let i = 0; i < post.like.length; i++) {
+        for (let i = 0; i < post.like.length; i += 1) {
           if (post.like[i] === email) { // verifica si ya el usuario está en el array
             post.like.splice(i, 1); // sentencia para eliminar un elemento de un array
             db.collection('post').doc(id).update({ // para actualizar el array
@@ -133,3 +203,5 @@ export const likePostFb = (id, email) => {
       console.error('Error like: ', error);
     });
 };
+
+//postComment()
