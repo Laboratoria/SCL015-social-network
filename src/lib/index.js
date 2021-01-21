@@ -1,4 +1,3 @@
-// aqui exportaras las funciones que necesites
 import { db } from '../firebaseConfig.js';
 
 const cleanFormSignUp = () => {
@@ -116,17 +115,6 @@ export const addCollectionPost = (content, pseudonym, emailuser, img) => {
     });
 };
 
-// export const profileFb = (emailUser) => {
-//   db.collection('profile').where('email', '==', emailUser).get()
-//     .then((querySnapshot) => {
-//       querySnapshot.forEach((doc) => {
-//         console.log(doc.id, ' => ', doc.data());
-//         const userName = doc.data().userName;// userName del usuario luzcielm@gmail.com
-//         console.log(userName);
-//       });
-//     });
-// };
-
 // Editar el post en firebase
 export const editPostFb = (id, addEdit) => {
   const PostRef = db.collection('post').doc(id);
@@ -138,8 +126,6 @@ export const editPostFb = (id, addEdit) => {
     .catch(() => {
     });
 };
-
-
 
 // Eliminar post en firebase
 export const deletePostFb = (id) => {
@@ -162,10 +148,9 @@ export const postComment = (comentario,userId,idPost) =>{
       });
   };
 
+//obtiene los comentarios de firebase
 export const getComments = (idPost) =>{
-  
   return db.collection(`post/${idPost}/comentarios`).get()
-
 };
 
 // cerrar sesion
@@ -180,13 +165,10 @@ export const likePostFb = (id, email) => {
   db.collection('post').doc(id).get()
     .then((query) => {
       const post = query.data();
-      if (post.like === null || post.like === '') {
-        post.like = [];
-      }
       if (post.like.includes(email)) {
-        for (let i = 0; i < post.like.length; i += 1) {
+        for (let i = 0; i < post.like.length; i += 1) {//recorre el array del like
           if (post.like[i] === email) { // verifica si ya el usuario está en el array
-            post.like.splice(i, 1); // sentencia para eliminar un elemento de un array
+            post.like.splice(i, 1); // sentencia para eliminar un elemento de un array 
             db.collection('post').doc(id).update({ // para actualizar el array
               like: post.like,
             });
@@ -200,8 +182,5 @@ export const likePostFb = (id, email) => {
       }
     })
     .catch((error) => {
-      console.error('Error like: ', error);
     });
 };
-
-//postComment()

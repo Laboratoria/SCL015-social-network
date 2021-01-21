@@ -410,6 +410,16 @@ input[type=file]::-webkit-file-upload-button {
   color: white;
 }
 
+.comments{
+  border-radius: solid;
+  background-color: red
+}
+
+.div-comments {
+  flex-direction: column;
+}
+
+
 
 .commet{
   height: 44px;
@@ -417,9 +427,58 @@ input[type=file]::-webkit-file-upload-button {
   margin-left: 342px;
 }
 
+
 .modal-comments{
   height: 44px;
   width:  30px;
+  flex-direction: column;
+  background-color: #B2EFA3;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 45%;
+  height: 45%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  border-radius: 15px;
+}
+
+.comentar-Post {
+  width: 39px;
+  height: 29px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 14px;
+  margin-left: 35px;
+}
+
+.contanierComments {
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.49);
+  box-sizing: border-box;
+  border-radius: 18px;
+  margin: 10px;
+}
+
+.contanierUserComments{
+  margin: 0px 0px -18px 15px;
+}
+
+.contanierComentsComments{
+  margin: 0px 10px -4px 79px;
+}
+
+.modal-discuss{
+  align-items: center;
+  flex-direction: column;
+}
+
+.user-comment{
+  width: 19px;
+  margin: 12px;
 }
 
 
