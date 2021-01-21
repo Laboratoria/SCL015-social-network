@@ -4,6 +4,8 @@ import {
   deletePostFb,
   likePostFb,
   singOff,
+  postComment,
+  getComments,
 } from '../../index.js';
 
 const containerModal = document.getElementById('modal'); // seccion HTML para el modal
@@ -154,7 +156,12 @@ export const templateWall = (containerRoot) => {
           <div class="like">
             ${doc.data().like.includes(emailData) ? heartGreen : heartWhite}
             <p class="number-like">${doc.data().like.length}</p>
-            
+            <div class="commet">
+            <img src="imagenes/comentar.png" alt="comentar" id="imgComment-${doc.id}" class="comentar-Post">
+            </div>
+            </div>
+            <div class="sectionComments">
+            <ul id="sectionComments-${doc.id}"></ul>
             </div>
           </div>
           <section id="modalEdit-${doc.id}" class="modal">
@@ -171,6 +178,18 @@ export const templateWall = (containerRoot) => {
               </div>
             </div>
           </section>  
+          <section id="modalComments-${doc.id}" class="modal">
+            <div class ="modal-comments">
+              <span id="closeComment-${doc.id}" class="close">&times;</span>
+              <div class="modal-discuss">
+                <p class= "modal-commentt"><strong>Escribe un comentario publico...</strong></p>
+                <textarea id="discussArea-${doc.id}" class="modal-textarea" cols="30" rows="10"></textarea>
+                <div class="modal-btn">
+                  <button class="btn-post-edit" id="btncomment-${doc.id}">Publicar</button>
+                </div>
+              </div>
+            </div>
+          </section>  
           `;
     });
 
@@ -184,12 +203,35 @@ export const templateWall = (containerRoot) => {
       const openDelete = document.getElementById(`openDelete-${doc.id}`);// boton borrar
 
       const likeImg = document.getElementById(`heart-${doc.id}`); // corazon para el like
+      const comments = document.getElementById(`imgComment-${doc.id}`); // icono comentar
+      const modalComments = document.getElementById(`modalComments-${doc.id}`);// modal comentar
+      const btncomment = document.getElementById(`btncomment-${doc.id}`);// boton publicar el comentario del post
+      const closeComment = document.getElementById(`closeComment-${doc.id}`); // X que cierra el modal comentar
+      const cajaComentarios = document.getElementById(`sectionComments-${doc.id}`);
+
+      obtenerComentarios(doc.id, cajaComentarios);
 
       likeImg.addEventListener('click', () => { // llama a la funcion like
         likePostFb(doc.id, emailData);
       });
 
+      modalComments.style.display = 'none';
+      comments.addEventListener('click', () => { // Abre el modal para comentar
+        // console.log('comento');
+        modalComments.style.display = 'block';
+      });
+
+      btncomment.addEventListener('click', () => {
+        const comentario = document.getElementById(`discussArea-${doc.id}`);
+        console.log(comentario, doc.id);
+        postComment(comentario.value, displayNameData, doc.id);// funcion comentar
+        modalComments.style.display = 'none';
+        obtenerComentarios(doc.id, cajaComentarios);
+        comentario.value = '';
+      });
+
       openEdit.addEventListener('click', () => { // Abre el modal para editar
+        console.log('hola comentar');
         modalEdit.style.display = 'block';
       });
 
@@ -205,6 +247,9 @@ export const templateWall = (containerRoot) => {
         modalEdit.style.display = 'none';
       };
 
+      closeComment.onclick = () => { // cierra el modal comentario en la "X"
+      modalComments.style.display = 'none';
+      };
       openDelete.addEventListener('click', () => { // abre el modal delete
         containerModal.style.display = 'block';
         containerModal.setAttribute('code', doc.id); // asigno el valor id a code(es la variable con la que almaceno enel container)
@@ -220,8 +265,18 @@ export const templateWall = (containerRoot) => {
       }
     }); // fin del for 2
   }); // fin de la promesa doc
+
   containerRoot.appendChild(divWall);
 };// final
+const obtenerComentarios = (idPost, cajaComentarios) => {
+  getComments(idPost).then((array) => {
+    cajaComentarios.innerHTML = '';
+    array.docs.forEach((doc) => {
+      cajaComentarios.innerHTML += `<li class="list-comments">${doc.data().comentario}</li>`;
+      console.log(doc.data());
+    });
+  });
+};
 
 // document.querySelectorAll('.postDiv button').forEach((element) => {
 //   element.addEventListener('click', () => {

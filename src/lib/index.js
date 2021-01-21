@@ -136,6 +136,21 @@ export const deletePostFb = (id) => {
     });
 };
 
+// comentar post
+export const postComment = (comentario, userId, idPost) => {
+  const commentRef = db.collection('post').doc(idPost).collection('comentarios');
+  return commentRef.add({
+    comentario,
+    usuario: userId,
+  })
+    .then(() => {
+    })
+    .catch(() => {
+    });
+};
+
+export const getComments = (idPost) => db.collection(`post/${idPost}/comentarios`).get();
+
 // cerrar sesion
 export const singOff = () => {
   firebase.auth().signOut().then(() => {
