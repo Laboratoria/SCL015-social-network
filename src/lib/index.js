@@ -1,4 +1,3 @@
-// aqui exportaras las funciones que necesites
 import { db } from '../firebaseConfig.js';
 
 const cleanFormSignUp = () => {
@@ -149,6 +148,7 @@ export const postComment = (comentario, userId, idPost) => {
     });
 };
 
+// obtiene los comentarios de firebase
 export const getComments = (idPost) => db.collection(`post/${idPost}/comentarios`).get();
 
 // cerrar sesion
@@ -163,11 +163,8 @@ export const likePostFb = (id, email) => {
   db.collection('post').doc(id).get()
     .then((query) => {
       const post = query.data();
-      if (post.like === null || post.like === '') {
-        post.like = [];
-      }
       if (post.like.includes(email)) {
-        for (let i = 0; i < post.like.length; i += 1) {
+        for (let i = 0; i < post.like.length; i += 1) { // recorre el array del like
           if (post.like[i] === email) { // verifica si ya el usuario está en el array
             post.like.splice(i, 1); // sentencia para eliminar un elemento de un array
             db.collection('post').doc(id).update({ // para actualizar el array
@@ -182,7 +179,6 @@ export const likePostFb = (id, email) => {
         });
       }
     })
-    .catch((error) => {
-      console.error('Error like: ', error);
+    .catch(() => {
     });
 };

@@ -67,6 +67,23 @@ spanModalClose.onclick = () => {
   containerModal.style.display = 'none';
 };
 
+const obtainComments = (idPost, commentBoxs) => {
+  getComments(idPost).then((array) => {
+    commentBoxs.innerHTML = '';
+    array.docs.forEach((doc) => {
+      commentBoxs.innerHTML += ` <div  class="contanierComments" id="contanierComments-${doc.id}"> 
+      <div  class="contanierUserComments">
+      <img src="imagenes/user.svg" alt="User" class="user-comment">
+      <p class="list-comments">${doc.data().usuario}</p>
+      </div>
+      <div  class="contanierComentsComments">
+      <p class="list-comments">${doc.data().comentario}</p>
+      </div
+      </div>`;
+    });
+  });
+};
+
 // <----------Contenido del Muro--------->
 export const templateWall = (containerRoot) => {
   const currentUserData = firebase.auth().currentUser; // Datos del Usuario que accedió
@@ -160,8 +177,8 @@ export const templateWall = (containerRoot) => {
             <img src="imagenes/comentar.png" alt="comentar" id="imgComment-${doc.id}" class="comentar-Post">
             </div>
             </div>
-            <div class="sectionComments">
-            <ul id="sectionComments-${doc.id}"></ul>
+            <div id="divComments-${doc.id}" class="div-comments">
+            
             </div>
           </div>
           <section id="modalEdit-${doc.id}" class="modal">
@@ -197,65 +214,69 @@ export const templateWall = (containerRoot) => {
       const openEdit = document.getElementById(`openEdit-${doc.id}`); // // boton que abre el modal
       const editbutton = document.getElementById(`btnPostEdit-${doc.id}`); // boton que publica la edicion
       const modalEdit = document.getElementById(`modalEdit-${doc.id}`); // seccion que contiene el modal
-
       const spanModalCloseEdit = document.getElementById(`close-${doc.id}`); // (x) que cierra el modal
       const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
       const openDelete = document.getElementById(`openDelete-${doc.id}`);// boton borrar
-
       const likeImg = document.getElementById(`heart-${doc.id}`); // corazon para el like
       const comments = document.getElementById(`imgComment-${doc.id}`); // icono comentar
       const modalComments = document.getElementById(`modalComments-${doc.id}`);// modal comentar
       const btncomment = document.getElementById(`btncomment-${doc.id}`);// boton publicar el comentario del post
       const closeComment = document.getElementById(`closeComment-${doc.id}`); // X que cierra el modal comentar
-      const cajaComentarios = document.getElementById(`sectionComments-${doc.id}`);
+      const commentBox = document.getElementById(`divComments-${doc.id}`);
 
-      obtenerComentarios(doc.id, cajaComentarios);
-
-      likeImg.addEventListener('click', () => { // llama a la funcion like
+      console.log(33333, commentBox);
+      // llama a la funcion LIKE
+      likeImg.addEventListener('click', () => {
         likePostFb(doc.id, emailData);
       });
 
-      modalComments.style.display = 'none';
-      comments.addEventListener('click', () => { // Abre el modal para comentar
-        // console.log('comento');
+      // Abre el modal para COMENTAR
+      comments.addEventListener('click', () => {
         modalComments.style.display = 'block';
       });
 
+      // funcionalidad boton publicar COMENTARIO del post
       btncomment.addEventListener('click', () => {
-        const comentario = document.getElementById(`discussArea-${doc.id}`);
-        console.log(comentario, doc.id);
+        const comentario = document.getElementById(`discussArea-${doc.id}`);// text area para comentar
         postComment(comentario.value, displayNameData, doc.id);// funcion comentar
         modalComments.style.display = 'none';
-        obtenerComentarios(doc.id, cajaComentarios);
+        obtainComments(doc.id, commentBox);
         comentario.value = '';
       });
+      obtainComments(doc.id, commentBox);
 
-      openEdit.addEventListener('click', () => { // Abre el modal para editar
-        console.log('hola comentar');
+      // Abre el modal para EDITAR
+      openEdit.addEventListener('click', () => {
         modalEdit.style.display = 'block';
       });
 
-      editbutton.addEventListener('click', () => { // Edita el post en firebase
+      // EDITA el post en firebase
+      editbutton.addEventListener('click', () => {
         editPostFb(doc.id, document.getElementById(`postArea-${doc.id}`).value);
       });
 
-      modalCancel.addEventListener('click', () => { // cierra el modal
+      // cierra el modal EDITAR (Boton cancelar)
+      modalCancel.addEventListener('click', () => {
         modalEdit.style.display = 'none';
       });
 
-      spanModalCloseEdit.onclick = () => { // cierra el modal editar en la "X"
+      // cierra el modal EDITAR en la "X"
+      spanModalCloseEdit.onclick = () => {
         modalEdit.style.display = 'none';
       };
 
-      closeComment.onclick = () => { // cierra el modal comentario en la "X"
-      modalComments.style.display = 'none';
+      // cierra el modal COMENTARIO en la "X"
+      closeComment.onclick = () => {
+        modalComments.style.display = 'none';
       };
-      openDelete.addEventListener('click', () => { // abre el modal delete
+
+      // abre el modal ELIMINAR
+      openDelete.addEventListener('click', () => {
         containerModal.style.display = 'block';
         containerModal.setAttribute('code', doc.id); // asigno el valor id a code(es la variable con la que almaceno enel container)
       });
 
-      /* Cuando el usuario hace clic en el botón ...,
+      /* Cuando el usuario hace clic en el icono ...,
        alternar entre ocultar y mostrar el contenido desplegable */
       if (doc.data().email === emailData) {
         const opcionPost = document.querySelector(`#dropbtn-${doc.id}`); // boton de las opciones
@@ -268,32 +289,3 @@ export const templateWall = (containerRoot) => {
 
   containerRoot.appendChild(divWall);
 };// final
-const obtenerComentarios = (idPost, cajaComentarios) => {
-  getComments(idPost).then((array) => {
-    cajaComentarios.innerHTML = '';
-    array.docs.forEach((doc) => {
-      cajaComentarios.innerHTML += `<li class="list-comments">${doc.data().comentario}</li>`;
-      console.log(doc.data());
-    });
-  });
-};
-
-// document.querySelectorAll('.postDiv button').forEach((element) => {
-//   element.addEventListener('click', () => {
-//     const postDiv = document.getElementById('postDiv');
-//     const newComment = document.createElement('div');
-//     newComment.setAttribute('class', 'newComment');
-//     const textComment = document.createElement('textarea');
-//     textComment.setAttribute('id', 'textComment');
-//     const btnUpComment = document.createElement('button');
-//     btnUpComment.setAttribute('id', 'btnUpComment');
-//     btnUpComment.setAttribute('class', 'btn');
-//     const btnCommentText = document.createTextNode('Comentar');
-//     btnUpComment.appendChild(btnCommentText);
-//     postDiv.appendChild(newComment);
-//     newComment.appendChild(textComment);
-//     newComment.appendChild(btnUpComment);
-
-//     postDiv.appendChild(newComment);
-//   });
-// });
