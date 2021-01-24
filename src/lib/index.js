@@ -116,6 +116,7 @@ export const addCollectionPost = (content, pseudonym, emailuser, img) => {
     userName: pseudonym,
     email: emailuser,
     like: [],
+    date: new Date(),
     image: img,
   })
     .then(() => {
@@ -139,6 +140,7 @@ export const editPostFb = (id, addEdit) => {
   const PostRef = db.collection('post').doc(id);
   return PostRef.update({
     postContent: addEdit,
+    date: new Date(),
   })
     .then(() => {
       EditUpdate(id, addEdit);

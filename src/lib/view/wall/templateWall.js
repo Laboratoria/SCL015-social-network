@@ -135,7 +135,7 @@ export const templateWall = (containerRoot) => {
 
   // <------Imprimir los cometarios------->
   const divPost = divWall.querySelector('#postList'); // Llamando al div donde se imprimirán los post
-  db.collection('post').get().then((querySnapshot) => { // Escuchando colección en firebase para ir imprimiendo los post
+  db.collection('post').orderBy('date', 'desc').get().then((querySnapshot) => { // Escuchando colección en firebase para ir imprimiendo los post
     divPost.innerHTML = ''; // Vaciando div para que no se repitan los post
     querySnapshot.forEach((doc) => {
       const imgPost = `<img src="${doc.data().image}" class="img-post"></img>`;
