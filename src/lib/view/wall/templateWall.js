@@ -135,17 +135,17 @@ export const templateWall = (containerRoot) => {
 
   // <------Imprimir los cometarios------->
   const divPost = divWall.querySelector('#postList'); // Llamando al div donde se imprimirán los post
-  db.collection('post').onSnapshot((querySnapshot) => { // Escuchando colección en firebase para ir imprimiendo los post
+  db.collection('post').get().then((querySnapshot) => { // Escuchando colección en firebase para ir imprimiendo los post
     divPost.innerHTML = ''; // Vaciando div para que no se repitan los post
     querySnapshot.forEach((doc) => {
       const imgPost = `<img src="${doc.data().image}" class="img-post"></img>`;
       const optionsEllipsis = `<img src="imagenes/3puntos.svg" alt="opcion" class="dropbtn" id="dropbtn-${doc.id}"></img> `;
-      const heartWhite = `<svg class="heart-icon" id="heart-${doc.id}" width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      const heartWhite = `<svg class="heart-icon" width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M29.5001 46.6666L50.3959 25.6666V16.3333L41.7917 12.8333L29.5001 16.3333L17.2084 12.8333L8.60425 16.3333V25.6666L29.5001 46.6666Z" fill="white"/>
       <path d="M29.5 18.6667L31.3634 16.3333C33.5169 13.6337 36.7275 11.6667 40.5625 11.6667C42.5658 11.6665 44.5316 12.1827 46.25 13.1602C47.9684 14.1376 49.3749 15.5396 50.3194 17.2166C51.2638 18.8935 51.7108 20.7823 51.6125 22.6815C51.5143 24.5807 50.8746 26.4189 49.7616 28C47.7777 30.814 29.5 49 29.5 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
       <path d="M29.5001 18.6667L27.6367 16.3333C25.4832 13.6337 22.2726 11.6667 18.4376 11.6667C16.4343 11.6665 14.4685 12.1827 12.7501 13.1602C11.0317 14.1376 9.62521 15.5396 8.68076 17.2166C7.73631 18.8935 7.28934 20.7823 7.38758 22.6815C7.48581 24.5807 8.12556 26.4189 9.23853 28C11.2224 30.814 29.5001 49 29.5001 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
     </svg> `;
-      const heartGreen = ` <svg class="heart-icon" id="heart-${doc.id}" width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      const heartGreen = ` <svg class="heart-icon" width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M29.5001 46.6666L50.3959 25.6666V16.3333L41.7917 12.8333L29.5001 16.3333L17.2084 12.8333L8.60425 16.3333V25.6666L29.5001 46.6666Z" fill="#60E440"/>
       <path d="M29.5 18.6667L31.3634 16.3333C33.5169 13.6337 36.7275 11.6667 40.5625 11.6667C42.5658 11.6665 44.5316 12.1827 46.25 13.1602C47.9684 14.1376 49.3749 15.5396 50.3194 17.2166C51.2638 18.8935 51.7108 20.7823 51.6125 22.6815C51.5143 24.5807 50.8746 26.4189 49.7616 28C47.7777 30.814 29.5 49 29.5 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
       <path d="M29.5001 18.6667L27.6367 16.3333C25.4832 13.6337 22.2726 11.6667 18.4376 11.6667C16.4343 11.6665 14.4685 12.1827 12.7501 13.1602C11.0317 14.1376 9.62521 15.5396 8.68076 17.2166C7.73631 18.8935 7.28934 20.7823 7.38758 22.6815C7.48581 24.5807 8.12556 26.4189 9.23853 28C11.2224 30.814 29.5001 49 29.5001 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
@@ -169,10 +169,10 @@ export const templateWall = (containerRoot) => {
           <div class="post-imagen">
           ${doc.data().image === undefined ? '' : imgPost}
           </div>
-          <p class="content-post"> <br> ${doc.data().postContent}</p>
+          <p class="content-post" id='contentPost-${doc.id}'> <br> ${doc.data().postContent}</p>
           <div class="like">
-            ${doc.data().like.includes(emailData) ? heartGreen : heartWhite}
-            <p class="number-like">${doc.data().like.length}</p>
+            <span id="heartColor-${doc.id}">${doc.data().like.includes(emailData) ? heartGreen : heartWhite}</span>
+            <p class="number-like" id="numberLike-${doc.id}">${doc.data().like.length}</p>
             <div class="commet">
             <img src="imagenes/comentar.png" alt="comentar" id="imgComment-${doc.id}" class="comentar-Post">
             </div>
@@ -217,14 +217,13 @@ export const templateWall = (containerRoot) => {
       const spanModalCloseEdit = document.getElementById(`close-${doc.id}`); // (x) que cierra el modal
       const modalCancel = document.getElementById(`btnCancel${doc.id}`); // boton de cancelar la edicion
       const openDelete = document.getElementById(`openDelete-${doc.id}`);// boton borrar
-      const likeImg = document.getElementById(`heart-${doc.id}`); // corazon para el like
+      const likeImg = document.getElementById(`heartColor-${doc.id}`); // corazon para el like
       const comments = document.getElementById(`imgComment-${doc.id}`); // icono comentar
       const modalComments = document.getElementById(`modalComments-${doc.id}`);// modal comentar
       const btncomment = document.getElementById(`btncomment-${doc.id}`);// boton publicar el comentario del post
       const closeComment = document.getElementById(`closeComment-${doc.id}`); // X que cierra el modal comentar
       const commentBox = document.getElementById(`divComments-${doc.id}`);
 
-      console.log(33333, commentBox);
       // llama a la funcion LIKE
       likeImg.addEventListener('click', () => {
         likePostFb(doc.id, emailData);
@@ -253,6 +252,7 @@ export const templateWall = (containerRoot) => {
       // EDITA el post en firebase
       editbutton.addEventListener('click', () => {
         editPostFb(doc.id, document.getElementById(`postArea-${doc.id}`).value);
+        modalEdit.style.display = 'none';
       });
 
       // cierra el modal EDITAR (Boton cancelar)
