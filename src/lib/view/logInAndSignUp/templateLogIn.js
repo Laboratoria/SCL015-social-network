@@ -4,10 +4,8 @@ import { loginGoogle, observer, loginFb } from '../../index.js';
 export const templateLogIn = () => {
   const divLogIn = document.createElement('div');
   const viewLogIn = `
-      <div class="container">
-      <a href="#/muro"> 
-       <img src="https://i.imgur.com/kYsQAKx.png" alt="logoVeg" id="logo">    
-      </a>
+      <div class="container"> 
+      <img src="https://i.imgur.com/kYsQAKx.png" alt="logoVeg" id="logo">    
       <h2 class="welcome-veg"> ¡La mejor red social para vegetarianos!</h2>
       <div class="buttons" id="buttons">       
        <button id="loginGoogle2">Ingresar con Gmail</button>
