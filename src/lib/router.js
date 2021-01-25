@@ -3,6 +3,7 @@ import { templateSignUp } from './view/logInAndSignUp/templateSignUp.js';
 import { templateWall } from './view/wall/templateWall.js';
 import { templatePost } from './view/wall/templatePost.js';
 
+
 const showTemplate = (hash) => {
   const containerRoot = document.getElementById('root');
   containerRoot.innerHTML = '';
