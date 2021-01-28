@@ -1,0 +1,356 @@
+  
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    width: 101vw;
+}
+
+#emailSignUp[type="email"]:focus:invalid {
+    -webkit-appearance: none;
+    background-color: rgba(63, 190, 32, 0.48);
+    border: 1px solid #e85c5c;
+    outline: none;
+    box-shadow: 0 0 4px red;
+}
+
+#errorPassword {
+    display: none;
+    width: 310px;
+    margin: 0;
+    color: gray;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+ div{
+    display: flex;   
+
+} 
+
+#logo{
+    justify-content: center;
+    width: 13vw;
+    height: 26vh;
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.welcome-veg {
+    font-family: 'Shrikhand', cursive;
+    font-size: 30px;
+    line-height: 20px;
+    color: #3FBC1F;
+    margin-top: 1vh;
+    margin-bottom: 0;
+    font-weight: normal
+}
+
+#buttons{
+   align-items: center;
+   flex-direction: column;
+
+}
+
+form{
+    display: flex;
+}
+
+#loginForm{   
+   align-items: center;
+   flex-direction: column;
+}
+
+button{
+    display: flex;
+    margin: 15px;
+}
+
+.inputSignUp {
+    margin: 5px;
+
+}
+
+.inputMain {
+    display: flex;
+    width: 313px;
+    height: 31px;
+    left: 34px;
+    top: 323px;
+    background: rgba(63, 190, 32, 0.48);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+    margin: 10px;
+    border-style: none;
+}
+
+/* #loginGoogle2{
+    background-size: 24px;
+    margin: 8px 0px 7px;
+    font-size: 20px;
+} */
+#loginGoogle2{
+    background: url("../../../imagenes/loGooglee.jpg");
+    background-repeat: no-repeat;
+    background-size: 30px;
+    width: 321px;
+    height: 39px;
+    border: 1px solid lightgray;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0px 7px;
+}
+
+.separator {
+    border: 0;
+    border-top: 1px solid;
+    padding: 0px 152px;
+}
+
+#btnLogIn, #btnSignUp{
+    width: 321px;
+    height: 35px;
+    background: #3FBE20;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    line-height: 33px;
+    justify-content: center;
+    display: flex;
+    margin: 8px;
+    border-style: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+#foot{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    top: 528px;
+}
+
+#foot2{
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    top: 609px;
+
+}
+
+.opcion-main {
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #F57804;
+}
+
+#fondo{
+    width: 100vw;
+    height: 39vh;
+    position: relative;
+    top: 22px;
+    overflow: hidden;
+    left: -5px;
+}
+
+#fondo2 {
+    width: 27vw;
+    height: 31vh;
+    top: 3px;
+    margin-inline-start: 914px;
+    margin-top: -129px;
+}
+
+#fondo3 {
+    width: 25vw;
+    height: 46vh;
+    top: 3px;
+    margin-top: 10px;
+    margin-inline-end: auto;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    /* overflow: hidden; */
+    width: 101vw;
+    margin-top: -49vh;
+}
+
+
+/* formato responsive para celular  */
+@media screen and (max-width: 415px) and (min-width: 320px) {
+
+    .container {
+        margin-top: 2vh;
+    }
+
+    #logo {
+        justify-content: center;
+        width: 31vw;
+        height: 17vh;
+        margin-bottom: 20px;
+    }
+
+    .welcome-veg {
+        font-size: 15px;
+    }
+
+    #loginGoogle2 {
+        background-size: 28px;
+        width: 265px;
+        height: 34px;
+    }
+
+    .separator {
+        padding: 1px 127px;
+    }
+    
+    .inputMain{
+        width: 266px;
+        height: 23px;
+        font-size: 17px;
+    }
+
+    #btnLogIn, #btnSignUp {
+        width: 264px;
+        height: 33px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+    }
+
+    #fondo {
+        width: 100vw;
+        height: 17vh;
+        top: 118px;
+    }
+
+    #foot{
+        top: 436px;
+    }
+
+    /* .welcome-veg {
+        font-size: 13px;
+    }
+     */
+     
+    #foot2 {
+        top: 479px;
+        margin-top: 3vh;  
+    }
+
+    .opcion-main {
+        font-size: 15px;
+    }
+
+    #fondo2 {
+    display: none;
+    /* margin-top: 5px;
+    width: 38vw;
+    height: 13vh;
+    top: 5px;
+    margin: auto; */
+    }
+    
+    #fondo3 {
+        width: 22vw;
+        height: 12vh;
+        top: 2px;
+        margin-top: -63px;
+        margin-inline-end: 31vh;
+    }
+
+    .content{
+        margin-top: 0vh;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 15px;
+    }
+}
+
+@media screen and (min-width: 1150px) and (max-width: 1550px) {
+   
+    #foot {
+        top: 514px;      
+    }
+}
+
+/* formato responsive para table hay que colocar max y min */  
+@media screen and (min-width: 415px)  and (max-width: 1024px){
+    #logo {
+        width: 28vw;
+        height: 21vh;
+        margin-bottom: 0;
+    }
+
+    .content {
+        margin-top: 0vh;
+    }
+
+    #foot {
+        top: 512px;   
+    }
+
+    #foot2 {
+        top: 659px;
+    }
+
+    #fondo {
+        width: 118vw;
+        height: 28vh;
+        top: 7px;
+        
+    }
+
+    #fondo3 {
+        display: none;
+    }
+
+}
+
+
+
+
+/* MURO  */
+
+/* .wall {
+    display: flex;
+    flex-direction: column
+} */
