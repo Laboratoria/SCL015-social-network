@@ -1,6 +1,17 @@
 import firebase from 'firebase/app';
+// import { initializeFb } from '../firebaseConfig.js';
 import 'firebase/auth';
-import initializeApp from '../firebaseConfig.js'
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyB2r9qp8bDIPyEc85GKA9D1GwIaNxOzCZg',
+  authDomain: 'social-veg.firebaseapp.com',
+  projectId: 'social-veg',
+  storageBucket: 'social-veg.appspot.com',
+  messagingSenderId: '241699896847',
+  appId: '1:241699896847:web:d9ecbe3e645536afcc2d7a',
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 export const signUpFirebase = (email, password) => {
   firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -12,5 +23,7 @@ export const loginGoogle = () => {
 };
 
 export const singOff = () => {
-  initializeApp.auth().signOut();
+  firebase.auth().signOut().then(() => {
+  }).catch(() => {
+  });
 };

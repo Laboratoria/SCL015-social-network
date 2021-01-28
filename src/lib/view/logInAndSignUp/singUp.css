@@ -154,7 +154,7 @@ button{
     align-items: center;
     position: absolute;
     z-index: 1;
-    top: 525px;
+    top: 528px;
 }
 
 #foot2{
@@ -308,7 +308,7 @@ a {
 @media screen and (min-width: 1150px) and (max-width: 1550px) {
    
     #foot {
-        top: 488px;      
+        top: 514px;      
     }
 }
 
