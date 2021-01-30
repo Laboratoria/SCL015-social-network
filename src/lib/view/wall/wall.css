@@ -153,15 +153,13 @@ p {
 .dropdown-content p {
   color: black;
   margin: 0px 0px;
-  /* text-decoration: none; */
   display: block;
 }
-/* .dropdown p:hover {background-color: #ddd;} */
+
 
 .show {display: block;}
 
 .img-post {
-  /* width: 100%; */
   width: 498px;
   height: 271px;
 }
@@ -170,10 +168,6 @@ svg {
   width: 31px;
   margin-left: 13px;
 } 
-
-/* .heart-icon{
-  /* fill: #60E440 !important; 
-} */
 
 .number-like{
   margin: 0px;
@@ -375,7 +369,6 @@ input[type=file]::-webkit-file-upload-button {
   border-radius: 4px;
   cursor: pointer;
   filter: alpha(opacity=0);
-  /* opacity: 0; */
 }
 .post-form-btn{
   justify-content: center;
@@ -406,14 +399,11 @@ input[type=file]::-webkit-file-upload-button {
   flex-direction: column;
 }
 
-
-
 .commet{
   height: 44px;
   width:  30px;
   margin-left: 342px;
 }
-
 
 .modal-comments{
   height: 44px;

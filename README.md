@@ -15,9 +15,16 @@
 
 Social veg es una red social para vegetarianos en donde  podrás intercambiar y compartir  información, imágenes, recetas, recomendaciones de restaurantes y experiencias personales relacionadas al estilo de vida veg.
 
+[Social Veg](https://social-veg.web.app/)
+
 ![](src/imagenes/web2.png)
 
 ![](src/imagenes/web1.png)
+
+![](src/imagenes/web3.png)
+
+![](src/imagenes/web4.png)
+
 
 
 ## 2. Definición del Proyecto
@@ -114,9 +121,9 @@ CRITERIOS DE ACEPTACIÓN
 
 Yo como: usuario vegetariano.
 
-Quiero:Dar like.
+Quiero: Comentar o responder una publicación.
 
-Para: Reaccionar a las publicaciones que me gustan.
+Para: Expresar mi opinión en relación al post publicado..
 
 CRITERIOS DE ACEPTACIÓN
 
@@ -125,6 +132,27 @@ CRITERIOS DE ACEPTACIÓN
 - Poder dar y quitar like a una publicación. Máximo uno por usuario.
 
 - Llevar un conteo de los likes.
+
+**QUINTA HISTORIA:**
+
+Yo como: usuario vegetariano.
+
+Quiero:Dar like.
+
+Para: Reaccionar a las publicaciones que me gustan.
+
+CRITERIOS DE ACEPTACIÓN
+
+- En cada post se debe visualizar un icono que haga alusión a los comentarios.
+
+- Al hacer click sobre el icono se abre un Modal.
+
+- Este modal debe tener contener un input que permite escribir el comentario y el botón “publicar”.
+
+- EL botón “publicar” debe guardar el comentario en firebase y cerrar el modal.
+
+- En la parte inferior de cada post se deben visualizar los comentarios publicados.
+
 
 ## 4. Prototipo de baja fidelidad.
 ![Prototipo papel](src/imagenes/prototipo1.jpeg)
@@ -150,5 +178,4 @@ CRITERIOS DE ACEPTACIÓN
 * Luzciel Montesinos
 * Erika Arango 
 
-[link del proyecto Social Veg](https://social-veg.web.app/)
 
