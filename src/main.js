@@ -1,5 +1,11 @@
-// Este es el punto de entrada de tu aplicacion
+import { templateLogIn } from './lib/view/logInAndSignUp/templateLogIn.js';
+import { changeRoute } from './lib/router.js';
 
-import { myFunction } from './lib/index.js';
+const init = () => {
+  document.getElementById('root').appendChild(templateLogIn());// en el html meteme el template login
+  window.addEventListener('hashchange', () => { // que la ventana escuche los cambios de has y de acuerdo a eso busca la funcion changerouter
+    changeRoute(window.location.hash);
+  });
+};
 
-myFunction();
+window.addEventListener('load', init); // cuando se cargue la pantalla llama a init eso lo hace load
