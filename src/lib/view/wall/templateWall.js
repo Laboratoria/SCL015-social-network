@@ -47,8 +47,9 @@ const modal = htmlToElements(
         </div>
     </div>`,
 );
-  // eliminar post
 containerModal.appendChild(modal);
+
+// eliminar post
 const btnDeletePost = document.getElementById('btnDeletePost');
 btnDeletePost.addEventListener('click', () => {
   deletePostFb(containerModal.getAttribute('code'));//  para que al eliminar el post sepa que id debe borrar
@@ -273,7 +274,7 @@ export const templateWall = (containerRoot) => {
       // abre el modal ELIMINAR
       openDelete.addEventListener('click', () => {
         containerModal.style.display = 'block';
-        containerModal.setAttribute('code', doc.id); // asigno el valor id a code(es la variable con la que almaceno enel container)
+        containerModal.setAttribute('code', doc.id); // asigno el valor id a code(es la variable con la que almaceno en el container)
       });
 
       /* Cuando el usuario hace clic en el icono ...,

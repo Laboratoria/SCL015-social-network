@@ -11,6 +11,7 @@ const heartGreen = `<svg class="heart-icon" width="59" height="56" viewBox="0 0 
       <path d="M29.5001 18.6667L27.6367 16.3333C25.4832 13.6337 22.2726 11.6667 18.4376 11.6667C16.4343 11.6665 14.4685 12.1827 12.7501 13.1602C11.0317 14.1376 9.62521 15.5396 8.68076 17.2166C7.73631 18.8935 7.28934 20.7823 7.38758 22.6815C7.48581 24.5807 8.12556 26.4189 9.23853 28C11.2224 30.814 29.5001 49 29.5001 49" stroke="#60E440" stroke-width="4" stroke-linecap="round"/>
     </svg> `;
 
+// funcion para limpliar los input SignUp
 const cleanFormSignUp = () => {
   document.querySelector('#emailSignUp').value = '';
   document.querySelector('#passwordSignUp').value = '';
@@ -127,6 +128,7 @@ export const addCollectionPost = (content, pseudonym, emailuser, img) => {
     });
 };
 
+// Actualiza en el Muro el post Editado
 const EditUpdate = (id, addEdit) => {
   db.collection('post').doc(id).get()
     .then(() => {
@@ -151,10 +153,11 @@ export const editPostFb = (id, addEdit) => {
 
 // Eliminar post en firebase
 export const deletePostFb = (id) => {
-  db.collection('post').doc(id).delete().then(() => {
-    const divPost = document.getElementById(`postDiv-${id}`);
-    divPost.remove(); // elimina el post en el HTML
-  })
+  db.collection('post').doc(id).delete()
+    .then(() => {
+      const divPost = document.getElementById(`postDiv-${id}`);
+      divPost.remove(); // elimina el post en el HTML
+    })
     .catch(() => {
     });
 };
